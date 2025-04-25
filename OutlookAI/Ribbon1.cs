@@ -1,20 +1,12 @@
 ﻿using Microsoft.Office.Interop.Outlook;
 using Microsoft.Office.Tools.Ribbon;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
-using System.Xml.Linq;
-
-
-
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.IO;
-using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace OutlookAI
@@ -33,71 +25,42 @@ namespace OutlookAI
                     Prompt1 = "Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:\r\n1.Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.\r\n2.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.\r\n3.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.\r\n\r\nNutze als Sprache der Antwort die Sprache der E - Mail. Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.",
                     Prompt2 = "Schreibe mir für die folgende E - Mail eine ToDoListe (Bitte berücksichtige: [kurze Zusammenfassung]) drei Antwortmöglichkeiten:Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.Nutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.",
                     Prompt3 = "Schreibe mir für die folgende Email 3 Antwortmöglichkeiten:\n-Zustimmende Antwort\n-Ablehnede Antwort\n-Nachfragende Antwort\n\nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.",
-                    Prompt4 = "Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:"
+                    Prompt4 = "Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:",
+                    ApiKey = "",
 
+                };
 
-
-
-                    /*
-                    Prompt1 = "Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:"
-                            + "Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu."
-                            + "Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an."
-                            + "Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an."
-                            + "Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten."
-                            + "Nutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.",
-                    
-
-
-                    Prompt2 = "Schreibe mir für die folgende E - Mail eine ToDoListe (Bitte berücksichtige: [kurze Zusammenfassung]) drei Antwortmöglichkeiten:"
-                            + "Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu."
-                            + "Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an."
-                            + "Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten."
-                            + "Nutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.",
-
-                    Prompt3 = "Schreibe mir für die folgende Email 3 Antwortmöglichkeiten:\n"
-                        + "-Zustimmende Antwort\n"
-                        + "-Ablehnede Antwort\n"
-                        + "-Nachfragende Antwort\n\n"
-                        + "Nutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.",
-
-                    Prompt4 = "Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese Email"
-                            + "Nutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:",
-
-                    */
-                }
-            ;
                 string json = JsonConvert.SerializeObject(data);
                 File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"), json);
             }
-            // Abrufen
+
             string jsonData = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"));
             UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
             _userdata = loadedData;
         }
 
-        private async void button1_Click(object sender, RibbonControlEventArgs e)
+        private async void Button1_Click(object sender, RibbonControlEventArgs e)
         {
-
-            MailItem mail = getMail();
+            MailItem mail = GetMail();
             await Reply(mail, _userdata.Prompt1);
         }
-        private async void button2_Click(object sender, RibbonControlEventArgs e)
+        private async void Button2_Click(object sender, RibbonControlEventArgs e)
         {
 
-            MailItem mail = getMail();
+            MailItem mail = GetMail();
             await Reply(mail, _userdata.Prompt2);
         }
-        private async void button3_Click(object sender, RibbonControlEventArgs e)
+        private async void Button3_Click(object sender, RibbonControlEventArgs e)
         {
 
-            MailItem mail = getMail();
+            MailItem mail = GetMail();
             await Reply(mail, _userdata.Prompt3);
         }
-        private async void button4_Click(object sender, RibbonControlEventArgs e)
+        private async void Button4_Click(object sender, RibbonControlEventArgs e)
         {
 
-            MailItem mail = getMail();
-            InputBox inputBox = new InputBox("Bitte geben Sie Ihren Text ein:", "Textinput");
+            MailItem mail = GetMail();
+            InputBox inputBox = new InputBox(_userdata.Prompt4, "Textinput");
             string userInput = string.Empty;
             if (inputBox.ShowDialog() == DialogResult.OK)
             {
@@ -106,14 +69,18 @@ namespace OutlookAI
             }
             await Reply(mail, _userdata.Prompt4 + "\n" + userInput);
         }
+        private void Button5_Click(object sender, RibbonControlEventArgs e)
+        {
+            PromptBox p = new PromptBox(_userdata);
+            p.ShowDialog();
+        }
 
         private async Task Reply(MailItem mail, string prompt)
         {
+            if (mail == null) return;
             try
             {
-                string response = await GetChatGPTResponse(prompt + "\n"
-                    + $"Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}");
-                //                System.Windows.Forms.MessageBox.Show(response);
+                string response = await GetChatGPTResponse($"{prompt} \n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}");
                 var reply = mail.ReplyAll();
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
                 reply.HTMLBody = "<br>" + response + "<br><br>" + reply.HTMLBody;
@@ -125,7 +92,7 @@ namespace OutlookAI
             }
         }
 
-        private MailItem getMail()
+        private MailItem GetMail()
         {
             MailItem mail = null;
             var outlookApp = Globals.ThisAddIn.Application;
@@ -136,19 +103,13 @@ namespace OutlookAI
                 mail = ctx.CurrentItem as MailItem;
             }
             catch (System.Exception)
-            { }
+            {//ignore & fallback
+            }
             if (mail == null)
             {
                 var selection = outlookApp.ActiveExplorer().Selection;
-                if (selection.Count > 0)
-                {
-                    if (selection[1] is MailItem)
-                    {
-                        mail = (MailItem)selection[1];
-                    }
-                }
+                if (selection.Count > 0 && selection[1] is MailItem selectedmail) { mail = selectedmail; }
             }
-
             return mail;
         }
 
@@ -168,8 +129,8 @@ namespace OutlookAI
                     model = "gpt-4o-mini", // Das GPT-Modell, das Sie verwenden möchten
                     messages = new[]
                     {
-                new { role = "user", content = userInput }
-            }
+                        new { role = "user", content = userInput }
+                    }
                 };
 
                 string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
@@ -191,10 +152,5 @@ namespace OutlookAI
             }
         }
 
-        private void button5_Click(object sender, RibbonControlEventArgs e)
-        {
-            PromptBox p = new PromptBox(_userdata);
-            p.ShowDialog();
-        }
     }
 }

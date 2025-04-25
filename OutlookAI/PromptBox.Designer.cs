@@ -37,9 +37,9 @@
             this.P3 = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.P4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.textBoxApiKey = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.Tab1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -58,7 +58,7 @@
             this.Tab1.Location = new System.Drawing.Point(12, 12);
             this.Tab1.Name = "Tab1";
             this.Tab1.SelectedIndex = 0;
-            this.Tab1.Size = new System.Drawing.Size(766, 426);
+            this.Tab1.Size = new System.Drawing.Size(765, 422);
             this.Tab1.TabIndex = 0;
             // 
             // tabPage1
@@ -67,7 +67,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(758, 397);
+            this.tabPage1.Size = new System.Drawing.Size(757, 393);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Prompt 1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@
             this.P1.Location = new System.Drawing.Point(3, 3);
             this.P1.Multiline = true;
             this.P1.Name = "P1";
-            this.P1.Size = new System.Drawing.Size(752, 391);
+            this.P1.Size = new System.Drawing.Size(751, 387);
             this.P1.TabIndex = 0;
             // 
             // tabPage2
@@ -88,7 +88,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(758, 397);
+            this.tabPage2.Size = new System.Drawing.Size(757, 393);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Prompt 2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             this.P2.Location = new System.Drawing.Point(3, 3);
             this.P2.Multiline = true;
             this.P2.Name = "P2";
-            this.P2.Size = new System.Drawing.Size(752, 391);
+            this.P2.Size = new System.Drawing.Size(751, 387);
             this.P2.TabIndex = 1;
             // 
             // tabPage3
@@ -130,7 +130,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(758, 397);
+            this.tabPage4.Size = new System.Drawing.Size(757, 393);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Prompt 4";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -142,18 +142,8 @@
             this.P4.Location = new System.Drawing.Point(3, 3);
             this.P4.Multiline = true;
             this.P4.Name = "P4";
-            this.P4.Size = new System.Drawing.Size(752, 391);
+            this.P4.Size = new System.Drawing.Size(751, 387);
             this.P4.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(696, 440);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage5
             // 
@@ -177,11 +167,21 @@
             this.textBoxApiKey.Size = new System.Drawing.Size(752, 391);
             this.textBoxApiKey.TabIndex = 2;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(703, 440);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "OK";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PromptBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 548);
+            this.ClientSize = new System.Drawing.Size(789, 471);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Tab1);
             this.Name = "PromptBox";
