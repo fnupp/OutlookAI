@@ -1,13 +1,13 @@
 ﻿namespace OutlookAI
 {
-    partial class Ribbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class OutlookAIRibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
         /// <summary>
         /// Erforderliche Designervariable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        public Ribbon1()
+        public OutlookAIRibbon()
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();
@@ -94,9 +94,9 @@
             this.button5.Name = "button5";
             this.button5.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button5_Click);
             // 
-            // Ribbon1
+            // OutlookAIRibbon
             // 
-            this.Name = "Ribbon1";
+            this.Name = "OutlookAIRibbon";
             this.RibbonType = "Microsoft.Outlook.Explorer, Microsoft.Outlook.Mail.Read, Microsoft.Outlook.Respon" +
     "se.Read";
             this.Tabs.Add(this.tab1);
@@ -122,9 +122,9 @@
 
     partial class ThisRibbonCollection
     {
-        internal Ribbon1 Ribbon1
+        internal OutlookAIRibbon Ribbon1
         {
-            get { return this.GetRibbon<Ribbon1>(); }
+            get { return this.GetRibbon<OutlookAIRibbon>(); }
         }
     }
 }
