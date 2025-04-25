@@ -42,6 +42,11 @@ namespace OutlookAI
             UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
             _userdata = loadedData;
 
+            UpdateRibbonLabels();
+        }
+
+        private void UpdateRibbonLabels()
+        {
             this.button1.Label = _userdata.Titel1;
             this.button2.Label = _userdata.Titel2;
             this.button3.Label = _userdata.Titel3;
@@ -74,15 +79,15 @@ namespace OutlookAI
             string userInput = string.Empty;
             if (inputBox.ShowDialog() == DialogResult.OK)
             {
-                userInput = inputBox.InputText;
-                //MessageBox.Show("Eingegebener Text: " + userInput);
+                await Reply(mail, _userdata.Prompt4 + "\n" + inputBox.InputText);
+
             }
-            await Reply(mail, _userdata.Prompt4 + "\n" + userInput);
         }
         private void Button5_Click(object sender, RibbonControlEventArgs e)
         {
             PromptBox p = new PromptBox(_userdata);
             p.ShowDialog();
+            UpdateRibbonLabels();
         }
 
         private async Task Reply(MailItem mail, string prompt)
@@ -90,11 +95,12 @@ namespace OutlookAI
             if (mail == null) return;
             try
             {
-                string response = await GetChatGPTResponse($"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}");
+                var task = GetChatGPTResponse($"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}");
                 var reply = mail.ReplyAll();
+                reply.Display();
+                string response = await task;
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
                 reply.HTMLBody = "<br>" + response + "<br><br>" + reply.HTMLBody;
-                reply.Display();
             }
             catch (System.Exception ex)
             {
