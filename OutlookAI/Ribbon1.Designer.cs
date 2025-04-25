@@ -61,7 +61,7 @@
             this.group1.Items.Add(this.button3);
             this.group1.Items.Add(this.button4);
             this.group1.Items.Add(this.button5);
-            this.group1.Label = "group1";
+            this.group1.Label = "OutlookAI";
             this.group1.Name = "group1";
             // 
             // button1

@@ -8,7 +8,6 @@ namespace OutlookAI
         public InputBox(string prompt, string title)
         {
             InitializeComponent();
-
             this.Text = title;
             labelPrompt.Text = prompt;
         }
@@ -27,7 +26,7 @@ namespace OutlookAI
         }
 
         /// <summary>
-        /// Required designer variable.
+        /// Required designer variable. 123
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
@@ -63,7 +62,7 @@ namespace OutlookAI
             this.buttonOk.Location = new System.Drawing.Point(550, 399);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 0;
+            this.buttonOk.TabIndex = 1;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
@@ -73,19 +72,20 @@ namespace OutlookAI
             this.buttonCancel.Location = new System.Drawing.Point(659, 399);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // textBoxInput
             // 
+            this.textBoxInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxInput.Location = new System.Drawing.Point(21, 32);
             this.textBoxInput.Multiline = true;
             this.textBoxInput.Name = "textBoxInput";
             this.textBoxInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxInput.Size = new System.Drawing.Size(713, 361);
-            this.textBoxInput.TabIndex = 2;
+            this.textBoxInput.TabIndex = 0;
             // 
             // labelPrompt
             // 

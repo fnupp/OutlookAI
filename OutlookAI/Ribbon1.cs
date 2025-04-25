@@ -35,13 +35,19 @@ namespace OutlookAI
                     Prompt3 = "Schreibe mir für die folgende Email 3 Antwortmöglichkeiten:\n-Zustimmende Antwort\n-Ablehnede Antwort\n-Nachfragende Antwort\n\nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.",
                     Prompt4 = "Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:"
 
+
+
+
                     /*
                     Prompt1 = "Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:"
                             + "Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu."
                             + "Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an."
+                            + "Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an."
                             + "Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten."
                             + "Nutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.",
                     
+
+
                     Prompt2 = "Schreibe mir für die folgende E - Mail eine ToDoListe (Bitte berücksichtige: [kurze Zusammenfassung]) drei Antwortmöglichkeiten:"
                             + "Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu."
                             + "Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an."
@@ -106,7 +112,7 @@ namespace OutlookAI
             try
             {
                 string response = await GetChatGPTResponse(prompt + "\n"
-                    + $"Betreff: {mail.Subject}\nInhalt: {mail.Body}");
+                    + $"Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}");
                 //                System.Windows.Forms.MessageBox.Show(response);
                 var reply = mail.ReplyAll();
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
