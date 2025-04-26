@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -20,6 +21,10 @@ namespace OutlookAI
         {
             this.userData = ud;
             userDataBindingSource.DataSource = ud;
+            if (ApplicationDeployment.IsNetworkDeployed)
+                labelVersion.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            else
+                labelVersion.Text = "Nicht veröffentlicht";
         }
 
 

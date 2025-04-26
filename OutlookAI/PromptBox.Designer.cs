@@ -68,7 +68,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxOpenAIApiKey = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelVersion = new System.Windows.Forms.Label();
             this.Tab1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).BeginInit();
@@ -468,21 +468,21 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.OK_Click);
             // 
-            // label4
+            // labelVersion
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 591);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 16);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "V1.0.10";
+            this.labelVersion.AutoSize = true;
+            this.labelVersion.Location = new System.Drawing.Point(14, 591);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(50, 16);
+            this.labelVersion.TabIndex = 2;
+            this.labelVersion.Text = "V1.0.10";
             // 
             // PromptBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1263, 625);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.Tab1);
             this.Name = "PromptBox";
@@ -532,7 +532,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxOpenAIApiKey;
         private System.Windows.Forms.TextBox P2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBoxOpenAIModel;
         private System.Windows.Forms.Label label11;
