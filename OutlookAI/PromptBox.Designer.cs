@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Tab1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.T1 = new System.Windows.Forms.TextBox();
+            this.userDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.P1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
@@ -50,16 +52,31 @@
             this.T4 = new System.Windows.Forms.TextBox();
             this.P4 = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.ollamaModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxOllamaUrl = new System.Windows.Forms.TextBox();
+            this.checkBoxOpenAI = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxOpenAIModel = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxApiKey = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxOpenAIApiKey = new System.Windows.Forms.TextBox();
+            this.buttonOK = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.Tab1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Tab1
@@ -112,13 +129,19 @@
             // 
             // T1
             // 
+            this.T1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel1", true));
             this.T1.Location = new System.Drawing.Point(13, 27);
             this.T1.Name = "T1";
             this.T1.Size = new System.Drawing.Size(1202, 22);
             this.T1.TabIndex = 1;
             // 
+            // userDataBindingSource
+            // 
+            this.userDataBindingSource.DataSource = typeof(OutlookAI.UserData);
+            // 
             // P1
             // 
+            this.P1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt1", true));
             this.P1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.P1.Location = new System.Drawing.Point(13, 72);
             this.P1.Multiline = true;
@@ -160,6 +183,7 @@
             // 
             // T2
             // 
+            this.T2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel2", true));
             this.T2.Location = new System.Drawing.Point(16, 25);
             this.T2.Name = "T2";
             this.T2.Size = new System.Drawing.Size(1202, 22);
@@ -167,6 +191,7 @@
             // 
             // P2
             // 
+            this.P2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt2", true));
             this.P2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.P2.Location = new System.Drawing.Point(16, 70);
             this.P2.Multiline = true;
@@ -208,6 +233,7 @@
             // 
             // T3
             // 
+            this.T3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel3", true));
             this.T3.Location = new System.Drawing.Point(15, 23);
             this.T3.Name = "T3";
             this.T3.Size = new System.Drawing.Size(1202, 22);
@@ -215,6 +241,7 @@
             // 
             // P3
             // 
+            this.P3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt3", true));
             this.P3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.P3.Location = new System.Drawing.Point(15, 68);
             this.P3.Multiline = true;
@@ -256,6 +283,7 @@
             // 
             // T4
             // 
+            this.T4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel4", true));
             this.T4.Location = new System.Drawing.Point(20, 30);
             this.T4.Name = "T4";
             this.T4.Size = new System.Drawing.Size(1202, 22);
@@ -263,6 +291,7 @@
             // 
             // P4
             // 
+            this.P4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt4", true));
             this.P4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.P4.Location = new System.Drawing.Point(20, 75);
             this.P4.Multiline = true;
@@ -272,51 +301,181 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.listBox1);
+            this.tabPage5.Controls.Add(this.button2);
+            this.tabPage5.Controls.Add(this.checkBox1);
+            this.tabPage5.Controls.Add(this.label13);
+            this.tabPage5.Controls.Add(this.textBox2);
+            this.tabPage5.Controls.Add(this.label14);
+            this.tabPage5.Controls.Add(this.textBoxOllamaUrl);
+            this.tabPage5.Controls.Add(this.checkBoxOpenAI);
+            this.tabPage5.Controls.Add(this.label12);
+            this.tabPage5.Controls.Add(this.textBoxOpenAIModel);
+            this.tabPage5.Controls.Add(this.label11);
+            this.tabPage5.Controls.Add(this.textBox1);
             this.tabPage5.Controls.Add(this.label3);
-            this.tabPage5.Controls.Add(this.textBoxApiKey);
+            this.tabPage5.Controls.Add(this.textBoxOpenAIApiKey);
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(1239, 551);
             this.tabPage5.TabIndex = 5;
-            this.tabPage5.Text = "ApiKey";
+            this.tabPage5.Text = "Einstellungen";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.userDataBindingSource, "Ollamamodel", true));
+            this.listBox1.DataSource = this.ollamaModelsBindingSource;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(9, 387);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(277, 148);
+            this.listBox1.TabIndex = 22;
+            this.listBox1.Click += new System.EventHandler(this.ListBox1_Click);
+            // 
+            // ollamaModelsBindingSource
+            // 
+            this.ollamaModelsBindingSource.DataMember = "OllamaModels";
+            this.ollamaModelsBindingSource.DataSource = this.userDataBindingSource;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(292, 387);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(109, 26);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Lade Models";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "OllamaActive", true));
+            this.checkBox1.Location = new System.Drawing.Point(7, 271);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(109, 20);
+            this.checkBox1.TabIndex = 20;
+            this.checkBox1.Text = "Nutze Ollama";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 340);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(45, 16);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Model";
+            // 
+            // textBox2
+            // 
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Ollamamodel", true));
+            this.textBox2.Location = new System.Drawing.Point(9, 359);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(1202, 22);
+            this.textBox2.TabIndex = 18;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 296);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(91, 16);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "Ollama Url       ";
+            // 
+            // textBoxOllamaUrl
+            // 
+            this.textBoxOllamaUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OllamaUrl", true));
+            this.textBoxOllamaUrl.Location = new System.Drawing.Point(6, 315);
+            this.textBoxOllamaUrl.Name = "textBoxOllamaUrl";
+            this.textBoxOllamaUrl.Size = new System.Drawing.Size(1202, 22);
+            this.textBoxOllamaUrl.TabIndex = 16;
+            // 
+            // checkBoxOpenAI
+            // 
+            this.checkBoxOpenAI.AutoSize = true;
+            this.checkBoxOpenAI.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "OpenAIAPIActive", true));
+            this.checkBoxOpenAI.Location = new System.Drawing.Point(4, 49);
+            this.checkBoxOpenAI.Name = "checkBoxOpenAI";
+            this.checkBoxOpenAI.Size = new System.Drawing.Size(111, 20);
+            this.checkBoxOpenAI.TabIndex = 13;
+            this.checkBoxOpenAI.Text = "Nutze OpenAI";
+            this.checkBoxOpenAI.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 171);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(45, 16);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Model";
+            // 
+            // textBoxOpenAIModel
+            // 
+            this.textBoxOpenAIModel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIModel", true));
+            this.textBoxOpenAIModel.Location = new System.Drawing.Point(9, 190);
+            this.textBoxOpenAIModel.Name = "textBoxOpenAIModel";
+            this.textBoxOpenAIModel.Size = new System.Drawing.Size(1202, 22);
+            this.textBoxOpenAIModel.TabIndex = 11;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 127);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(93, 16);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "OpenAI Url       ";
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIUrl", true));
+            this.textBox1.Location = new System.Drawing.Point(6, 146);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(1202, 22);
+            this.textBox1.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 9);
+            this.label3.Location = new System.Drawing.Point(3, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 16);
             this.label3.TabIndex = 8;
             this.label3.Text = "API KEY         ";
             // 
-            // textBoxApiKey
+            // textBoxOpenAIApiKey
             // 
-            this.textBoxApiKey.Location = new System.Drawing.Point(6, 28);
-            this.textBoxApiKey.Name = "textBoxApiKey";
-            this.textBoxApiKey.Size = new System.Drawing.Size(1202, 22);
-            this.textBoxApiKey.TabIndex = 7;
+            this.textBoxOpenAIApiKey.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIKey", true));
+            this.textBoxOpenAIApiKey.Location = new System.Drawing.Point(6, 102);
+            this.textBoxOpenAIApiKey.Name = "textBoxOpenAIApiKey";
+            this.textBoxOpenAIApiKey.Size = new System.Drawing.Size(1202, 22);
+            this.textBoxOpenAIApiKey.TabIndex = 7;
             // 
-            // button1
+            // buttonOK
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(1176, 590);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Location = new System.Drawing.Point(1176, 590);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.TabIndex = 1;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.OK_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(14, 591);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 13);
+            this.label4.Size = new System.Drawing.Size(43, 16);
             this.label4.TabIndex = 2;
-            this.label4.Text = "V1.0.9";
+            this.label4.Text = "V1.0.10";
             // 
             // PromptBox
             // 
@@ -324,13 +483,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1263, 625);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.Tab1);
             this.Name = "PromptBox";
             this.Text = "OutlookAi - Einstellungen";
             this.Tab1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -339,6 +499,7 @@
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,7 +512,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox P1;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox T1;
@@ -369,8 +530,22 @@
         private System.Windows.Forms.TextBox P4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxApiKey;
+        private System.Windows.Forms.TextBox textBoxOpenAIApiKey;
         private System.Windows.Forms.TextBox P2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxOpenAIModel;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBoxOpenAI;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.BindingSource userDataBindingSource;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxOllamaUrl;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.BindingSource ollamaModelsBindingSource;
     }
 }

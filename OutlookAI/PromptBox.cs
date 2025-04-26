@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OutlookAI
@@ -13,40 +16,78 @@ namespace OutlookAI
         }
 
         private readonly UserData userData;
-        public PromptBox(UserData ud)
+        public PromptBox(UserData ud):this()
         {
             this.userData = ud;
-            InitializeComponent();
-            P1.Text = ud.Prompt1;
-            P2.Text = ud.Prompt2;
-            P3.Text = ud.Prompt3;
-            P4.Text = ud.Prompt4;
-            T1.Text = ud.Titel1;
-            T2.Text = ud.Titel2;
-            T3.Text = ud.Titel3;
-            T4.Text = ud.Titel4;
-            textBoxApiKey.Text = ud.ApiKey;
+            userDataBindingSource.DataSource = ud;
         }
 
 
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void OK_Click(object sender, EventArgs e)
         {
-
-            userData.Prompt1 = P1.Text;
-            userData.Prompt2 = P2.Text;
-            userData.Prompt3 = P3.Text;
-            userData.Prompt4 = P4.Text;
-            userData.ApiKey = textBoxApiKey.Text;
-            userData.Titel1 = T1.Text;
-            userData.Titel2 = T2.Text;
-            userData.Titel3 = T3.Text;
-            userData.Titel4 = T4.Text;
-
-            string json = JsonConvert.SerializeObject(userData);
+            string json = JsonConvert.SerializeObject(userDataBindingSource.DataSource);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"), json);
             this.Close();
         }
 
+        private async void Button2_Click(object sender, EventArgs e)
+        {
+            await GetOllamaModels();
+        }
+
+
+        public async Task<List<ModelInfo>> GetOllamaModels()
+        {
+            var ollamaUrl = "http://localhost:11434/api/tags";
+            try
+            {
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(ollamaUrl);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
+                }
+
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                ModelListResponse modelListResponse = JsonConvert.DeserializeObject<ModelListResponse>(jsonResponse);
+
+
+                if (modelListResponse?.Models != null)
+                {
+                    if(userData.OllamaModels == null)
+                        userData.OllamaModels = new List<string>();
+                    else
+                        userData.OllamaModels.Clear();
+                    userData.OllamaModels.AddRange(modelListResponse.Models.ConvertAll(m => m.Name));   
+                }
+                return modelListResponse.Models;
+            }
+            catch (System.Exception ex)
+            {
+                throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {ex.Message}");
+            }
+        }
+
+        private void ListBox1_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = listBox1.SelectedItem.ToString();
+        }
+
+    }
+
+    public class ModelListResponse
+    {
+        public List<ModelInfo> Models { get; set; }
+    }
+
+    public class ModelInfo
+    {
+        public string Name { get; set; }
+        public string Mod { get; set; }
+        public string Size { get; set; }
+
+        public string CreatedAt { get; set; }
     }
 }

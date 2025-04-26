@@ -30,7 +30,13 @@ namespace OutlookAI
                     Titel2 = "ToDo",
                     Titel3 = "Rückfragen",
                     Titel4 = "Custom",
-                    ApiKey = "",
+                    OpenAIAPIActive = false,
+                    OpenAIAPIKey = "",
+                    OpenAIAPIModel = "gpt-4o-mini",
+                    OpenAIAPIUrl = "https://api.openai.com/v1/chat/completions",
+                    OllamaActive = false,
+                    OllamaUrl = ""
+
 
                 };
 
@@ -76,11 +82,9 @@ namespace OutlookAI
 
             MailItem mail = GetMail();
             InputBox inputBox = new InputBox(_userdata.Prompt4, "Textinput");
-            string userInput = string.Empty;
             if (inputBox.ShowDialog() == DialogResult.OK)
             {
                 await Reply(mail, _userdata.Prompt4 + "\n" + inputBox.InputText);
-
             }
         }
         private void Button5_Click(object sender, RibbonControlEventArgs e)
@@ -95,12 +99,25 @@ namespace OutlookAI
             if (mail == null) return;
             try
             {
-                var task = GetChatGPTResponse($"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}");
+                string response;
+                string finalPrompt = $"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
+                if (_userdata.OllamaActive)
+                {
+                    response = await GetChatOllamaResponse(finalPrompt);
+                }
+                else if (_userdata.OpenAIAPIActive)
+                {
+                    response = await GetChatGPTResponse(finalPrompt);
+                }
+                else
+                {
+                    response = "No active all. Active in Settings.";
+                }
+
                 var reply = mail.ReplyAll();
-                reply.Display();
-                string response = await task;
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
                 reply.HTMLBody = "<br>" + response + "<br><br>" + reply.HTMLBody;
+                reply.Display();
             }
             catch (System.Exception ex)
             {
@@ -129,20 +146,49 @@ namespace OutlookAI
             return mail;
         }
 
-        private async Task<string> GetChatGPTResponse(string userInput)
+        async Task<string> GetChatOllamaResponse(string prompt)
         {
-            // Ersetzen Sie "YOUR_API_KEY" durch Ihren tatsächlichen API-Schlüssel
-            string apiKey = _userdata.ApiKey; //                
-            string apiUrl = "https://api.openai.com/v1/chat/completions";
+            //var ollamaUrl = "http://localhost:11434/api/generate";
+            //var model = "llama3"; 
 
-            using (HttpClient client = new HttpClient())
+
+
+            using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-
-                // Erstellen des Anforderungskörpers
                 var requestBody = new
                 {
-                    model = "gpt-4o-mini", // Das GPT-Modell, das Sie verwenden möchten
+                    model = _userdata.Ollamamodel,
+                    prompt,
+                    stream = false
+                };
+
+                var json = JsonConvert.SerializeObject(requestBody);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync(_userdata.OllamaUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    dynamic jsonResponseParsed = JsonConvert.DeserializeObject(jsonResponse);
+                    return jsonResponseParsed.response.ToString();
+                }
+                else
+                {
+                    throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
+                }
+            }
+        }
+
+        private async Task<string> GetChatGPTResponse(string userInput)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _userdata.OpenAIAPIKey);
+
+                var requestBody = new
+                {
+                    model = _userdata.OpenAIAPIModel,  //"gpt-4o-mini", 
                     messages = new[]
                     {
                         new { role = "user", content = userInput }
@@ -152,8 +198,7 @@ namespace OutlookAI
                 string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
                 var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
-                // Senden der POST-Anfrage
-                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+                HttpResponseMessage response = await client.PostAsync(_userdata.OpenAIAPIUrl, content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -169,4 +214,5 @@ namespace OutlookAI
         }
 
     }
+
 }

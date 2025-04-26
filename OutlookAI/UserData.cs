@@ -1,4 +1,6 @@
-﻿namespace OutlookAI
+﻿using System.Collections.Generic;
+
+namespace OutlookAI
 {
     public class UserData
     {
@@ -10,6 +12,18 @@
         public string Titel2 { get; set; }
         public string Titel3 { get; set; }
         public string Titel4 { get; set; }
-        public string ApiKey { get; set; }
+
+        public bool OpenAIAPIActive { get; set; }
+        public string OpenAIAPIUrl { get; set; }
+        public string OpenAIAPIKey { get; set; }
+        public string OpenAIAPIModel { get; set; }
+
+
+        public bool OllamaActive { get; set; }
+        public string OllamaUrl { get; set; }
+        public string Ollamamodel { get; set; }
+
+        public List<string> OllamaModels { get; set; }
+
     }
 }
