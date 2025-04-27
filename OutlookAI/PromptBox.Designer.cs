@@ -29,30 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PromptBox));
             this.Tab1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.T1 = new System.Windows.Forms.TextBox();
-            this.userDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.P1 = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.T2 = new System.Windows.Forms.TextBox();
-            this.P2 = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.T3 = new System.Windows.Forms.TextBox();
-            this.P3 = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.T4 = new System.Windows.Forms.TextBox();
-            this.P4 = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.userDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ollamaModelsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -75,6 +56,26 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.T1 = new System.Windows.Forms.TextBox();
+            this.P1 = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.T2 = new System.Windows.Forms.TextBox();
+            this.P2 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.T3 = new System.Windows.Forms.TextBox();
+            this.P3 = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.T4 = new System.Windows.Forms.TextBox();
+            this.P4 = new System.Windows.Forms.TextBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -103,14 +104,14 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelVersion = new System.Windows.Forms.Label();
             this.Tab1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).BeginInit();
-            this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage9.SuspendLayout();
@@ -120,232 +121,24 @@
             // 
             // Tab1
             // 
-            this.Tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.Tab1, "Tab1");
+            this.Tab1.Controls.Add(this.tabPage5);
+            this.Tab1.Controls.Add(this.tabPage6);
             this.Tab1.Controls.Add(this.tabPage1);
             this.Tab1.Controls.Add(this.tabPage2);
             this.Tab1.Controls.Add(this.tabPage3);
             this.Tab1.Controls.Add(this.tabPage4);
-            this.Tab1.Controls.Add(this.tabPage5);
-            this.Tab1.Controls.Add(this.tabPage6);
             this.Tab1.Controls.Add(this.tabPage7);
             this.Tab1.Controls.Add(this.tabPage8);
             this.Tab1.Controls.Add(this.tabPage9);
             this.Tab1.Controls.Add(this.tabPage10);
             this.Tab1.Controls.Add(this.tabPage11);
-            this.Tab1.Location = new System.Drawing.Point(4, 4);
             this.Tab1.Name = "Tab1";
             this.Tab1.SelectedIndex = 0;
-            this.Tab1.Size = new System.Drawing.Size(1247, 580);
-            this.Tab1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.T1);
-            this.tabPage1.Controls.Add(this.P1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Prompt 1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 53);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 16);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Promt     ";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 5);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 16);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Titel       ";
-            // 
-            // T1
-            // 
-            this.T1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel1", true));
-            this.T1.Location = new System.Drawing.Point(16, 24);
-            this.T1.Name = "T1";
-            this.T1.Size = new System.Drawing.Size(1202, 22);
-            this.T1.TabIndex = 1;
-            // 
-            // userDataBindingSource
-            // 
-            this.userDataBindingSource.DataSource = typeof(OutlookAI.UserData);
-            // 
-            // P1
-            // 
-            this.P1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt1", true));
-            this.P1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.P1.Location = new System.Drawing.Point(19, 72);
-            this.P1.Multiline = true;
-            this.P1.Name = "P1";
-            this.P1.Size = new System.Drawing.Size(1202, 464);
-            this.P1.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.T2);
-            this.tabPage2.Controls.Add(this.P2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Prompt 2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 54);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 16);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Promt     ";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 16);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Titel       ";
-            // 
-            // T2
-            // 
-            this.T2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel2", true));
-            this.T2.Location = new System.Drawing.Point(16, 25);
-            this.T2.Name = "T2";
-            this.T2.Size = new System.Drawing.Size(1202, 22);
-            this.T2.TabIndex = 5;
-            // 
-            // P2
-            // 
-            this.P2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt2", true));
-            this.P2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.P2.Location = new System.Drawing.Point(16, 70);
-            this.P2.Multiline = true;
-            this.P2.Name = "P2";
-            this.P2.Size = new System.Drawing.Size(1202, 464);
-            this.P2.TabIndex = 4;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.label10);
-            this.tabPage3.Controls.Add(this.T3);
-            this.tabPage3.Controls.Add(this.P3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Prompt 3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 52);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 16);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Promt     ";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 4);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(54, 16);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Titel       ";
-            // 
-            // T3
-            // 
-            this.T3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel3", true));
-            this.T3.Location = new System.Drawing.Point(15, 23);
-            this.T3.Name = "T3";
-            this.T3.Size = new System.Drawing.Size(1202, 22);
-            this.T3.TabIndex = 5;
-            // 
-            // P3
-            // 
-            this.P3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt3", true));
-            this.P3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.P3.Location = new System.Drawing.Point(15, 68);
-            this.P3.Multiline = true;
-            this.P3.Name = "P3";
-            this.P3.Size = new System.Drawing.Size(1202, 464);
-            this.P3.TabIndex = 4;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.label1);
-            this.tabPage4.Controls.Add(this.label2);
-            this.tabPage4.Controls.Add(this.T4);
-            this.tabPage4.Controls.Add(this.P4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage4.TabIndex = 4;
-            this.tabPage4.Text = "Prompt 4";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 16);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Promt     ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 16);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Titel       ";
-            // 
-            // T4
-            // 
-            this.T4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel4", true));
-            this.T4.Location = new System.Drawing.Point(20, 30);
-            this.T4.Name = "T4";
-            this.T4.Size = new System.Drawing.Size(1202, 22);
-            this.T4.TabIndex = 5;
-            // 
-            // P4
-            // 
-            this.P4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt4", true));
-            this.P4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.P4.Location = new System.Drawing.Point(20, 75);
-            this.P4.Multiline = true;
-            this.P4.Name = "P4";
-            this.P4.Size = new System.Drawing.Size(1202, 464);
-            this.P4.TabIndex = 4;
             // 
             // tabPage5
             // 
+            resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Controls.Add(this.listBox1);
             this.tabPage5.Controls.Add(this.button2);
             this.tabPage5.Controls.Add(this.checkBox1);
@@ -360,25 +153,21 @@
             this.tabPage5.Controls.Add(this.textBox1);
             this.tabPage5.Controls.Add(this.label3);
             this.tabPage5.Controls.Add(this.textBoxOpenAIApiKey);
-            this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage5.TabIndex = 5;
-            this.tabPage5.Text = "Einstellungen";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // listBox1
             // 
+            resources.ApplyResources(this.listBox1, "listBox1");
             this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.userDataBindingSource, "Ollamamodel", true));
             this.listBox1.DataSource = this.ollamaModelsBindingSource;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(11, 331);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(277, 148);
-            this.listBox1.TabIndex = 22;
             this.listBox1.Click += new System.EventHandler(this.ListBox1_Click);
+            // 
+            // userDataBindingSource
+            // 
+            this.userDataBindingSource.DataSource = typeof(OutlookAI.UserData);
             // 
             // ollamaModelsBindingSource
             // 
@@ -387,123 +176,83 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(294, 331);
+            resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 26);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Load Models";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // checkBox1
             // 
-            this.checkBox1.AutoSize = true;
+            resources.ApplyResources(this.checkBox1, "checkBox1");
             this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "OllamaActive", true));
-            this.checkBox1.Location = new System.Drawing.Point(11, 217);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(109, 20);
-            this.checkBox1.TabIndex = 20;
-            this.checkBox1.Text = "Nutze Ollama";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 284);
+            resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(45, 16);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "Model";
             // 
             // textBox2
             // 
+            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Ollamamodel", true));
-            this.textBox2.Location = new System.Drawing.Point(11, 303);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(664, 22);
-            this.textBox2.TabIndex = 18;
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(5, 240);
+            resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(91, 16);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "Ollama Url       ";
             // 
             // textBoxOllamaUrl
             // 
+            resources.ApplyResources(this.textBoxOllamaUrl, "textBoxOllamaUrl");
             this.textBoxOllamaUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OllamaUrl", true));
-            this.textBoxOllamaUrl.Location = new System.Drawing.Point(11, 259);
             this.textBoxOllamaUrl.Name = "textBoxOllamaUrl";
-            this.textBoxOllamaUrl.Size = new System.Drawing.Size(664, 22);
-            this.textBoxOllamaUrl.TabIndex = 16;
             // 
             // checkBoxOpenAI
             // 
-            this.checkBoxOpenAI.AutoSize = true;
+            resources.ApplyResources(this.checkBoxOpenAI, "checkBoxOpenAI");
             this.checkBoxOpenAI.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "OpenAIAPIActive", true));
-            this.checkBoxOpenAI.Location = new System.Drawing.Point(9, 18);
             this.checkBoxOpenAI.Name = "checkBoxOpenAI";
-            this.checkBoxOpenAI.Size = new System.Drawing.Size(111, 20);
-            this.checkBoxOpenAI.TabIndex = 13;
-            this.checkBoxOpenAI.Text = "Nutze OpenAI";
             this.checkBoxOpenAI.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(11, 140);
+            resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(45, 16);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "Model";
             // 
             // textBoxOpenAIModel
             // 
+            resources.ApplyResources(this.textBoxOpenAIModel, "textBoxOpenAIModel");
             this.textBoxOpenAIModel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIModel", true));
-            this.textBoxOpenAIModel.Location = new System.Drawing.Point(9, 159);
             this.textBoxOpenAIModel.Name = "textBoxOpenAIModel";
-            this.textBoxOpenAIModel.Size = new System.Drawing.Size(816, 22);
-            this.textBoxOpenAIModel.TabIndex = 11;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 96);
+            resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(93, 16);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "OpenAI Url       ";
             // 
             // textBox1
             // 
+            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIUrl", true));
-            this.textBox1.Location = new System.Drawing.Point(9, 115);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(816, 22);
-            this.textBox1.TabIndex = 9;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 52);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "API KEY         ";
             // 
             // textBoxOpenAIApiKey
             // 
+            resources.ApplyResources(this.textBoxOpenAIApiKey, "textBoxOpenAIApiKey");
             this.textBoxOpenAIApiKey.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIKey", true));
-            this.textBoxOpenAIApiKey.Location = new System.Drawing.Point(11, 71);
             this.textBoxOpenAIApiKey.Name = "textBoxOpenAIApiKey";
-            this.textBoxOpenAIApiKey.Size = new System.Drawing.Size(816, 22);
-            this.textBoxOpenAIApiKey.TabIndex = 7;
             // 
             // tabPage6
             // 
+            resources.ApplyResources(this.tabPage6, "tabPage6");
             this.tabPage6.Controls.Add(this.label16);
             this.tabPage6.Controls.Add(this.textBox5);
             this.tabPage6.Controls.Add(this.checkBox2);
@@ -511,372 +260,372 @@
             this.tabPage6.Controls.Add(this.textBox3);
             this.tabPage6.Controls.Add(this.label15);
             this.tabPage6.Controls.Add(this.textBox4);
-            this.tabPage6.Location = new System.Drawing.Point(4, 25);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage6.TabIndex = 6;
-            this.tabPage6.Text = "Proxy";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(8, 119);
+            resources.ApplyResources(this.label16, "label16");
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(67, 16);
-            this.label16.TabIndex = 36;
-            this.label16.Text = "Password";
             // 
             // textBox5
             // 
+            resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyPassword", true));
-            this.textBox5.Location = new System.Drawing.Point(11, 138);
             this.textBox5.Name = "textBox5";
-            this.textBox5.PasswordChar = '*';
-            this.textBox5.Size = new System.Drawing.Size(395, 22);
-            this.textBox5.TabIndex = 35;
             // 
             // checkBox2
             // 
-            this.checkBox2.AutoSize = true;
+            resources.ApplyResources(this.checkBox2, "checkBox2");
             this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "ProxyActive", true));
-            this.checkBox2.Location = new System.Drawing.Point(9, 6);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(100, 20);
-            this.checkBox2.TabIndex = 34;
-            this.checkBox2.Text = "Nutze Proxy";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 75);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 16);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "User";
             // 
             // textBox3
             // 
+            resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyUsername", true));
-            this.textBox3.Location = new System.Drawing.Point(11, 94);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(395, 22);
-            this.textBox3.TabIndex = 32;
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(5, 31);
+            resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(82, 16);
-            this.label15.TabIndex = 31;
-            this.label15.Text = "Proxy Url       ";
             // 
             // textBox4
             // 
+            resources.ApplyResources(this.textBox4, "textBox4");
             this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyUrl", true));
-            this.textBox4.Location = new System.Drawing.Point(8, 50);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(395, 22);
-            this.textBox4.TabIndex = 30;
+            // 
+            // tabPage1
+            // 
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.T1);
+            this.tabPage1.Controls.Add(this.P1);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // T1
+            // 
+            resources.ApplyResources(this.T1, "T1");
+            this.T1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel1", true));
+            this.T1.Name = "T1";
+            // 
+            // P1
+            // 
+            resources.ApplyResources(this.P1, "P1");
+            this.P1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt1", true));
+            this.P1.Name = "P1";
+            // 
+            // tabPage2
+            // 
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.T2);
+            this.tabPage2.Controls.Add(this.P2);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // T2
+            // 
+            resources.ApplyResources(this.T2, "T2");
+            this.T2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel2", true));
+            this.T2.Name = "T2";
+            // 
+            // P2
+            // 
+            resources.ApplyResources(this.P2, "P2");
+            this.P2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt2", true));
+            this.P2.Name = "P2";
+            // 
+            // tabPage3
+            // 
+            resources.ApplyResources(this.tabPage3, "tabPage3");
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.T3);
+            this.tabPage3.Controls.Add(this.P3);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // T3
+            // 
+            resources.ApplyResources(this.T3, "T3");
+            this.T3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel3", true));
+            this.T3.Name = "T3";
+            // 
+            // P3
+            // 
+            resources.ApplyResources(this.P3, "P3");
+            this.P3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt3", true));
+            this.P3.Name = "P3";
+            // 
+            // tabPage4
+            // 
+            resources.ApplyResources(this.tabPage4, "tabPage4");
+            this.tabPage4.Controls.Add(this.label1);
+            this.tabPage4.Controls.Add(this.label2);
+            this.tabPage4.Controls.Add(this.T4);
+            this.tabPage4.Controls.Add(this.P4);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // T4
+            // 
+            resources.ApplyResources(this.T4, "T4");
+            this.T4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel4", true));
+            this.T4.Name = "T4";
+            // 
+            // P4
+            // 
+            resources.ApplyResources(this.P4, "P4");
+            this.P4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt4", true));
+            this.P4.Name = "P4";
             // 
             // tabPage7
             // 
+            resources.ApplyResources(this.tabPage7, "tabPage7");
             this.tabPage7.Controls.Add(this.label17);
             this.tabPage7.Controls.Add(this.label18);
             this.tabPage7.Controls.Add(this.textBox6);
             this.tabPage7.Controls.Add(this.textBox7);
-            this.tabPage7.Location = new System.Drawing.Point(4, 25);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "Zusammenfassung 1";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // label17
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(20, 59);
+            resources.ApplyResources(this.label17, "label17");
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(57, 16);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Promt     ";
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(17, 11);
+            resources.ApplyResources(this.label18, "label18");
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(54, 16);
-            this.label18.TabIndex = 10;
-            this.label18.Text = "Titel       ";
             // 
             // textBox6
             // 
+            resources.ApplyResources(this.textBox6, "textBox6");
             this.textBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "SummaryTitel1", true));
-            this.textBox6.Location = new System.Drawing.Point(20, 30);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(1202, 22);
-            this.textBox6.TabIndex = 9;
             // 
             // textBox7
             // 
+            resources.ApplyResources(this.textBox7, "textBox7");
             this.textBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Summary1", true));
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(20, 75);
-            this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(1202, 464);
-            this.textBox7.TabIndex = 8;
             // 
             // tabPage8
             // 
+            resources.ApplyResources(this.tabPage8, "tabPage8");
             this.tabPage8.Controls.Add(this.label19);
             this.tabPage8.Controls.Add(this.label20);
             this.tabPage8.Controls.Add(this.textBox8);
             this.tabPage8.Controls.Add(this.textBox9);
-            this.tabPage8.Location = new System.Drawing.Point(4, 25);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage8.TabIndex = 8;
-            this.tabPage8.Text = "Zusammenfassung 2";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // label19
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(20, 59);
+            resources.ApplyResources(this.label19, "label19");
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(57, 16);
-            this.label19.TabIndex = 15;
-            this.label19.Text = "Promt     ";
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(17, 11);
+            resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(54, 16);
-            this.label20.TabIndex = 14;
-            this.label20.Text = "Titel       ";
             // 
             // textBox8
             // 
+            resources.ApplyResources(this.textBox8, "textBox8");
             this.textBox8.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "SummaryTitel2", true));
-            this.textBox8.Location = new System.Drawing.Point(20, 30);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(1202, 22);
-            this.textBox8.TabIndex = 13;
             // 
             // textBox9
             // 
+            resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Summary2", true));
-            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox9.Location = new System.Drawing.Point(20, 75);
-            this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(1202, 464);
-            this.textBox9.TabIndex = 12;
             // 
             // tabPage9
             // 
+            resources.ApplyResources(this.tabPage9, "tabPage9");
             this.tabPage9.Controls.Add(this.label21);
             this.tabPage9.Controls.Add(this.label22);
             this.tabPage9.Controls.Add(this.textBox10);
             this.tabPage9.Controls.Add(this.textBox11);
-            this.tabPage9.Location = new System.Drawing.Point(4, 25);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage9.TabIndex = 9;
-            this.tabPage9.Text = "Compose 1";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // label21
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(20, 59);
+            resources.ApplyResources(this.label21, "label21");
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(57, 16);
-            this.label21.TabIndex = 19;
-            this.label21.Text = "Promt     ";
             // 
             // label22
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(17, 11);
+            resources.ApplyResources(this.label22, "label22");
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(54, 16);
-            this.label22.TabIndex = 18;
-            this.label22.Text = "Titel       ";
             // 
             // textBox10
             // 
+            resources.ApplyResources(this.textBox10, "textBox10");
             this.textBox10.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposeTitle1", true));
-            this.textBox10.Location = new System.Drawing.Point(20, 30);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(1202, 22);
-            this.textBox10.TabIndex = 17;
             // 
             // textBox11
             // 
+            resources.ApplyResources(this.textBox11, "textBox11");
             this.textBox11.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposePrompt1", true));
-            this.textBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox11.Location = new System.Drawing.Point(20, 75);
-            this.textBox11.Multiline = true;
             this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(1202, 464);
-            this.textBox11.TabIndex = 16;
             // 
             // tabPage10
             // 
+            resources.ApplyResources(this.tabPage10, "tabPage10");
             this.tabPage10.Controls.Add(this.label23);
             this.tabPage10.Controls.Add(this.label24);
             this.tabPage10.Controls.Add(this.textBox12);
             this.tabPage10.Controls.Add(this.textBox13);
-            this.tabPage10.Location = new System.Drawing.Point(4, 25);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage10.TabIndex = 10;
-            this.tabPage10.Text = "Compose 2";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
             // label23
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(20, 59);
+            resources.ApplyResources(this.label23, "label23");
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(57, 16);
-            this.label23.TabIndex = 23;
-            this.label23.Text = "Promt     ";
             // 
             // label24
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(17, 11);
+            resources.ApplyResources(this.label24, "label24");
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(54, 16);
-            this.label24.TabIndex = 22;
-            this.label24.Text = "Titel       ";
             // 
             // textBox12
             // 
+            resources.ApplyResources(this.textBox12, "textBox12");
             this.textBox12.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposeTitle2", true));
-            this.textBox12.Location = new System.Drawing.Point(20, 30);
             this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(1202, 22);
-            this.textBox12.TabIndex = 21;
             // 
             // textBox13
             // 
+            resources.ApplyResources(this.textBox13, "textBox13");
             this.textBox13.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposePrompt2", true));
-            this.textBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox13.Location = new System.Drawing.Point(20, 75);
-            this.textBox13.Multiline = true;
             this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(1202, 464);
-            this.textBox13.TabIndex = 20;
             // 
             // tabPage11
             // 
+            resources.ApplyResources(this.tabPage11, "tabPage11");
             this.tabPage11.Controls.Add(this.label25);
             this.tabPage11.Controls.Add(this.label26);
             this.tabPage11.Controls.Add(this.textBox14);
             this.tabPage11.Controls.Add(this.textBox15);
-            this.tabPage11.Location = new System.Drawing.Point(4, 25);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(1239, 551);
-            this.tabPage11.TabIndex = 11;
-            this.tabPage11.Text = "Compose 3";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
             // label25
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(20, 59);
+            resources.ApplyResources(this.label25, "label25");
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(57, 16);
-            this.label25.TabIndex = 23;
-            this.label25.Text = "Promt     ";
             // 
             // label26
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(17, 11);
+            resources.ApplyResources(this.label26, "label26");
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(54, 16);
-            this.label26.TabIndex = 22;
-            this.label26.Text = "Titel       ";
             // 
             // textBox14
             // 
+            resources.ApplyResources(this.textBox14, "textBox14");
             this.textBox14.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposeTitle3", true));
-            this.textBox14.Location = new System.Drawing.Point(20, 30);
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(1202, 22);
-            this.textBox14.TabIndex = 21;
             // 
             // textBox15
             // 
+            resources.ApplyResources(this.textBox15, "textBox15");
             this.textBox15.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposePrompt3", true));
-            this.textBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox15.Location = new System.Drawing.Point(20, 75);
-            this.textBox15.Multiline = true;
             this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(1202, 464);
-            this.textBox15.TabIndex = 20;
             // 
             // buttonOK
             // 
-            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(1176, 590);
+            resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 1;
-            this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.OK_Click);
             // 
             // labelVersion
             // 
-            this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(14, 591);
+            resources.ApplyResources(this.labelVersion, "labelVersion");
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(50, 16);
-            this.labelVersion.TabIndex = 2;
-            this.labelVersion.Text = "V1.0.10";
             // 
             // PromptBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1263, 625);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.Tab1);
             this.Name = "PromptBox";
-            this.Text = "OutlookAi - Einstellungen";
             this.Tab1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).EndInit();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             this.tabPage8.ResumeLayout(false);

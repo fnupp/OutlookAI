@@ -286,6 +286,9 @@
     <EmbeddedResource Include="InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PromptBox.de.resx">
+      <DependentUpon>PromptBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PromptBox.resx">
       <DependentUpon>PromptBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -303,10 +306,13 @@
     <EmbeddedResource Include="OutlookAIRibbon.resx">
       <DependentUpon>OutlookAIRibbon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources.de.resx" />
+    <EmbeddedResource Include="Resources.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="OutlookAI_TemporaryKey.pfx" />

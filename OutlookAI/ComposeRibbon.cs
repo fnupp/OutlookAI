@@ -58,9 +58,11 @@ namespace OutlookAI
         {
             var ctx = (Inspector)this.Context;
             var mail = ctx.CurrentItem as MailItem;
-
             string selectedText = GetSelectedText(ctx);
-
+            if (string.IsNullOrWhiteSpace(selectedText))
+            { 
+                return;
+            }
             await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
         }
 

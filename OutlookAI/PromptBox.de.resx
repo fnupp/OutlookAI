@@ -117,81 +117,54 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+  <data name="tabPage8.Text" xml:space="preserve">
+    <value>Zusammenfassung 2</value>
   </data>
-  <data name="NichtVeröffentlicht" xml:space="preserve">
-    <value>Not published</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label21.Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Prompt1" xml:space="preserve">
-    <value>Write me for the following E - Mail three answer options: \ r \ n1. Use a friendly, professional tone and add possible next steps. \ R \ n2. preserved. Do not create an email or subject. Write briefly and use paragraphs to structure the argument.</value>
+  <data name="checkBoxOpenAI.Text" xml:space="preserve">
+    <value>Nutze OpenAI</value>
   </data>
-  <data name="Prompt2" xml:space="preserve">
-    <value>Write me a to-do list for the following email. Write in detail and use paragraphs to structure the argument.</value>
+  <data name="label15.Text" xml:space="preserve">
+    <value>Proxy Url       </value>
   </data>
-  <data name="Prompt3" xml:space="preserve">
-    <value>Write me a response to the following email with 3 follow-up questions. Use the same language as the email for your response. Do not include an email footer or subject line. Write in detail and in an informal style.</value>
+  <data name="tabPage11.Text" xml:space="preserve">
+    <value>Mail verfassen 3</value>
   </data>
-  <data name="Prompt4" xml:space="preserve">
-    <value>Write a response to the following email and refer to this email. Use the language of the email for your response. Do not create any email footers or subject lines. Write in detail and use paragraphs to structure your argument. Pay special attention to the following points:</value>
+  <data name="label9.Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Title1" xml:space="preserve">
-    <value>3 Antworten</value>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>Nutze Ollama</value>
   </data>
-  <data name="Title2" xml:space="preserve">
-    <value>ToDo</value>
+  <data name="tabPage10.Text" xml:space="preserve">
+    <value>Mail verfassen 2</value>
   </data>
-  <data name="Title3" xml:space="preserve">
-    <value>Rückfragen</value>
+  <data name="tabPage10.Location" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Title4" xml:space="preserve">
-    <value>Custom</value>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Einstellungen</value>
   </data>
-  <data name="ErrorcallingOllama" xml:space="preserve">
-    <value>#TODO#_Error in the request to oLLAMA</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="checkBoxOpenAI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 24</value>
   </data>
-  <data name="ErrorcallingOpenai" xml:space="preserve">
-    <value>#TODO#_Error in the request to ChatGPT</value>
+  <data name="labelVersion.Text" xml:space="preserve">
+    <value>VersionText</value>
   </data>
-  <data name="ComposePrompt1" xml:space="preserve">
-    <value>Please formulate this email more professionally. \r\n - Do not include a subject line or signature.\r\n - Keep the salutation (you, they) as is.</value>
+  <data name="tabPage7.Text" xml:space="preserve">
+    <value>Zusammenfassung 1</value>
   </data>
-  <data name="ComposePrompt2" xml:space="preserve">
-    <value>Revise this email so that it is more clearly structured and easier to understand, without changing the content. Do not create a subject line or signature. Keep the salutation (you, they) as is:</value>
+  <data name="checkBox2.Text" xml:space="preserve">
+    <value>Proxy aktivieren</value>
   </data>
-  <data name="ComposePrompt3" xml:space="preserve">
-    <value>Make this email shorter and more personal, as if you were writing to a good colleague or acquaintance:  
-- Do not include a subject line or signature.  
-- Keep the salutation (you, they) the same.</value>
+  <data name="tabPage9.Text" xml:space="preserve">
+    <value>Mail verfassen 1</value>
   </data>
-  <data name="ComposePromptTitle1" xml:space="preserve">
-    <value>Professional</value>
-  </data>
-  <data name="ComposePromptTitle2" xml:space="preserve">
-    <value>Clearer</value>
-  </data>
-  <data name="ComposePromptTitle3" xml:space="preserve">
-    <value>Informal</value>
-  </data>
-  <data name="SummarizeTitle1" xml:space="preserve">
-    <value>Summary 1</value>
-  </data>
-  <data name="SummarizeTitle2" xml:space="preserve">
-    <value>Summary 2</value>
-  </data>
-  <data name="SummarizePrompt1" xml:space="preserve">
-    <value>Summarize the following email, list the key statements and information, and describe the tone of the email. 
-
-Analyze the email: 
-Read the original email to understand the context, the issue, and the sender's tone.
-
-Incorporate content input: 
-Use only the provided content information and statements as the basis for the response.</value>
-  </data>
-  <data name="SummarizePrompt2" xml:space="preserve">
-    <value>Summarize the following email. Read the original email to understand the context, the issue, and the sender's tone.</value>
-  </data>
-  <data name="OpenAiDefaultModel" xml:space="preserve">
-    <value>gpt-4o-mini</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>OutlookAi - Einstellungen</value>
   </data>
 </root>

@@ -61,6 +61,62 @@ namespace OutlookAI {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please formulate this email more professionally. \r\n - Do not include a subject line or signature.\r\n - Keep the salutation (you, they) as is. ähnelt.
+        /// </summary>
+        internal static string ComposePrompt1 {
+            get {
+                return ResourceManager.GetString("ComposePrompt1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Revise this email so that it is more clearly structured and easier to understand, without changing the content. Do not create a subject line or signature. Keep the salutation (you, they) as is: ähnelt.
+        /// </summary>
+        internal static string ComposePrompt2 {
+            get {
+                return ResourceManager.GetString("ComposePrompt2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Make this email shorter and more personal, as if you were writing to a good colleague or acquaintance:  
+        ///- Do not include a subject line or signature.  
+        ///- Keep the salutation (you, they) the same. ähnelt.
+        /// </summary>
+        internal static string ComposePrompt3 {
+            get {
+                return ResourceManager.GetString("ComposePrompt3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Professional ähnelt.
+        /// </summary>
+        internal static string ComposePromptTitle1 {
+            get {
+                return ResourceManager.GetString("ComposePromptTitle1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Clearer ähnelt.
+        /// </summary>
+        internal static string ComposePromptTitle2 {
+            get {
+                return ResourceManager.GetString("ComposePromptTitle2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Informal ähnelt.
+        /// </summary>
+        internal static string ComposePromptTitle3 {
+            get {
+                return ResourceManager.GetString("ComposePromptTitle3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die #TODO#_Error in the request to oLLAMA ähnelt.
         /// </summary>
         internal static string ErrorcallingOllama {
@@ -84,6 +140,15 @@ namespace OutlookAI {
         internal static string NichtVeröffentlicht {
             get {
                 return ResourceManager.GetString("NichtVeröffentlicht", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die gpt-4o-mini ähnelt.
+        /// </summary>
+        internal static string OpenAiDefaultModel {
+            get {
+                return ResourceManager.GetString("OpenAiDefaultModel", resourceCulture);
             }
         }
         
@@ -129,6 +194,48 @@ namespace OutlookAI {
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Summarize the following email, list the key statements and information, and describe the tone of the email. 
+        ///
+        ///Analyze the email: 
+        ///Read the original email to understand the context, the issue, and the sender&apos;s tone.
+        ///
+        ///Incorporate content input: 
+        ///Use only the provided content information and statements as the basis for the response. ähnelt.
+        /// </summary>
+        internal static string SummarizePrompt1 {
+            get {
+                return ResourceManager.GetString("SummarizePrompt1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Summarize the following email. Read the original email to understand the context, the issue, and the sender&apos;s tone. ähnelt.
+        /// </summary>
+        internal static string SummarizePrompt2 {
+            get {
+                return ResourceManager.GetString("SummarizePrompt2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Summary 1 ähnelt.
+        /// </summary>
+        internal static string SummarizeTitle1 {
+            get {
+                return ResourceManager.GetString("SummarizeTitle1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Summary 2 ähnelt.
+        /// </summary>
+        internal static string SummarizeTitle2 {
+            get {
+                return ResourceManager.GetString("SummarizeTitle2", resourceCulture);
             }
         }
         

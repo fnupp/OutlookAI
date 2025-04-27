@@ -153,4 +153,37 @@
   <data name="ErrorcallingOpenai" xml:space="preserve">
     <value>Fehler bei der Anfrage an ChatGPT</value>
   </data>
+  <data name="ComposePrompt1" xml:space="preserve">
+    <value>Formuliere diese Email professioneller. \r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei.</value>
+  </data>
+  <data name="ComposePrompt2" xml:space="preserve">
+    <value>Überarbeite diese E-Mail so, dass sie klarer strukturiert und leichter verständlich ist, ohne den Inhalt zu verändern. Erzeuge keinen Betreff oder Signatur. Behalte die Anrede (Du, sie) bei:</value>
+  </data>
+  <data name="ComposePrompt3" xml:space="preserve">
+    <value>Mach diese E-Mail kürzer und persönlicher, als würdest du einem guten Kollegen oder einer Bekannten schreiben:\r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei.</value>
+  </data>
+  <data name="ComposePromptTitle1" xml:space="preserve">
+    <value>Professioneller</value>
+  </data>
+  <data name="ComposePromptTitle2" xml:space="preserve">
+    <value>Klarer</value>
+  </data>
+  <data name="ComposePromptTitle3" xml:space="preserve">
+    <value>Informeller</value>
+  </data>
+  <data name="SummarizeTitle1" xml:space="preserve">
+    <value>Zusammenfassung 1</value>
+  </data>
+  <data name="SummarizeTitle2" xml:space="preserve">
+    <value>Zusammenfassung 2</value>
+  </data>
+  <data name="SummarizePrompt1" xml:space="preserve">
+    <value>Fasse die folgende Email zusammen, zähle die zentralen Aussagen und Informationen auf und beschreibe den Ton der Email.\r\n\r\n\r\n   E-Mail analysieren:\r\n        Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.\r\n\r\n    Inhaltlichen Input einbauen:\r\n        Verwende ausschließlich die bereitgestellten inhaltlichen Informationen und Aussagen als Basis für die Antwort.</value>
+  </data>
+  <data name="SummarizePrompt2" xml:space="preserve">
+    <value>Fasse die folgende Eamil zusammen.Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.</value>
+  </data>
+  <data name="OpenAiDefaultModel" xml:space="preserve">
+    <value>gpt-4o-mini</value>
+  </data>
 </root>
