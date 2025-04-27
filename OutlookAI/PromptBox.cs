@@ -15,19 +15,15 @@ namespace OutlookAI
         public PromptBox()
         {
             InitializeComponent();
-        }
 
-        private readonly UserData userData;
-        public PromptBox(UserData ud) : this()
-        {
-            this.userData = ud;
-            userDataBindingSource.DataSource = ud;
+
+            userDataBindingSource.DataSource = ThisAddIn.userdata;
             if (ApplicationDeployment.IsNetworkDeployed)
                 labelVersion.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
             else
                 labelVersion.Text = "Nicht veröffentlicht";
-        }
 
+        }
 
 
         private void OK_Click(object sender, EventArgs e)
@@ -48,7 +44,7 @@ namespace OutlookAI
             var ollamaUrl = "http://localhost:11434/api/tags";
             try
             {
-                HttpClient httpClient = CreateHttpClient();
+                HttpClient httpClient = ThisAddIn.CreateHttpClient();
 
                 var response = await httpClient.GetAsync(ollamaUrl);
 
@@ -63,11 +59,11 @@ namespace OutlookAI
 
                 if (modelListResponse?.Models != null)
                 {
-                    if (userData.OllamaModels == null)
-                        userData.OllamaModels = new List<string>();
+                    if (ThisAddIn.userdata.OllamaModels == null)
+                        ThisAddIn.userdata.OllamaModels = new List<string>();
                     else
-                        userData.OllamaModels.Clear();
-                    userData.OllamaModels.AddRange(modelListResponse.Models.ConvertAll(m => m.Name));
+                        ThisAddIn.userdata.OllamaModels.Clear();
+                    ThisAddIn.userdata.OllamaModels.AddRange(modelListResponse.Models.ConvertAll(m => m.Name));
                 }
                 return modelListResponse.Models;
             }
@@ -77,24 +73,6 @@ namespace OutlookAI
             }
         }
 
-        private HttpClient CreateHttpClient()
-        {
-            if (userData.ProxyActive)
-            {
-                var proxy = new WebProxy(userData.ProxyUrl)
-                {
-                    Credentials = new NetworkCredential(userData.ProxyUsername, userData.ProxyPassword)
-                };
-
-                var handler = new HttpClientHandler
-                {
-                    Proxy = proxy,
-                    UseProxy = true
-                };
-                return new HttpClient(handler);
-            }
-            return  new HttpClient();
-        }
 
         private void ListBox1_Click(object sender, EventArgs e)
         {

@@ -41,10 +41,10 @@
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
-            this.separator1 = this.Factory.CreateRibbonSeparator();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.btnSummary1 = this.Factory.CreateRibbonButton();
             this.btnSummary2 = this.Factory.CreateRibbonButton();
-            this.separator2 = this.Factory.CreateRibbonSeparator();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.button5 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
@@ -71,6 +71,7 @@
             this.group1.Items.Add(this.button5);
             this.group1.Label = "OutlookAI";
             this.group1.Name = "group1";
+            this.group1.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Group1_DialogLauncherClick);
             // 
             // button1
             // 
@@ -96,9 +97,9 @@
             this.button4.Name = "button4";
             this.button4.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button4_Click);
             // 
-            // separator1
+            // separator2
             // 
-            this.separator1.Name = "separator1";
+            this.separator2.Name = "separator2";
             // 
             // btnSummary1
             // 
@@ -112,9 +113,9 @@
             this.btnSummary2.Name = "btnSummary2";
             this.btnSummary2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnSummary2_Click);
             // 
-            // separator2
+            // separator1
             // 
-            this.separator2.Name = "separator2";
+            this.separator1.Name = "separator1";
             // 
             // button5
             // 
@@ -127,8 +128,7 @@
             // OutlookAIRibbon
             // 
             this.Name = "OutlookAIRibbon";
-            this.RibbonType = "Microsoft.Outlook.Explorer, Microsoft.Outlook.Mail.Read, Microsoft.Outlook.Respon" +
-    "se.Read";
+            this.RibbonType = "Microsoft.Outlook.Explorer, Microsoft.Outlook.Mail.Read";
             this.Tabs.Add(this.tab1);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
             this.tab1.ResumeLayout(false);

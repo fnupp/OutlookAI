@@ -16,47 +16,6 @@ namespace OutlookAI
        
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-            FileInfo fi = new FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"));
-            if (!fi.Exists)
-            {
-                // initiale Befüllung
-                UserData data = new UserData
-                {
-                    Prompt1 = "Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:\r\n1.Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.\r\n2.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.\r\n3.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.\r\n\r\nNutze als Sprache der Antwort die Sprache der E - Mail. Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.",
-                    Prompt2 = "Schreibe mir für die folgende E - Mail eine ToDoListeSchreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.",
-                    Prompt3 = "Schreibe mir für die folgende Email eine Antwort micht 3 Rückfragen \nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.",
-                    Prompt4 = "Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:",
-                    Titel1 = "3 Antworten",
-                    Titel2 = "ToDo",
-                    Titel3 = "Rückfragen",
-                    Titel4 = "Custom",
-                    OpenAIAPIActive = false,
-                    OpenAIAPIKey = "",
-                    OpenAIAPIModel = "gpt-4o-mini",
-                    OpenAIAPIUrl = "https://api.openai.com/v1/chat/completions",
-                    OllamaActive = false,
-                    OllamaUrl = "",
-                    ComposePrompt1 = "Formuliere diese Email professioneller. \r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei\r\n",
-                    ComposePrompt2 = "Überarbeite diese E-Mail so, dass sie klarer strukturiert und leichter verständlich ist, ohne den Inhalt zu verändern. Erzeuge keinen Betreff oder Signatur. Behalte die Anrede (Du, sie) bei:",
-                    ComposePrompt3 = "Mach diese E-Mail kürzer und persönlicher, als würdest du einem guten Kollegen oder einer Bekannten schreiben:\r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei",
-                    ComposeTitle1 = "Professioneller",
-                    ComposeTitle2 = "Klarer ",
-                    ComposeTitle3 = "Informeller",
-                    ProxyActive = false,
-                    SummaryTitel1 = "Zusammenfassung 1",
-                    SummaryTitel2 = "Zusammenfassung 2",
-                    Summary1 = "Fasse die folgende Eamil zusammen, zähle die zentralen Aussagen und Informationen auf und beschreibe den Ton der Email.\r\n\r\n\r\n   E-Mail analysieren:\r\n        Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.\r\n\r\n    Inhaltlichen Input einbauen:\r\n        Verwende ausschließlich die bereitgestellten inhaltlichen Informationen und Aussagen als Basis für die Antwort.\r\n        ",
-                    Summary2 = "Fasse die folgende Eamil zusammen.Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.",
-                };
-                string json = JsonConvert.SerializeObject(data);
-                File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"), json);
-            }
-
-            //lade Settings
-            string jsonData = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"));
-            UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
-            ThisAddIn.userdata = loadedData;
-
             // Ui Labels aktualisiern
             UpdateRibbonLabels();
         }
@@ -77,8 +36,6 @@ namespace OutlookAI
             button4.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Titel4);
             btnSummary1.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Summary1);
             btnSummary2.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Summary2);
-
-
         }
 
         private async void Button1_Click(object sender, RibbonControlEventArgs e)
@@ -109,7 +66,7 @@ namespace OutlookAI
         }
         private void Button5_Click(object sender, RibbonControlEventArgs e)
         {
-            PromptBox p = new PromptBox(ThisAddIn.userdata);
+            PromptBox p = new PromptBox();
             p.ShowDialog();
             UpdateRibbonLabels();
         }
@@ -119,22 +76,8 @@ namespace OutlookAI
             if (mail == null) return;
             try
             {
-                string response;
                 string finalPrompt = $"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
-
-//                System.Windows.Forms.MessageBox.Show(finalPrompt);
-                if (ThisAddIn.userdata.OllamaActive)
-                {
-                    response = await ThisAddIn.GetChatOllamaResponse(finalPrompt);
-                }
-                else if (ThisAddIn.userdata.OpenAIAPIActive)
-                {
-                    response = await ThisAddIn.GetChatGPTResponse(finalPrompt);
-                }
-                else
-                {
-                    response = "No active LLM. Active in Settings.";
-                }
+                string response = await ThisAddIn.GetLLMResponse(finalPrompt);
 
                 var reply = mail.ReplyAll();
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
@@ -146,6 +89,8 @@ namespace OutlookAI
                 System.Windows.Forms.MessageBox.Show("Fehler: " + ex.Message);
             }
         }
+
+       
 
         private MailItem GetMail()
         {
@@ -225,25 +170,9 @@ namespace OutlookAI
                 foreach (var mail in mails)
                 {
 
-                    Task<string> response;
                     string finalPrompt = $"{prompt} \r\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
-
-                    //                System.Windows.Forms.MessageBox.Show(finalPrompt);
-                    if (ThisAddIn.userdata.OllamaActive)
-                    {
-                        response = ThisAddIn.GetChatOllamaResponse(finalPrompt);
-                    }
-                    else if (ThisAddIn.userdata.OpenAIAPIActive)
-                    {
-                        response = ThisAddIn.GetChatGPTResponse(finalPrompt);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No active LLM. Activate in Settings.");
-                        return;
-                    }
+                    var response = ThisAddIn.GetLLMResponse(finalPrompt);
                     responses.Add(response);
-
                     msgs.Add(response.ContinueWith(t =>
                     {
                         if (t.IsFaulted)
@@ -252,8 +181,7 @@ namespace OutlookAI
                         }
                         else
                         {
-                            string result = t.Result;
-                            MessageBox.Show(result);
+                            MessageBox.Show(t.Result);
                         }
                     }));
                 }
@@ -267,6 +195,12 @@ namespace OutlookAI
             }
         }
 
+        private void Group1_DialogLauncherClick(object sender, RibbonControlEventArgs e)
+        {
+            PromptBox p = new PromptBox();
+            p.ShowDialog();
+            UpdateRibbonLabels();
+        }
     }
 
 }

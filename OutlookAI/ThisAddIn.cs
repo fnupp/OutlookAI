@@ -1,8 +1,11 @@
 ﻿using Newtonsoft.Json;
+using System.IO;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace OutlookAI
 {
@@ -14,6 +17,12 @@ namespace OutlookAI
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+            InitSettingsFile();
+
+            //lade Settings
+            string jsonData = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"));
+            UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
+            ThisAddIn.userdata = loadedData;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -22,14 +31,34 @@ namespace OutlookAI
             //    muss ausgeführt werden, wenn Outlook heruntergefahren wird. Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkId=506785.
         }
 
-        public static async Task<string> GetChatOllamaResponse(string prompt)
+
+        public  static async Task<string> GetLLMResponse(string prompt)
+        {
+            string response;
+            if (ThisAddIn.userdata.OllamaActive)
+            {
+                response = await ThisAddIn.GetChatOllamaResponse(prompt);
+            }
+            else if (ThisAddIn.userdata.OpenAIAPIActive)
+            {
+                response = await ThisAddIn.GetChatGPTResponse(prompt);
+            }
+            else
+            {
+                response = "No active LLM. Active in Settings.";
+            }
+
+            return response;
+        }
+
+        private static async Task<string> GetChatOllamaResponse(string prompt)
         {
             //var ollamaUrl = "http://localhost:11434/api/generate";
             //var model = "llama3"; 
 
 
 
-            using (var client = new HttpClient())
+            using (var client = CreateHttpClient())
             {
                 var requestBody = new
                 {
@@ -56,9 +85,9 @@ namespace OutlookAI
             }
         }
 
-        public static async Task<string> GetChatGPTResponse(string userInput)
+        private static async Task<string> GetChatGPTResponse(string userInput)
         {
-            using (HttpClient client = new HttpClient())
+            using (HttpClient client = CreateHttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ThisAddIn.userdata.OpenAIAPIKey);
 
@@ -90,6 +119,65 @@ namespace OutlookAI
         }
 
 
+        public static HttpClient CreateHttpClient()
+        {
+            if (ThisAddIn.userdata.ProxyActive)
+            {
+                var proxy = new WebProxy(ThisAddIn.userdata.ProxyUrl)
+                {
+                    Credentials = new NetworkCredential(ThisAddIn.userdata.ProxyUsername, ThisAddIn.userdata.ProxyPassword)
+                };
+
+                var handler = new HttpClientHandler
+                {
+                    Proxy = proxy,
+                    UseProxy = true
+                };
+                return new HttpClient(handler);
+            }
+            return new HttpClient();
+        }
+
+        private static void InitSettingsFile()
+        {
+            FileInfo fi = new FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"));
+            if (!fi.Directory.Exists)
+                fi.Directory.Create();
+            if (!fi.Exists)
+            {
+                // initiale Befüllung
+                UserData data = new UserData
+                {
+                    Prompt1 = "Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:\r\n1.Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.\r\n2.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.\r\n3.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.\r\n\r\nNutze als Sprache der Antwort die Sprache der E - Mail. Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.",
+                    Prompt2 = "Schreibe mir für die folgende E - Mail eine ToDoListeSchreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.",
+                    Prompt3 = "Schreibe mir für die folgende Email eine Antwort micht 3 Rückfragen \nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.",
+                    Prompt4 = "Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:",
+                    Titel1 = "3 Antworten",
+                    Titel2 = "ToDo",
+                    Titel3 = "Rückfragen",
+                    Titel4 = "Custom",
+                    OpenAIAPIActive = false,
+                    OpenAIAPIKey = "",
+                    OpenAIAPIModel = "gpt-4o-mini",
+                    OpenAIAPIUrl = "https://api.openai.com/v1/chat/completions",
+                    OllamaActive = false,
+                    OllamaUrl = "",
+                    ComposePrompt1 = "Formuliere diese Email professioneller. \r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei\r\n",
+                    ComposePrompt2 = "Überarbeite diese E-Mail so, dass sie klarer strukturiert und leichter verständlich ist, ohne den Inhalt zu verändern. Erzeuge keinen Betreff oder Signatur. Behalte die Anrede (Du, sie) bei:",
+                    ComposePrompt3 = "Mach diese E-Mail kürzer und persönlicher, als würdest du einem guten Kollegen oder einer Bekannten schreiben:\r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei",
+                    ComposeTitle1 = "Professioneller",
+                    ComposeTitle2 = "Klarer ",
+                    ComposeTitle3 = "Informeller",
+                    ProxyActive = false,
+                    SummaryTitel1 = "Zusammenfassung 1",
+                    SummaryTitel2 = "Zusammenfassung 2",
+                    Summary1 = "Fasse die folgende Eamil zusammen, zähle die zentralen Aussagen und Informationen auf und beschreibe den Ton der Email.\r\n\r\n\r\n   E-Mail analysieren:\r\n        Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.\r\n\r\n    Inhaltlichen Input einbauen:\r\n        Verwende ausschließlich die bereitgestellten inhaltlichen Informationen und Aussagen als Basis für die Antwort.\r\n        ",
+                    Summary2 = "Fasse die folgende Eamil zusammen.Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.",
+                };
+                string json = JsonConvert.SerializeObject(data);
+                File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"OutlookAI", "OutlookAI.json"), json);
+            }
+        }
 
         #region Von VSTO generierter Code
 

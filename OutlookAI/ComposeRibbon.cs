@@ -14,9 +14,11 @@ namespace OutlookAI
        
         private void ComposeRibbon_Load(object sender, RibbonUIEventArgs e)
         {
-            var ctx = (Inspector)this.Context;
-            var mail = ctx.CurrentItem as MailItem;
+            UpdateRibbonLabels();
+        }
 
+        private void UpdateRibbonLabels()
+        {
             btnCompose1.Label = ThisAddIn.userdata.ComposeTitle1;
             btnCompose2.Label = ThisAddIn.userdata.ComposeTitle2;
             btnCompose3.Label = ThisAddIn.userdata.ComposeTitle3;
@@ -24,36 +26,45 @@ namespace OutlookAI
             btnCompose1.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.ComposeTitle1);
             btnCompose2.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.ComposeTitle2);
             btnCompose3.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.ComposeTitle3);
-
-
-        }
-/*
-
-        private string originalBody;
-
-        public void TrackChanges(MailItem mailItem)
-        {
-            // Speichern des ursprünglichen Inhalts
-            originalBody = mailItem.Body;
         }
 
-        public string GetNewText(MailItem mailItem)
-        {
-            // Vergleichen des aktuellen Inhalts mit dem ursprünglichen
-            string currentBody = mailItem.HTMLBody;
+        /*
 
-            // Prüfen, ob der ursprüngliche Text im aktuellen Text enthalten ist
-            int originalTextIndex = currentBody.IndexOf(originalBody, StringComparison.Ordinal);
-            if (originalTextIndex > 0)
-            {
-                // Der neue Text liegt vor dem ursprünglichen Text
-                return currentBody.Substring(0, originalTextIndex).Trim();
-            }
-            return string.Empty;
-        }
+       private string originalBody;
+
+       public void TrackChanges(MailItem mailItem)
+       {
+           // Speichern des ursprünglichen Inhalts
+           originalBody = mailItem.Body;
+       }
+
+       public string GetNewText(MailItem mailItem)
+       {
+           // Vergleichen des aktuellen Inhalts mit dem ursprünglichen
+           string currentBody = mailItem.HTMLBody;
+
+           // Prüfen, ob der ursprüngliche Text im aktuellen Text enthalten ist
+           int originalTextIndex = currentBody.IndexOf(originalBody, StringComparison.Ordinal);
+           if (originalTextIndex > 0)
+           {
+               // Der neue Text liegt vor dem ursprünglichen Text
+               return currentBody.Substring(0, originalTextIndex).Trim();
+           }
+           return string.Empty;
+       }
 */
 
-        private async void btnCompose_Click(object sender, RibbonControlEventArgs e)
+        private async void BtnCompose_Click(object sender, RibbonControlEventArgs e)
+        {
+            var ctx = (Inspector)this.Context;
+            var mail = ctx.CurrentItem as MailItem;
+
+            string selectedText = GetSelectedText(ctx);
+
+            await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
+        }
+
+        private async void BtnCompose2_Click(object sender, RibbonControlEventArgs e)
         {
 
             var ctx = (Inspector)this.Context;
@@ -61,10 +72,10 @@ namespace OutlookAI
 
             string selectedText = GetSelectedText(ctx);
 
-            await ThisAddIn.GetChatGPTResponse(ThisAddIn.userdata.ComposePrompt1 +  " \r\n" + selectedText).ContinueWith(updateMail(mail));
+            await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
         }
 
-        private async void btnCompose2_Click(object sender, RibbonControlEventArgs e)
+        private async void BtnCompose3_Click(object sender, RibbonControlEventArgs e)
         {
 
             var ctx = (Inspector)this.Context;
@@ -72,22 +83,11 @@ namespace OutlookAI
 
             string selectedText = GetSelectedText(ctx);
 
-            await ThisAddIn.GetChatGPTResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText).ContinueWith(updateMail(mail));
-        }
-
-        private async void btnCompose3_Click(object sender, RibbonControlEventArgs e)
-        {
-
-            var ctx = (Inspector)this.Context;
-            var mail = ctx.CurrentItem as MailItem;
-
-            string selectedText = GetSelectedText(ctx);
-
-            await ThisAddIn.GetChatGPTResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText).ContinueWith(updateMail(mail));
+            await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
         }
 
 
-        private static Action<System.Threading.Tasks.Task<string>> updateMail(MailItem mail)
+        private static Action<System.Threading.Tasks.Task<string>> UpdateMail(MailItem mail)
         {
             return task =>
             {
@@ -116,6 +116,14 @@ namespace OutlookAI
             }
 
             return selection.Text;
+        }
+
+        private void Group1_DialogLauncherClick(object sender, RibbonControlEventArgs e)
+        {
+            PromptBox p = new PromptBox();
+            p.ShowDialog();
+            UpdateRibbonLabels();
+
         }
     }
 }

@@ -34,6 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl1 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.btnCompose1 = this.Factory.CreateRibbonButton();
@@ -52,29 +53,31 @@
             // 
             // group1
             // 
+            this.group1.DialogLauncher = ribbonDialogLauncherImpl1;
             this.group1.Items.Add(this.btnCompose1);
             this.group1.Items.Add(this.btnCompose2);
             this.group1.Items.Add(this.btnCompose3);
-            this.group1.Label = "group1";
+            this.group1.Label = "OutllokAI";
             this.group1.Name = "group1";
+            this.group1.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Group1_DialogLauncherClick);
             // 
             // btnCompose1
             // 
             this.btnCompose1.Label = "btnCompose1";
             this.btnCompose1.Name = "btnCompose1";
-            this.btnCompose1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnCompose_Click);
+            this.btnCompose1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnCompose_Click);
             // 
             // btnCompose2
             // 
             this.btnCompose2.Label = "btnCompose2";
             this.btnCompose2.Name = "btnCompose2";
-            this.btnCompose2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnCompose2_Click);
+            this.btnCompose2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnCompose2_Click);
             // 
             // btnCompose3
             // 
             this.btnCompose3.Label = "btnCompose3";
             this.btnCompose3.Name = "btnCompose3";
-            this.btnCompose3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnCompose3_Click);
+            this.btnCompose3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnCompose3_Click);
             // 
             // ComposeRibbon
             // 

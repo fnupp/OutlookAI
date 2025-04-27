@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+    <ribbon>
+        <tabs>
+            <tab idMso="TabAddIns">
+                <group id="group1" label="OutlookAI">
+                    <button id="button1" onAction="Button1_Click" label="3 Antworten kurz" showImage="false" />
+                    <button id="button2" onAction="Button2_Click" label="3 Antworten lang" showImage="false" />
+                    <button id="button3" onAction="Button3_Click" label="button3" showImage="false" />
+                    <button id="button4" onAction="Button4_Click" label="Input" showImage="false" />
+                    <separator id="separator2" />
+                    <button id="btnSummary1" onAction="Summary_Click" label="Zusammenfassung 1" showImage="false" />
+                    <button id="btnSummary2" onAction="BtnSummary2_Click" label="Zusammenfassung" showImage="false" />
+                    <separator id="separator1" />
+                    <button id="button5" onAction="Button5_Click" label="Settings" />
+                </group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>
