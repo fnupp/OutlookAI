@@ -26,7 +26,7 @@ namespace OutlookAI
         }
 
         /// <summary>
-        /// Required designer variable. 123
+        /// Required designer variable. 
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 

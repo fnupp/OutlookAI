@@ -25,7 +25,6 @@ namespace OutlookAI
 
         }
 
-
         private void OK_Click(object sender, EventArgs e)
         {
             string json = JsonConvert.SerializeObject(userDataBindingSource.DataSource);
@@ -42,10 +41,10 @@ namespace OutlookAI
         public async Task<List<ModelInfo>> GetOllamaModels()
         {
 
-            var ollamaUrl = ThisAddIn.userdata.OllamaUrl; 
+            var ollamaUrl = ThisAddIn.userdata.OllamaUrl;
             if (!ThisAddIn.userdata.OllamaUrl.EndsWith("/"))
                 ollamaUrl += "/";
-            ollamaUrl +=  "api/tags";
+            ollamaUrl += "api/tags";
             try
             {
                 HttpClient httpClient = ThisAddIn.CreateHttpClient();
@@ -77,7 +76,6 @@ namespace OutlookAI
             }
         }
 
-
         private void ListBox1_Click(object sender, EventArgs e)
         {
             textBox2.Text = listBox1.SelectedItem.ToString();
@@ -95,7 +93,6 @@ namespace OutlookAI
         public string Name { get; set; }
         public string Mod { get; set; }
         public string Size { get; set; }
-
         public string CreatedAt { get; set; }
     }
 }
