@@ -75,8 +75,18 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelVersion = new System.Windows.Forms.Label();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.Tab1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userDataBindingSource)).BeginInit();
@@ -86,6 +96,8 @@
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).BeginInit();
             this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tab1
@@ -99,6 +111,8 @@
             this.Tab1.Controls.Add(this.tabPage4);
             this.Tab1.Controls.Add(this.tabPage5);
             this.Tab1.Controls.Add(this.tabPage6);
+            this.Tab1.Controls.Add(this.tabPage7);
+            this.Tab1.Controls.Add(this.tabPage8);
             this.Tab1.Location = new System.Drawing.Point(4, 4);
             this.Tab1.Name = "Tab1";
             this.Tab1.SelectedIndex = 0;
@@ -547,6 +561,56 @@
             this.textBox4.Size = new System.Drawing.Size(395, 22);
             this.textBox4.TabIndex = 30;
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.label17);
+            this.tabPage7.Controls.Add(this.label18);
+            this.tabPage7.Controls.Add(this.textBox6);
+            this.tabPage7.Controls.Add(this.textBox7);
+            this.tabPage7.Location = new System.Drawing.Point(4, 25);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1239, 551);
+            this.tabPage7.TabIndex = 7;
+            this.tabPage7.Text = "Zusammenfassung 1";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(20, 59);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(57, 16);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Promt     ";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(17, 11);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(54, 16);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Titel       ";
+            // 
+            // textBox6
+            // 
+            this.textBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "SumaryTitel1", true));
+            this.textBox6.Location = new System.Drawing.Point(20, 30);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(1202, 22);
+            this.textBox6.TabIndex = 9;
+            // 
+            // textBox7
+            // 
+            this.textBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Summary1", true));
+            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox7.Location = new System.Drawing.Point(20, 75);
+            this.textBox7.Multiline = true;
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(1202, 464);
+            this.textBox7.TabIndex = 8;
+            // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -566,6 +630,56 @@
             this.labelVersion.Size = new System.Drawing.Size(50, 16);
             this.labelVersion.TabIndex = 2;
             this.labelVersion.Text = "V1.0.10";
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.label19);
+            this.tabPage8.Controls.Add(this.label20);
+            this.tabPage8.Controls.Add(this.textBox8);
+            this.tabPage8.Controls.Add(this.textBox9);
+            this.tabPage8.Location = new System.Drawing.Point(4, 25);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(1239, 551);
+            this.tabPage8.TabIndex = 8;
+            this.tabPage8.Text = "tabPage8";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(20, 59);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(57, 16);
+            this.label19.TabIndex = 15;
+            this.label19.Text = "Promt     ";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(17, 11);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(54, 16);
+            this.label20.TabIndex = 14;
+            this.label20.Text = "Titel       ";
+            // 
+            // textBox8
+            // 
+            this.textBox8.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "SumaryTitel2", true));
+            this.textBox8.Location = new System.Drawing.Point(20, 30);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(1202, 22);
+            this.textBox8.TabIndex = 13;
+            // 
+            // textBox9
+            // 
+            this.textBox9.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Summary2", true));
+            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox9.Location = new System.Drawing.Point(20, 75);
+            this.textBox9.Multiline = true;
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(1202, 464);
+            this.textBox9.TabIndex = 12;
             // 
             // PromptBox
             // 
@@ -592,6 +706,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -647,5 +765,15 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox9;
     }
 }

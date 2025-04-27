@@ -42,6 +42,8 @@
             this.button3 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
             this.button5 = this.Factory.CreateRibbonButton();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
+            this.btnSummary = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +63,8 @@
             this.group1.Items.Add(this.button3);
             this.group1.Items.Add(this.button4);
             this.group1.Items.Add(this.button5);
+            this.group1.Items.Add(this.separator1);
+            this.group1.Items.Add(this.btnSummary);
             this.group1.Label = "OutlookAI";
             this.group1.Name = "group1";
             // 
@@ -94,6 +98,16 @@
             this.button5.Name = "button5";
             this.button5.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button5_Click);
             // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
+            // 
+            // btnSummary
+            // 
+            this.btnSummary.Label = "Zusammenfassung";
+            this.btnSummary.Name = "btnSummary";
+            this.btnSummary.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Summary_Click);
+            // 
             // OutlookAIRibbon
             // 
             this.Name = "OutlookAIRibbon";
@@ -118,6 +132,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button5;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary;
     }
 
     partial class ThisRibbonCollection

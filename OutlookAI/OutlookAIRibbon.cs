@@ -2,6 +2,7 @@
 using Microsoft.Office.Tools.Ribbon;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -147,6 +148,35 @@ namespace OutlookAI
             return mail;
         }
 
+        private List<MailItem> GetMails()
+        {
+            List<MailItem> mails = new List<MailItem>();
+            MailItem mail = null;
+            var outlookApp = Globals.ThisAddIn.Application;
+
+            try
+            {
+                var ctx = (Inspector)this.Context;
+                mail = ctx.CurrentItem as MailItem;
+                mails.Add(mail);
+            }
+            catch (System.Exception)
+            {//ignore & fallback
+            }
+            if (mail == null)
+            {
+                var selection = outlookApp.ActiveExplorer().Selection;
+                foreach (var item in selection)
+                {
+                    if (item is MailItem selectedmail)
+                    {
+                        mails.Add(selectedmail);
+                    }   
+                }
+            }
+            return mails;
+        }
+
         async Task<string> GetChatOllamaResponse(string prompt)
         {
             //var ollamaUrl = "http://localhost:11434/api/generate";
@@ -214,6 +244,65 @@ namespace OutlookAI
             }
         }
 
+        private async void Summary_Click(object sender, RibbonControlEventArgs e)
+        {
+
+            var mails = GetMails();
+            await Summarize(mails,_userdata.Summary1);
+        }
+
+        private async Task Summarize(List<MailItem> mails, string prompt ="")
+        {
+            if (mails == null || mails.Count == 0) return;
+            try
+            {
+                List<Task<string>> responses = new List<Task<string>>();
+                var msgs = new List<Task>();
+                
+                foreach (var mail in mails)
+                {
+
+                    Task<string> response;
+                    string finalPrompt = $"{prompt} \r\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
+
+                    //                System.Windows.Forms.MessageBox.Show(finalPrompt);
+                    if (_userdata.OllamaActive)
+                    {
+                        response = GetChatOllamaResponse(finalPrompt);
+                    }
+                    else if (_userdata.OpenAIAPIActive)
+                    {
+                        response = GetChatGPTResponse(finalPrompt);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No active LLM. Activate in Settings.");
+                        return;
+                    }
+                    responses.Add(response);
+
+                    msgs.Add(response.ContinueWith(t =>
+                    {
+                        if (t.IsFaulted)
+                        {
+                            MessageBox.Show("Fehler: " + t.Exception.InnerException.Message);
+                        }
+                        else
+                        {
+                            string result = t.Result;
+                            MessageBox.Show(result);
+                        }
+                    }));
+                }
+                await Task.WhenAll(responses);
+                await Task.WhenAll(msgs);
+
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Fehler: " + ex.Message);
+            }
+        }
     }
 
 }

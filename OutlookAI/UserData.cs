@@ -17,6 +17,13 @@ namespace OutlookAI
         public string Titel3 { get; set; }
         public string Titel4 { get; set; }
 
+
+        public string Summary1 { get; set; }
+        public string SumaryTitel1 { get; set; }
+        public string Summary2{ get; set; }
+        public string SumaryTitel2 { get; set; }
+
+
         public bool OpenAIAPIActive { get; set; }
         public string OpenAIAPIUrl { get; set; }
         public string OpenAIAPIKey { get; set; }
