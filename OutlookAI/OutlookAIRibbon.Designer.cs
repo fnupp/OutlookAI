@@ -43,7 +43,8 @@
             this.button4 = this.Factory.CreateRibbonButton();
             this.button5 = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
-            this.btnSummary = this.Factory.CreateRibbonButton();
+            this.btnSummary1 = this.Factory.CreateRibbonButton();
+            this.btnSummary2 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +65,8 @@
             this.group1.Items.Add(this.button4);
             this.group1.Items.Add(this.button5);
             this.group1.Items.Add(this.separator1);
-            this.group1.Items.Add(this.btnSummary);
+            this.group1.Items.Add(this.btnSummary1);
+            this.group1.Items.Add(this.btnSummary2);
             this.group1.Label = "OutlookAI";
             this.group1.Name = "group1";
             // 
@@ -102,11 +104,16 @@
             // 
             this.separator1.Name = "separator1";
             // 
-            // btnSummary
+            // btnSummary1
             // 
-            this.btnSummary.Label = "Zusammenfassung";
-            this.btnSummary.Name = "btnSummary";
-            this.btnSummary.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Summary_Click);
+            this.btnSummary1.Label = "Zusammenfassung 1";
+            this.btnSummary1.Name = "btnSummary1";
+            this.btnSummary1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Summary_Click);
+            // 
+            // btnSummary2
+            // 
+            this.btnSummary2.Label = "Zusammenfassung";
+            this.btnSummary2.Name = "btnSummary2";
             // 
             // OutlookAIRibbon
             // 
@@ -133,7 +140,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button5;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary2;
     }
 
     partial class ThisRibbonCollection

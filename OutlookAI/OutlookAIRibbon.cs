@@ -13,13 +13,13 @@ namespace OutlookAI
 {
     public partial class OutlookAIRibbon
     {
-        UserData _userdata;
+       
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
             FileInfo fi = new FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"));
             if (!fi.Exists)
             {
-                // Speichern
+                // initiale Befüllung
                 UserData data = new UserData
                 {
                     Prompt1 = "Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:\r\n1.Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.\r\n2.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.\r\n3.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.\r\n\r\nNutze als Sprache der Antwort die Sprache der E - Mail. Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.",
@@ -35,61 +35,81 @@ namespace OutlookAI
                     OpenAIAPIModel = "gpt-4o-mini",
                     OpenAIAPIUrl = "https://api.openai.com/v1/chat/completions",
                     OllamaActive = false,
-                    OllamaUrl = ""
-
-
+                    OllamaUrl = "",
+                    ComposePrompt1 = "Formuliere diese Email professioneller. \r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei\r\n",
+                    ComposePrompt2 = "Überarbeite diese E-Mail so, dass sie klarer strukturiert und leichter verständlich ist, ohne den Inhalt zu verändern. Erzeuge keinen Betreff oder Signatur. Behalte die Anrede (Du, sie) bei:",
+                    ComposePrompt3 = "Mach diese E-Mail kürzer und persönlicher, als würdest du einem guten Kollegen oder einer Bekannten schreiben:\r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei",
+                    ComposeTitle1 = "Professioneller",
+                    ComposeTitle2 = "Klarer ",
+                    ComposeTitle3 = "Informeller",
+                    ProxyActive = false,
+                    SummaryTitel1 = "Zusammenfassung 1",
+                    SummaryTitel2 = "Zusammenfassung 2",
+                    Summary1 = "Fasse die folgende Eamil zusammen, zähle die zentralen Aussagen und Informationen auf und beschreibe den Ton der Email.\r\n\r\n\r\n   E-Mail analysieren:\r\n        Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.\r\n\r\n    Inhaltlichen Input einbauen:\r\n        Verwende ausschließlich die bereitgestellten inhaltlichen Informationen und Aussagen als Basis für die Antwort.\r\n        ",
+                    Summary2 = "Fasse die folgende Eamil zusammen.Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.",
                 };
-
                 string json = JsonConvert.SerializeObject(data);
                 File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"), json);
             }
 
+            //lade Settings
             string jsonData = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"));
             UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
-            _userdata = loadedData;
+            ThisAddIn.userdata = loadedData;
 
+            // Ui Labels aktualisiern
             UpdateRibbonLabels();
         }
 
         private void UpdateRibbonLabels()
         {
-            this.button1.Label = _userdata.Titel1;
-            this.button2.Label = _userdata.Titel2;
-            this.button3.Label = _userdata.Titel3;
-            this.button4.Label = _userdata.Titel4;
-            this.button5.Label = "Einstellungen";
+            button1.Label = ThisAddIn.userdata.Titel1;
+            button2.Label = ThisAddIn.userdata.Titel2;
+            button3.Label = ThisAddIn.userdata.Titel3;
+            button4.Label = ThisAddIn.userdata.Titel4;
+            button5.Label = "Einstellungen";
+            btnSummary1.Label = ThisAddIn.userdata.SummaryTitel1;
+            btnSummary2.Label = ThisAddIn.userdata.SummaryTitel2;
+
+            button1.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Titel1);
+            button2.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Titel2);
+            button3.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Titel3);
+            button4.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Titel4);
+            btnSummary1.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Summary1);
+            btnSummary2.Visible = !string.IsNullOrEmpty(ThisAddIn.userdata.Summary2);
+
+
         }
 
         private async void Button1_Click(object sender, RibbonControlEventArgs e)
         {
             MailItem mail = GetMail();
-            await Reply(mail, _userdata.Prompt1);
+            await Reply(mail, ThisAddIn.userdata.Prompt1);
         }
         private async void Button2_Click(object sender, RibbonControlEventArgs e)
         {
 
             MailItem mail = GetMail();
-            await Reply(mail, _userdata.Prompt2);
+            await Reply(mail, ThisAddIn.userdata.Prompt2);
         }
         private async void Button3_Click(object sender, RibbonControlEventArgs e)
         {
 
             MailItem mail = GetMail();
-            await Reply(mail, _userdata.Prompt3);
+            await Reply(mail, ThisAddIn.userdata.Prompt3);
         }
         private async void Button4_Click(object sender, RibbonControlEventArgs e)
         {
-
             MailItem mail = GetMail();
-            InputBox inputBox = new InputBox(_userdata.Prompt4, "Textinput");
+            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
             if (inputBox.ShowDialog() == DialogResult.OK)
             {
-                await Reply(mail, _userdata.Prompt4 + "\n" + inputBox.InputText);
+                await Reply(mail, ThisAddIn.userdata.Prompt4 + "\n" + inputBox.InputText);
             }
         }
         private void Button5_Click(object sender, RibbonControlEventArgs e)
         {
-            PromptBox p = new PromptBox(_userdata);
+            PromptBox p = new PromptBox(ThisAddIn.userdata);
             p.ShowDialog();
             UpdateRibbonLabels();
         }
@@ -103,13 +123,13 @@ namespace OutlookAI
                 string finalPrompt = $"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
 
 //                System.Windows.Forms.MessageBox.Show(finalPrompt);
-                if (_userdata.OllamaActive)
+                if (ThisAddIn.userdata.OllamaActive)
                 {
-                    response = await GetChatOllamaResponse(finalPrompt);
+                    response = await ThisAddIn.GetChatOllamaResponse(finalPrompt);
                 }
-                else if (_userdata.OpenAIAPIActive)
+                else if (ThisAddIn.userdata.OpenAIAPIActive)
                 {
-                    response = await GetChatGPTResponse(finalPrompt);
+                    response = await ThisAddIn.GetChatGPTResponse(finalPrompt);
                 }
                 else
                 {
@@ -177,78 +197,14 @@ namespace OutlookAI
             return mails;
         }
 
-        async Task<string> GetChatOllamaResponse(string prompt)
-        {
-            //var ollamaUrl = "http://localhost:11434/api/generate";
-            //var model = "llama3"; 
+       
 
-
-
-            using (var client = new HttpClient())
-            {
-                var requestBody = new
-                {
-                    model = _userdata.Ollamamodel,
-                    prompt,
-                    stream = false
-                };
-
-                var json = JsonConvert.SerializeObject(requestBody);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync(_userdata.OllamaUrl, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string jsonResponse = await response.Content.ReadAsStringAsync();
-                    dynamic jsonResponseParsed = JsonConvert.DeserializeObject(jsonResponse);
-                    return jsonResponseParsed.response.ToString();
-                }
-                else
-                {
-                    throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
-                }
-            }
-        }
-
-        private async Task<string> GetChatGPTResponse(string userInput)
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _userdata.OpenAIAPIKey);
-
-                var requestBody = new
-                {
-                    model = _userdata.OpenAIAPIModel,  //"gpt-4o-mini", 
-                    messages = new[]
-                    {
-                        new { role = "user", content = userInput }
-                    }
-                };
-
-                string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
-                var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PostAsync(_userdata.OpenAIAPIUrl, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string jsonResponse = await response.Content.ReadAsStringAsync();
-                    dynamic jsonResponseParsed = JsonConvert.DeserializeObject(jsonResponse);
-                    return jsonResponseParsed.choices[0].message.content.ToString();
-                }
-                else
-                {
-                    throw new System.Exception($"Fehler bei der Anfrage an ChatGPT: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
-                }
-            }
-        }
 
         private async void Summary_Click(object sender, RibbonControlEventArgs e)
         {
 
             var mails = GetMails();
-            await Summarize(mails,_userdata.Summary1);
+            await Summarize(mails, ThisAddIn.userdata.Summary1);
         }
 
         private async Task Summarize(List<MailItem> mails, string prompt ="")
@@ -266,13 +222,13 @@ namespace OutlookAI
                     string finalPrompt = $"{prompt} \r\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
 
                     //                System.Windows.Forms.MessageBox.Show(finalPrompt);
-                    if (_userdata.OllamaActive)
+                    if (ThisAddIn.userdata.OllamaActive)
                     {
-                        response = GetChatOllamaResponse(finalPrompt);
+                        response = ThisAddIn.GetChatOllamaResponse(finalPrompt);
                     }
-                    else if (_userdata.OpenAIAPIActive)
+                    else if (ThisAddIn.userdata.OpenAIAPIActive)
                     {
-                        response = GetChatGPTResponse(finalPrompt);
+                        response = ThisAddIn.GetChatGPTResponse(finalPrompt);
                     }
                     else
                     {
