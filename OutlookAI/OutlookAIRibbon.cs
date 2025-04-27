@@ -26,7 +26,7 @@ namespace OutlookAI
             button2.Label = ThisAddIn.userdata.Titel2;
             button3.Label = ThisAddIn.userdata.Titel3;
             button4.Label = ThisAddIn.userdata.Titel4;
-            button5.Label = "Einstellungen";
+            button5.Label = Resources.Settings;
             btnSummary1.Label = ThisAddIn.userdata.SummaryTitel1;
             btnSummary2.Label = ThisAddIn.userdata.SummaryTitel2;
 

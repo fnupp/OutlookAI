@@ -117,7 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="textBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="NichtVeröffentlicht" xml:space="preserve">
+    <value>Nicht veröffentlicht</value>
+  </data>
+  <data name="Prompt1" xml:space="preserve">
+    <value>Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:\r\n1.Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.\r\n2.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.\r\n3.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.\r\n\r\nNutze als Sprache der Antwort die Sprache der E - Mail. Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.</value>
+  </data>
+  <data name="Prompt2" xml:space="preserve">
+    <value>Schreibe mir für die folgende E - Mail eine ToDoListeSchreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.</value>
+  </data>
+  <data name="Prompt3" xml:space="preserve">
+    <value>Schreibe mir für die folgende Email eine Antwort micht 3 Rückfragen \nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.</value>
+  </data>
+  <data name="Prompt4" xml:space="preserve">
+    <value>Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:</value>
+  </data>
+  <data name="Title1" xml:space="preserve">
+    <value>3 Antworten</value>
+  </data>
+  <data name="Title3" xml:space="preserve">
+    <value>Clarifications</value>
+  </data>
+  <data name="Title4" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Title2" xml:space="preserve">
+    <value>ToDo</value>
+  </data>
+  <data name="ErrorcallingOllama" xml:space="preserve">
+    <value>Fehler bei der Anfrage an oLLAMA</value>
+  </data>
+  <data name="ErrorcallingOpenai" xml:space="preserve">
+    <value>Fehler bei der Anfrage an ChatGPT</value>
+  </data>
 </root>

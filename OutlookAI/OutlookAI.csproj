@@ -271,6 +271,11 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon.cs">
       <XmlRibbon>true</XmlRibbon>
     </Compile>
@@ -297,6 +302,11 @@
     </Compile>
     <EmbeddedResource Include="OutlookAIRibbon.resx">
       <DependentUpon>OutlookAIRibbon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.de.resx" />
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="OutlookAI_TemporaryKey.pfx" />

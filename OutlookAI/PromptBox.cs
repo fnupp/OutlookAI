@@ -21,7 +21,7 @@ namespace OutlookAI
             if (ApplicationDeployment.IsNetworkDeployed)
                 labelVersion.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
             else
-                labelVersion.Text = "Nicht veröffentlicht";
+                labelVersion.Text = OutlookAI.Resources.NichtVeröffentlicht;
 
         }
 
@@ -41,7 +41,11 @@ namespace OutlookAI
 
         public async Task<List<ModelInfo>> GetOllamaModels()
         {
-            var ollamaUrl = "http://localhost:11434/api/tags";
+
+            var ollamaUrl = ThisAddIn.userdata.OllamaUrl; 
+            if (!ThisAddIn.userdata.OllamaUrl.EndsWith("/"))
+                ollamaUrl += "/";
+            ollamaUrl +=  "api/tags";
             try
             {
                 HttpClient httpClient = ThisAddIn.CreateHttpClient();
@@ -50,7 +54,7 @@ namespace OutlookAI
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
+                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOllama}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
                 }
 
                 string jsonResponse = await response.Content.ReadAsStringAsync();
@@ -69,7 +73,7 @@ namespace OutlookAI
             }
             catch (System.Exception ex)
             {
-                throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {ex.Message}");
+                throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOllama}: {ex.Message}");
             }
         }
 

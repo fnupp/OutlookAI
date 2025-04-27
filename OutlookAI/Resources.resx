@@ -117,7 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="textBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="NichtVeröffentlicht" xml:space="preserve">
+    <value>Not published</value>
+  </data>
+  <data name="Prompt1" xml:space="preserve">
+    <value>Write me for the following E - Mail three answer options: \ r \ n1. Use a friendly, professional tone and add possible next steps. \ R \ n2. preserved. Do not create an email or subject. Write briefly and use paragraphs to structure the argument.</value>
+  </data>
+  <data name="Prompt2" xml:space="preserve">
+    <value>Write me a to-do list for the following email. Write in detail and use paragraphs to structure the argument.</value>
+  </data>
+  <data name="Prompt3" xml:space="preserve">
+    <value>Write me a response to the following email with 3 follow-up questions. Use the same language as the email for your response. Do not include an email footer or subject line. Write in detail and in an informal style.</value>
+  </data>
+  <data name="Prompt4" xml:space="preserve">
+    <value>Write a response to the following email and refer to this email. Use the language of the email for your response. Do not create any email footers or subject lines. Write in detail and use paragraphs to structure your argument. Pay special attention to the following points:</value>
+  </data>
+  <data name="Title1" xml:space="preserve">
+    <value>3 Antworten</value>
+  </data>
+  <data name="Title2" xml:space="preserve">
+    <value>ToDo</value>
+  </data>
+  <data name="Title3" xml:space="preserve">
+    <value>Rückfragen</value>
+  </data>
+  <data name="Title4" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="ErrorcallingOllama" xml:space="preserve">
+    <value>#TODO#_Error in the request to oLLAMA</value>
+  </data>
+  <data name="ErrorcallingOpenai" xml:space="preserve">
+    <value>#TODO#_Error in the request to ChatGPT</value>
+  </data>
 </root>

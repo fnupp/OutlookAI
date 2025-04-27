@@ -69,8 +69,11 @@ namespace OutlookAI
 
                 var json = JsonConvert.SerializeObject(requestBody);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync(ThisAddIn.userdata.OllamaUrl, content);
+                var ollamaUrl = ThisAddIn.userdata.OllamaUrl;
+                if (!ThisAddIn.userdata.OllamaUrl.EndsWith("/"))
+                    ollamaUrl += "/";
+                ollamaUrl += "api/generate";
+                var response = await client.PostAsync(ollamaUrl, content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -80,7 +83,7 @@ namespace OutlookAI
                 }
                 else
                 {
-                    throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
+                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOllama}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
                 }
             }
         }
@@ -113,7 +116,7 @@ namespace OutlookAI
                 }
                 else
                 {
-                    throw new System.Exception($"Fehler bei der Anfrage an ChatGPT: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
+                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOpenai}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
                 }
             }
         }
@@ -148,20 +151,20 @@ namespace OutlookAI
                 // initiale Befüllung
                 UserData data = new UserData
                 {
-                    Prompt1 = "Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:\r\n1.Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.\r\n2.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.\r\n3.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.\r\n\r\nNutze als Sprache der Antwort die Sprache der E - Mail. Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.",
-                    Prompt2 = "Schreibe mir für die folgende E - Mail eine ToDoListeSchreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.",
-                    Prompt3 = "Schreibe mir für die folgende Email eine Antwort micht 3 Rückfragen \nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.",
-                    Prompt4 = "Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:",
-                    Titel1 = "3 Antworten",
-                    Titel2 = "ToDo",
-                    Titel3 = "Rückfragen",
-                    Titel4 = "Custom",
+                    Prompt1 = OutlookAI.Resources.Prompt1,
+                    Prompt2 = OutlookAI.Resources.Prompt2,
+                    Prompt3 = OutlookAI.Resources.Prompt3,
+                    Prompt4 = OutlookAI.Resources.Prompt4,
+                    Titel1 = OutlookAI.Resources.Title1,
+                    Titel2 = OutlookAI.Resources.Title2,
+                    Titel3 = OutlookAI.Resources.Title3,
+                    Titel4 = OutlookAI.Resources.Title4,
                     OpenAIAPIActive = false,
                     OpenAIAPIKey = "",
                     OpenAIAPIModel = "gpt-4o-mini",
                     OpenAIAPIUrl = "https://api.openai.com/v1/chat/completions",
                     OllamaActive = false,
-                    OllamaUrl = "",
+                    OllamaUrl = "http://localhost:11434",
                     ComposePrompt1 = "Formuliere diese Email professioneller. \r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei\r\n",
                     ComposePrompt2 = "Überarbeite diese E-Mail so, dass sie klarer strukturiert und leichter verständlich ist, ohne den Inhalt zu verändern. Erzeuge keinen Betreff oder Signatur. Behalte die Anrede (Du, sie) bei:",
                     ComposePrompt3 = "Mach diese E-Mail kürzer und persönlicher, als würdest du einem guten Kollegen oder einer Bekannten schreiben:\r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei",
