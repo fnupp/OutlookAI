@@ -29,7 +29,7 @@ namespace OutlookAI
         private void OK_Click(object sender, EventArgs e)
         {
             string json = JsonConvert.SerializeObject(userDataBindingSource.DataSource);
-            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI.json"), json);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"), json);
             this.Close();
         }
 
