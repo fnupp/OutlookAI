@@ -149,6 +149,8 @@ namespace OutlookAI
 
         private MailItem GetMail()
         {
+            //Entweder ist der aktuelle Kontext eine Mail - falls das nicht so ist nimm alle Mails aus dem Explorer
+            
             MailItem mail = null;
             var outlookApp = Globals.ThisAddIn.Application;
 
@@ -202,9 +204,14 @@ namespace OutlookAI
 
         private async void Summary_Click(object sender, RibbonControlEventArgs e)
         {
-
             var mails = GetMails();
             await Summarize(mails, ThisAddIn.userdata.Summary1);
+        }
+        private async void BtnSummary2_Click(object sender, RibbonControlEventArgs e)
+        {
+            var mails = GetMails();
+            await Summarize(mails, ThisAddIn.userdata.Summary2);
+
         }
 
         private async Task Summarize(List<MailItem> mails, string prompt ="")
@@ -259,6 +266,7 @@ namespace OutlookAI
                 System.Windows.Forms.MessageBox.Show("Fehler: " + ex.Message);
             }
         }
+
     }
 
 }

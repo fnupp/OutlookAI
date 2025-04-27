@@ -59,5 +59,15 @@ namespace OutlookAI.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _211751_gear_icon_1_ {
+            get {
+                object obj = ResourceManager.GetObject("211751_gear_icon(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

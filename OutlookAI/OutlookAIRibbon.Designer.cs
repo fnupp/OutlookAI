@@ -41,10 +41,11 @@
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
             this.button4 = this.Factory.CreateRibbonButton();
-            this.button5 = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.btnSummary1 = this.Factory.CreateRibbonButton();
             this.btnSummary2 = this.Factory.CreateRibbonButton();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
+            this.button5 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -63,10 +64,11 @@
             this.group1.Items.Add(this.button2);
             this.group1.Items.Add(this.button3);
             this.group1.Items.Add(this.button4);
-            this.group1.Items.Add(this.button5);
-            this.group1.Items.Add(this.separator1);
+            this.group1.Items.Add(this.separator2);
             this.group1.Items.Add(this.btnSummary1);
             this.group1.Items.Add(this.btnSummary2);
+            this.group1.Items.Add(this.separator1);
+            this.group1.Items.Add(this.button5);
             this.group1.Label = "OutlookAI";
             this.group1.Name = "group1";
             // 
@@ -94,12 +96,6 @@
             this.button4.Name = "button4";
             this.button4.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button4_Click);
             // 
-            // button5
-            // 
-            this.button5.Label = "Settings";
-            this.button5.Name = "button5";
-            this.button5.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button5_Click);
-            // 
             // separator1
             // 
             this.separator1.Name = "separator1";
@@ -114,6 +110,19 @@
             // 
             this.btnSummary2.Label = "Zusammenfassung";
             this.btnSummary2.Name = "btnSummary2";
+            this.btnSummary2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnSummary2_Click);
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
+            // 
+            // button5
+            // 
+            this.button5.Image = global::OutlookAI.Properties.Resources._211751_gear_icon_1_;
+            this.button5.Label = "Settings";
+            this.button5.Name = "button5";
+            this.button5.ShowImage = true;
+            this.button5.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button5_Click);
             // 
             // OutlookAIRibbon
             // 
@@ -142,6 +151,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
     }
 
     partial class ThisRibbonCollection
