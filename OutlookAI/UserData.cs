@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace OutlookAI
 {
@@ -25,5 +29,50 @@ namespace OutlookAI
 
         public List<string> OllamaModels { get; set; }
 
+
+        public bool ProxyActive { get; set; }
+        public string ProxyUrl { get; set; }
+        public string ProxyUsername { get; set; }
+
+        // Verschlüsseltes Passwort wird serialisiert
+        public string EncryptedProxyPassword
+        {
+            get => encryptedProxyPassword;
+            set => encryptedProxyPassword = value;
+        }
+
+        [NonSerialized]
+        private string encryptedProxyPassword;
+
+        [IgnoreDataMember]
+        public string ProxyPassword
+        {
+            get
+            {
+                return string.IsNullOrEmpty(encryptedProxyPassword)
+                    ? null
+                    : DecryptPassword(encryptedProxyPassword);
+            }
+            set
+            {
+                encryptedProxyPassword = string.IsNullOrEmpty(value)
+                    ? null
+                    : EncryptPassword(value);
+            }
+        }
+
+        private string EncryptPassword(string password)
+        {
+            var data = Encoding.UTF8.GetBytes(password);
+            var encrypted = ProtectedData.Protect(data, null, DataProtectionScope.CurrentUser);
+            return Convert.ToBase64String(encrypted);
+        }
+
+        private string DecryptPassword(string encryptedPassword)
+        {
+            var data = Convert.FromBase64String(encryptedPassword);
+            var decrypted = ProtectedData.Unprotect(data, null, DataProtectionScope.CurrentUser);
+            return Encoding.UTF8.GetString(decrypted);
+        }
     }
 }

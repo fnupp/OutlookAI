@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Deployment.Application;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,7 +18,7 @@ namespace OutlookAI
         }
 
         private readonly UserData userData;
-        public PromptBox(UserData ud):this()
+        public PromptBox(UserData ud) : this()
         {
             this.userData = ud;
             userDataBindingSource.DataSource = ud;
@@ -47,7 +48,8 @@ namespace OutlookAI
             var ollamaUrl = "http://localhost:11434/api/tags";
             try
             {
-                var httpClient = new HttpClient();
+                HttpClient httpClient = CreateHttpClient();
+
                 var response = await httpClient.GetAsync(ollamaUrl);
 
                 if (!response.IsSuccessStatusCode)
@@ -61,11 +63,11 @@ namespace OutlookAI
 
                 if (modelListResponse?.Models != null)
                 {
-                    if(userData.OllamaModels == null)
+                    if (userData.OllamaModels == null)
                         userData.OllamaModels = new List<string>();
                     else
                         userData.OllamaModels.Clear();
-                    userData.OllamaModels.AddRange(modelListResponse.Models.ConvertAll(m => m.Name));   
+                    userData.OllamaModels.AddRange(modelListResponse.Models.ConvertAll(m => m.Name));
                 }
                 return modelListResponse.Models;
             }
@@ -73,6 +75,25 @@ namespace OutlookAI
             {
                 throw new System.Exception($"Fehler bei der Anfrage an oLLAMA: {ex.Message}");
             }
+        }
+
+        private HttpClient CreateHttpClient()
+        {
+            if (userData.ProxyActive)
+            {
+                var proxy = new WebProxy(userData.ProxyUrl)
+                {
+                    Credentials = new NetworkCredential(userData.ProxyUsername, userData.ProxyPassword)
+                };
+
+                var handler = new HttpClientHandler
+                {
+                    Proxy = proxy,
+                    UseProxy = true
+                };
+                return new HttpClient(handler);
+            }
+            return  new HttpClient();
         }
 
         private void ListBox1_Click(object sender, EventArgs e)

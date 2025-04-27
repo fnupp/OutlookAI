@@ -100,6 +100,8 @@ namespace OutlookAI
             {
                 string response;
                 string finalPrompt = $"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
+
+//                System.Windows.Forms.MessageBox.Show(finalPrompt);
                 if (_userdata.OllamaActive)
                 {
                     response = await GetChatOllamaResponse(finalPrompt);
@@ -110,7 +112,7 @@ namespace OutlookAI
                 }
                 else
                 {
-                    response = "No active all. Active in Settings.";
+                    response = "No active LLM. Active in Settings.";
                 }
 
                 var reply = mail.ReplyAll();

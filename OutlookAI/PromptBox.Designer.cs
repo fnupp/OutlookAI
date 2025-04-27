@@ -67,6 +67,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxOpenAIApiKey = new System.Windows.Forms.TextBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelVersion = new System.Windows.Forms.Label();
             this.Tab1.SuspendLayout();
@@ -77,6 +85,7 @@
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).BeginInit();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tab1
@@ -89,6 +98,7 @@
             this.Tab1.Controls.Add(this.tabPage3);
             this.Tab1.Controls.Add(this.tabPage4);
             this.Tab1.Controls.Add(this.tabPage5);
+            this.Tab1.Controls.Add(this.tabPage6);
             this.Tab1.Location = new System.Drawing.Point(4, 4);
             this.Tab1.Name = "Tab1";
             this.Tab1.SelectedIndex = 0;
@@ -112,7 +122,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 56);
+            this.label6.Location = new System.Drawing.Point(16, 53);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 16);
             this.label6.TabIndex = 3;
@@ -121,7 +131,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 8);
+            this.label5.Location = new System.Drawing.Point(16, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 16);
             this.label5.TabIndex = 2;
@@ -130,7 +140,7 @@
             // T1
             // 
             this.T1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel1", true));
-            this.T1.Location = new System.Drawing.Point(13, 27);
+            this.T1.Location = new System.Drawing.Point(16, 24);
             this.T1.Name = "T1";
             this.T1.Size = new System.Drawing.Size(1202, 22);
             this.T1.TabIndex = 1;
@@ -143,7 +153,7 @@
             // 
             this.P1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt1", true));
             this.P1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.P1.Location = new System.Drawing.Point(13, 72);
+            this.P1.Location = new System.Drawing.Point(19, 72);
             this.P1.Multiline = true;
             this.P1.Name = "P1";
             this.P1.Size = new System.Drawing.Size(1202, 464);
@@ -329,7 +339,7 @@
             this.listBox1.DataSource = this.ollamaModelsBindingSource;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(9, 387);
+            this.listBox1.Location = new System.Drawing.Point(11, 331);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(277, 148);
             this.listBox1.TabIndex = 22;
@@ -342,11 +352,11 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(292, 387);
+            this.button2.Location = new System.Drawing.Point(294, 331);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(109, 26);
             this.button2.TabIndex = 21;
-            this.button2.Text = "Lade Models";
+            this.button2.Text = "Load Models";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
@@ -354,7 +364,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "OllamaActive", true));
-            this.checkBox1.Location = new System.Drawing.Point(7, 271);
+            this.checkBox1.Location = new System.Drawing.Point(11, 217);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(109, 20);
             this.checkBox1.TabIndex = 20;
@@ -364,7 +374,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 340);
+            this.label13.Location = new System.Drawing.Point(8, 284);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(45, 16);
             this.label13.TabIndex = 19;
@@ -373,15 +383,15 @@
             // textBox2
             // 
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Ollamamodel", true));
-            this.textBox2.Location = new System.Drawing.Point(9, 359);
+            this.textBox2.Location = new System.Drawing.Point(11, 303);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(1202, 22);
+            this.textBox2.Size = new System.Drawing.Size(664, 22);
             this.textBox2.TabIndex = 18;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 296);
+            this.label14.Location = new System.Drawing.Point(5, 240);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(91, 16);
             this.label14.TabIndex = 17;
@@ -390,16 +400,16 @@
             // textBoxOllamaUrl
             // 
             this.textBoxOllamaUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OllamaUrl", true));
-            this.textBoxOllamaUrl.Location = new System.Drawing.Point(6, 315);
+            this.textBoxOllamaUrl.Location = new System.Drawing.Point(11, 259);
             this.textBoxOllamaUrl.Name = "textBoxOllamaUrl";
-            this.textBoxOllamaUrl.Size = new System.Drawing.Size(1202, 22);
+            this.textBoxOllamaUrl.Size = new System.Drawing.Size(664, 22);
             this.textBoxOllamaUrl.TabIndex = 16;
             // 
             // checkBoxOpenAI
             // 
             this.checkBoxOpenAI.AutoSize = true;
             this.checkBoxOpenAI.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "OpenAIAPIActive", true));
-            this.checkBoxOpenAI.Location = new System.Drawing.Point(4, 49);
+            this.checkBoxOpenAI.Location = new System.Drawing.Point(9, 18);
             this.checkBoxOpenAI.Name = "checkBoxOpenAI";
             this.checkBoxOpenAI.Size = new System.Drawing.Size(111, 20);
             this.checkBoxOpenAI.TabIndex = 13;
@@ -409,7 +419,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 171);
+            this.label12.Location = new System.Drawing.Point(11, 140);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(45, 16);
             this.label12.TabIndex = 12;
@@ -418,15 +428,15 @@
             // textBoxOpenAIModel
             // 
             this.textBoxOpenAIModel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIModel", true));
-            this.textBoxOpenAIModel.Location = new System.Drawing.Point(9, 190);
+            this.textBoxOpenAIModel.Location = new System.Drawing.Point(9, 159);
             this.textBoxOpenAIModel.Name = "textBoxOpenAIModel";
-            this.textBoxOpenAIModel.Size = new System.Drawing.Size(1202, 22);
+            this.textBoxOpenAIModel.Size = new System.Drawing.Size(816, 22);
             this.textBoxOpenAIModel.TabIndex = 11;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 127);
+            this.label11.Location = new System.Drawing.Point(8, 96);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(93, 16);
             this.label11.TabIndex = 10;
@@ -435,15 +445,15 @@
             // textBox1
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIUrl", true));
-            this.textBox1.Location = new System.Drawing.Point(6, 146);
+            this.textBox1.Location = new System.Drawing.Point(9, 115);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1202, 22);
+            this.textBox1.Size = new System.Drawing.Size(816, 22);
             this.textBox1.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 83);
+            this.label3.Location = new System.Drawing.Point(8, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 16);
             this.label3.TabIndex = 8;
@@ -452,10 +462,90 @@
             // textBoxOpenAIApiKey
             // 
             this.textBoxOpenAIApiKey.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIKey", true));
-            this.textBoxOpenAIApiKey.Location = new System.Drawing.Point(6, 102);
+            this.textBoxOpenAIApiKey.Location = new System.Drawing.Point(11, 71);
             this.textBoxOpenAIApiKey.Name = "textBoxOpenAIApiKey";
-            this.textBoxOpenAIApiKey.Size = new System.Drawing.Size(1202, 22);
+            this.textBoxOpenAIApiKey.Size = new System.Drawing.Size(816, 22);
             this.textBoxOpenAIApiKey.TabIndex = 7;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.label16);
+            this.tabPage6.Controls.Add(this.textBox5);
+            this.tabPage6.Controls.Add(this.checkBox2);
+            this.tabPage6.Controls.Add(this.label4);
+            this.tabPage6.Controls.Add(this.textBox3);
+            this.tabPage6.Controls.Add(this.label15);
+            this.tabPage6.Controls.Add(this.textBox4);
+            this.tabPage6.Location = new System.Drawing.Point(4, 25);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1239, 551);
+            this.tabPage6.TabIndex = 6;
+            this.tabPage6.Text = "Proxy";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 119);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(67, 16);
+            this.label16.TabIndex = 36;
+            this.label16.Text = "Password";
+            // 
+            // textBox5
+            // 
+            this.textBox5.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyPassword", true));
+            this.textBox5.Location = new System.Drawing.Point(11, 138);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.PasswordChar = '*';
+            this.textBox5.Size = new System.Drawing.Size(395, 22);
+            this.textBox5.TabIndex = 35;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "ProxyActive", true));
+            this.checkBox2.Location = new System.Drawing.Point(9, 6);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(100, 20);
+            this.checkBox2.TabIndex = 34;
+            this.checkBox2.Text = "Nutze Proxy";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(36, 16);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "User";
+            // 
+            // textBox3
+            // 
+            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyUsername", true));
+            this.textBox3.Location = new System.Drawing.Point(11, 94);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(395, 22);
+            this.textBox3.TabIndex = 32;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(5, 31);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(82, 16);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "Proxy Url       ";
+            // 
+            // textBox4
+            // 
+            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyUrl", true));
+            this.textBox4.Location = new System.Drawing.Point(8, 50);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(395, 22);
+            this.textBox4.TabIndex = 30;
             // 
             // buttonOK
             // 
@@ -500,6 +590,8 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ollamaModelsBindingSource)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -547,5 +639,13 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.BindingSource ollamaModelsBindingSource;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
