@@ -46,6 +46,8 @@
             this.btnSummary2 = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.button5 = this.Factory.CreateRibbonButton();
+            this.button6 = this.Factory.CreateRibbonButton();
+            this.button7 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +71,7 @@
             this.group1.Items.Add(this.btnSummary2);
             this.group1.Items.Add(this.separator1);
             this.group1.Items.Add(this.button5);
+            this.group1.Items.Add(this.button7);
             this.group1.Label = "OutlookAI";
             this.group1.Name = "group1";
             this.group1.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Group1_DialogLauncherClick);
@@ -125,6 +128,17 @@
             this.button5.ShowImage = true;
             this.button5.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button5_Click);
             // 
+            // button6
+            // 
+            this.button6.Label = "Zusammenfassung 1";
+            this.button6.Name = "button6";
+            // 
+            // button7
+            // 
+            this.button7.Label = "Kalender";
+            this.button7.Name = "button7";
+            this.button7.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button7_Click);
+            // 
             // OutlookAIRibbon
             // 
             this.Name = "OutlookAIRibbon";
@@ -152,6 +166,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary2;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
     }
 
     partial class ThisRibbonCollection
