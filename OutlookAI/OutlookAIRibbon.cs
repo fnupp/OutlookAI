@@ -206,13 +206,20 @@ namespace OutlookAI
 
 
 
-        public void ExportCalendarToJson(string outputPath)
+        public void ExportCalendarToJson()
         {
 
             Items calendarItems = null;
 
             try
             {
+
+                FileDialog fileDialog = new SaveFileDialog();
+                fileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var dr = fileDialog.ShowDialog();
+                if (dr != DialogResult.OK) return;
+
                 // Zugriff auf den Standardkalender
                 Microsoft.Office.Interop.Outlook.Application outlookApp = Globals.ThisAddIn.Application;
                 NameSpace outlookNamespace = outlookApp.GetNamespace("MAPI");
@@ -231,8 +238,8 @@ namespace OutlookAI
                         // Nur zukünftige Einträge berücksichtigen
                         if (!item.IsRecurring)
                         {
-                            if (item.Start < DateTime.Now.AddDays(-30)) continue;
-                            if (item.Start > DateTime.Now.AddDays(60)) continue;
+                            if (item.Start < DateTime.Now.AddDays(-20)) continue;
+                            if (item.Start > DateTime.Now.AddDays(20)) continue;
                         }
 
                         // Kalendereintrag-Daten sammeln
@@ -249,12 +256,11 @@ namespace OutlookAI
 
                         entries.Add(entry);
                         if (item2 != null) Marshal.ReleaseComObject(item2);
-
                     }
                 }
                 // JSON-Datei erstellen
                 string json = JsonConvert.SerializeObject(entries, Formatting.Indented);
-                File.WriteAllText(outputPath, json);
+                File.WriteAllText(fileDialog.FileName, json);
                 System.Windows.Forms.MessageBox.Show("Kalendereinträge erfolgreich exportiert!");
 
             }
@@ -294,17 +300,11 @@ namespace OutlookAI
         }
 
 
-        public void ImportCalendarFromJson(string inputPath)
+        public void ImportCalendarFromJson()
         {
             AppointmentItem appointment = null;
             try
             {
-                // JSON-Datei einlesen
-//                if (!File.Exists(inputPath))
- //               {
- //                   System.Windows.Forms.MessageBox.Show("Die angegebene JSON-Datei wurde nicht gefunden.");
- //                   return;
- //               }
                 FileDialog fileDialog = new OpenFileDialog();
                 fileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
                 fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -319,7 +319,22 @@ namespace OutlookAI
                 NameSpace outlookNamespace = outlookApp.GetNamespace("MAPI");
 
                 MAPIFolder calendarFolder = outlookNamespace.PickFolder();
+                if (calendarFolder == null) return;
                 //MAPIFolder calendarFolder = GetOrCreateCalendarFolder(outlookNamespace, "Test");
+
+                var oldcalendarItems = calendarFolder.Items;
+                oldcalendarItems.IncludeRecurrences = true;
+
+                foreach (object item2 in oldcalendarItems)
+                {
+                    if (item2 is AppointmentItem item)
+                    {
+                        if (item.Categories == "Synced")
+                        {
+                            item.Delete();
+                        }
+                    }
+                }
 
                 // Kalendereinträge hinzufügen
                 foreach (var entry in entries)
@@ -331,6 +346,7 @@ namespace OutlookAI
                     appointment.End = entry.End;
                     appointment.End = entry.End;
                     appointment.Location = entry.Location;
+                    appointment.Categories = "Synced";
 
                     if (entry.IsRecurring && entry.RecurrencePattern != null)
                     {
@@ -378,10 +394,15 @@ namespace OutlookAI
             }
         }
 
-        private async void Button7_Click(object sender, RibbonControlEventArgs e)
+        private  void ExportSync_Click(object sender, RibbonControlEventArgs e)
         {
-            //ExportCalendarToJson(outputPath: @"C:\Users\Public\Documents\calendar_entries.json");
-            ImportCalendarFromJson(inputPath: @"C:\Users\Public\Documents\calendar_entries.json");
+            ExportCalendarToJson();
+           // ImportCalendarFromJson(); // inputPath: @"C:\Users\Public\Documents\calendar_entries.json");
+        }
+
+        private void Import_Click(object sender, RibbonControlEventArgs e)
+        {
+            ImportCalendarFromJson();   
         }
     }
 
