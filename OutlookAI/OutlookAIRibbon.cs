@@ -7,15 +7,13 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 namespace OutlookAI
 {
     public partial class OutlookAIRibbon
     {
-
+       
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
             // Ui Labels aktualisiern
@@ -92,12 +90,12 @@ namespace OutlookAI
             }
         }
 
-
+       
 
         private MailItem GetMail()
         {
             //Entweder ist der aktuelle Kontext eine Mail - falls das nicht so ist nimm alle Mails aus dem Explorer
-
+            
             MailItem mail = null;
             var outlookApp = Globals.ThisAddIn.Application;
 
@@ -140,13 +138,13 @@ namespace OutlookAI
                     if (item is MailItem selectedmail)
                     {
                         mails.Add(selectedmail);
-                    }
+                    }   
                 }
             }
             return mails;
         }
 
-
+       
 
 
         private async void Summary_Click(object sender, RibbonControlEventArgs e)
@@ -161,14 +159,14 @@ namespace OutlookAI
 
         }
 
-        private async Task Summarize(List<MailItem> mails, string prompt = "")
+        private async Task Summarize(List<MailItem> mails, string prompt ="")
         {
             if (mails == null || mails.Count == 0) return;
             try
             {
                 List<Task<string>> responses = new List<Task<string>>();
                 var msgs = new List<Task>();
-
+                
                 foreach (var mail in mails)
                 {
 
@@ -203,228 +201,6 @@ namespace OutlookAI
             p.ShowDialog();
             UpdateRibbonLabels();
         }
-
-
-
-        public void ExportCalendarToJson()
-        {
-
-            Items calendarItems = null;
-
-            try
-            {
-
-                FileDialog fileDialog = new SaveFileDialog();
-                fileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-                fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var dr = fileDialog.ShowDialog();
-                if (dr != DialogResult.OK) return;
-
-                // Zugriff auf den Standardkalender
-                Microsoft.Office.Interop.Outlook.Application outlookApp = Globals.ThisAddIn.Application;
-                NameSpace outlookNamespace = outlookApp.GetNamespace("MAPI");
-                MAPIFolder calendarFolder = outlookNamespace.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
-
-                // Alle Kalendereinträge abrufen
-                calendarItems = calendarFolder.Items;
-                calendarItems.IncludeRecurrences = true;
-
-                List<CalendarEntry> entries = new List<CalendarEntry>();
-                foreach (object item2 in calendarItems)
-                {
-                    if (item2 is AppointmentItem item)
-                    {
-
-                        // Nur zukünftige Einträge berücksichtigen
-                        if (!item.IsRecurring)
-                        {
-                            if (item.Start < DateTime.Now.AddDays(-20)) continue;
-                            if (item.Start > DateTime.Now.AddDays(20)) continue;
-                        }
-
-                        // Kalendereintrag-Daten sammeln
-                        CalendarEntry entry = new CalendarEntry
-                        {
-                            Subject = item.Subject,
-                            Body = item.Body,
-                            Start = item.Start,
-                            End = item.End,
-                            IsRecurring = item.IsRecurring,
-                            RecurrencePattern = item.IsRecurring ? GetRecurrencePattern(item) : null,
-                            Location = item.Location
-                        };
-
-                        entries.Add(entry);
-                        if (item2 != null) Marshal.ReleaseComObject(item2);
-                    }
-                }
-                // JSON-Datei erstellen
-                string json = JsonConvert.SerializeObject(entries, Formatting.Indented);
-                File.WriteAllText(fileDialog.FileName, json);
-                System.Windows.Forms.MessageBox.Show("Kalendereinträge erfolgreich exportiert!");
-
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show("Fehler beim Exportieren: " + ex.Message);
-            }
-
-            finally
-            {
-                // COM-Objekte freigeben
-                if (calendarItems != null) Marshal.ReleaseComObject(calendarItems);
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-            }
-        }
-
-        private RecurrencePatternData GetRecurrencePattern(AppointmentItem item)
-        {
-            try
-            {
-                RecurrencePattern pattern = item.GetRecurrencePattern();
-                return new RecurrencePatternData
-                {
-                    RecurrenceType = pattern.RecurrenceType.ToString(),
-                    Interval = pattern.Interval,
-                    PatternStartDate = pattern.PatternStartDate,
-                    PatternEndDate = pattern.PatternEndDate,
-                    Occurrences = pattern.Occurrences
-                };
-            }
-            catch
-            {
-                return null; // Falls kein gültiges RecurrencePattern vorhanden ist
-            }
-        }
-
-
-        public void ImportCalendarFromJson()
-        {
-            AppointmentItem appointment = null;
-            try
-            {
-                FileDialog fileDialog = new OpenFileDialog();
-                fileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-                fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var dr = fileDialog.ShowDialog();
-                if (dr != DialogResult.OK) return;
-
-                string json = File.ReadAllText(fileDialog.FileName);
-                List<CalendarEntry> entries = JsonConvert.DeserializeObject<List<CalendarEntry>>(json);
-
-                // Zugriff auf den Kalender "Test"
-                Microsoft.Office.Interop.Outlook.Application outlookApp = Globals.ThisAddIn.Application;
-                NameSpace outlookNamespace = outlookApp.GetNamespace("MAPI");
-
-                MAPIFolder calendarFolder = outlookNamespace.PickFolder();
-                if (calendarFolder == null) return;
-                //MAPIFolder calendarFolder = GetOrCreateCalendarFolder(outlookNamespace, "Test");
-
-                var oldcalendarItems = calendarFolder.Items;
-                oldcalendarItems.IncludeRecurrences = true;
-
-                foreach (object item2 in oldcalendarItems)
-                {
-                    if (item2 is AppointmentItem item)
-                    {
-                        if (item.Categories == "Synced")
-                        {
-                            item.Delete();
-                        }
-                    }
-                }
-
-                // Kalendereinträge hinzufügen
-                foreach (var entry in entries)
-                {
-                    appointment = (AppointmentItem)calendarFolder.Items.Add(OlItemType.olAppointmentItem);
-                    appointment.Subject = entry.Subject;
-                    appointment.Body = entry.Body;
-                    appointment.Start = entry.Start;
-                    appointment.End = entry.End;
-                    appointment.End = entry.End;
-                    appointment.Location = entry.Location;
-                    appointment.Categories = "Synced";
-
-                    if (entry.IsRecurring && entry.RecurrencePattern != null)
-                    {
-                        RecurrencePattern pattern = appointment.GetRecurrencePattern();
-                        pattern.RecurrenceType = (OlRecurrenceType)Enum.Parse(typeof(OlRecurrenceType), entry.RecurrencePattern.RecurrenceType);
-                        pattern.Interval = entry.RecurrencePattern.Interval;
-                        pattern.PatternStartDate = entry.RecurrencePattern.PatternStartDate;
-                        pattern.PatternEndDate = entry.RecurrencePattern.PatternEndDate < new DateTime(2030, 1, 1) ? entry.RecurrencePattern.PatternEndDate : new DateTime(2030, 1, 1);
-                        pattern.Occurrences = entry.RecurrencePattern.Occurrences;
-                    }
-
-                    appointment.Save();
-                    if (appointment != null) Marshal.ReleaseComObject(appointment);
-                }
-
-                System.Windows.Forms.MessageBox.Show("Kalendereinträge erfolgreich importiert!");
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show("Fehler beim Importieren: " + ex.Message);
-            }
-            finally
-            {
-                // COM-Objekte freigeben
-                if (appointment != null) Marshal.ReleaseComObject(appointment);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-            }
-        }
-
-        private MAPIFolder GetOrCreateCalendarFolder(NameSpace outlookNamespace, string folderName)
-        {
-            try
-            {
-                // Prüfen, ob der Kalender "Test" existiert
-                MAPIFolder calendarFolder = outlookNamespace.GetDefaultFolder(OlDefaultFolders.olFolderCalendar).Parent.Folders[folderName];
-                return calendarFolder;
-            }
-            catch
-            {
-                // Kalender "Test" erstellen, falls er nicht existiert
-                MAPIFolder defaultCalendar = outlookNamespace.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
-                MAPIFolder parentFolder = defaultCalendar.Parent as MAPIFolder;
-                return parentFolder.Folders.Add(folderName, OlDefaultFolders.olFolderCalendar);
-            }
-        }
-
-        private  void ExportSync_Click(object sender, RibbonControlEventArgs e)
-        {
-            ExportCalendarToJson();
-           // ImportCalendarFromJson(); // inputPath: @"C:\Users\Public\Documents\calendar_entries.json");
-        }
-
-        private void Import_Click(object sender, RibbonControlEventArgs e)
-        {
-            ImportCalendarFromJson();   
-        }
     }
-
-    public class CalendarEntry
-    {
-        public string Subject { get; set; }
-        public string Body { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public bool IsRecurring { get; set; }
-        public RecurrencePatternData RecurrencePattern { get; set; }
-        public string Location { get; set; }
-    }
-
-    public class RecurrencePatternData
-    {
-        public string RecurrenceType { get; set; }
-        public int Interval { get; set; }
-        public DateTime PatternStartDate { get; set; }
-        public DateTime PatternEndDate { get; set; }
-        public int Occurrences { get; set; }
-    }
-
 
 }

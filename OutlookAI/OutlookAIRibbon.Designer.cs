@@ -46,20 +46,14 @@
             this.btnSummary2 = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.button5 = this.Factory.CreateRibbonButton();
-            this.group2 = this.Factory.CreateRibbonGroup();
-            this.button7 = this.Factory.CreateRibbonButton();
-            this.Button_Export = this.Factory.CreateRibbonButton();
-            this.button6 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
-            this.group2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab1.Groups.Add(this.group1);
-            this.tab1.Groups.Add(this.group2);
             this.tab1.Label = "TabAddIns";
             this.tab1.Name = "tab1";
             // 
@@ -131,30 +125,6 @@
             this.button5.ShowImage = true;
             this.button5.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button5_Click);
             // 
-            // group2
-            // 
-            this.group2.Items.Add(this.Button_Export);
-            this.group2.Items.Add(this.button7);
-            this.group2.Label = "Calendar Sync";
-            this.group2.Name = "group2";
-            // 
-            // button7
-            // 
-            this.button7.Label = "Import Transfer File";
-            this.button7.Name = "button7";
-            this.button7.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Import_Click);
-            // 
-            // Button_Export
-            // 
-            this.Button_Export.Label = "Export Transfer File";
-            this.Button_Export.Name = "Button_Export";
-            this.Button_Export.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ExportSync_Click);
-            // 
-            // button6
-            // 
-            this.button6.Label = "Zusammenfassung 1";
-            this.button6.Name = "button6";
-            // 
             // OutlookAIRibbon
             // 
             this.Name = "OutlookAIRibbon";
@@ -165,8 +135,6 @@
             this.tab1.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
-            this.group2.ResumeLayout(false);
-            this.group2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -184,10 +152,6 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSummary2;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton Button_Export;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
     }
 
     partial class ThisRibbonCollection
