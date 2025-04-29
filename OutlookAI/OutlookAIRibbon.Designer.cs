@@ -47,8 +47,8 @@
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.button5 = this.Factory.CreateRibbonButton();
             this.group2 = this.Factory.CreateRibbonGroup();
-            this.button7 = this.Factory.CreateRibbonButton();
             this.Button_Export = this.Factory.CreateRibbonButton();
+            this.button7 = this.Factory.CreateRibbonButton();
             this.button6 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
@@ -138,17 +138,17 @@
             this.group2.Label = "Calendar Sync";
             this.group2.Name = "group2";
             // 
-            // button7
-            // 
-            this.button7.Label = "Import Transfer File";
-            this.button7.Name = "button7";
-            this.button7.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Import_Click);
-            // 
             // Button_Export
             // 
             this.Button_Export.Label = "Export Transfer File";
             this.Button_Export.Name = "Button_Export";
             this.Button_Export.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ExportSync_Click);
+            // 
+            // button7
+            // 
+            this.button7.Label = "Import Transfer File";
+            this.button7.Name = "button7";
+            this.button7.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Import_Click);
             // 
             // button6
             // 

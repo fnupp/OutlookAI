@@ -359,10 +359,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>OutlookAI_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>OutlookAI_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>734432293511AB72D1A89B0B7162F2EB44678B7D</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>EA18A1F5107FF0F850CB8A5C73AE8F7994D7A76E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
