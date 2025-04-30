@@ -20,8 +20,10 @@ namespace OutlookAI
 
         public string Summary1 { get; set; }
         public string SummaryTitel1 { get; set; }
+        public bool? SummaryMultiple1 { get; set; }
         public string Summary2 { get; set; }
         public string SummaryTitel2 { get; set; }
+        public bool? SummaryMultiple2 { get; set; }
 
 
         public string ComposePrompt1 { get; set; }

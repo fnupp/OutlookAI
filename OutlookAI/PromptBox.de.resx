@@ -117,52 +117,60 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="tabPage8.Text" xml:space="preserve">
-    <value>Zusammenfassung 2</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label21.Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="checkBoxOpenAI.Text" xml:space="preserve">
-    <value>Nutze OpenAI</value>
-  </data>
-  <data name="label15.Text" xml:space="preserve">
-    <value>Proxy Url       </value>
-  </data>
-  <data name="tabPage11.Text" xml:space="preserve">
-    <value>Mail verfassen 3</value>
-  </data>
-  <data name="label9.Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 27</value>
   </data>
   <data name="checkBox1.Text" xml:space="preserve">
     <value>Nutze Ollama</value>
   </data>
-  <data name="tabPage10.Text" xml:space="preserve">
-    <value>Mail verfassen 2</value>
+  <data name="checkBoxOpenAI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 27</value>
   </data>
-  <data name="tabPage10.Location" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="checkBoxOpenAI.Text" xml:space="preserve">
+    <value>Nutze OpenAI</value>
   </data>
   <data name="tabPage5.Text" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="checkBoxOpenAI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 24</value>
-  </data>
-  <data name="labelVersion.Text" xml:space="preserve">
-    <value>VersionText</value>
-  </data>
-  <data name="tabPage7.Text" xml:space="preserve">
-    <value>Zusammenfassung 1</value>
+  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 27</value>
   </data>
   <data name="checkBox2.Text" xml:space="preserve">
     <value>Proxy aktivieren</value>
   </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="checkBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>449, 27</value>
+  </data>
+  <data name="checkBox3.Text" xml:space="preserve">
+    <value>Wenn mehrere E-Mails ausgewählt sind, werden alle E-Mails in einer Anfrage gesendet.</value>
+  </data>
+  <data name="tabPage7.Text" xml:space="preserve">
+    <value>Zusammenfassung 1</value>
+  </data>
+  <data name="checkBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>449, 27</value>
+  </data>
+  <data name="checkBox4.Text" xml:space="preserve">
+    <value>Wenn mehrere E-Mails ausgewählt sind, werden alle E-Mails in einer Anfrage gesendet.</value>
+  </data>
+  <data name="tabPage8.Text" xml:space="preserve">
+    <value>Zusammenfassung 2</value>
+  </data>
+  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
   <data name="tabPage9.Text" xml:space="preserve">
     <value>Mail verfassen 1</value>
+  </data>
+  <data name="tabPage10.Text" xml:space="preserve">
+    <value>Mail verfassen 2</value>
+  </data>
+  <data name="tabPage11.Text" xml:space="preserve">
+    <value>Mail verfassen 3</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>OutlookAi - Einstellungen</value>

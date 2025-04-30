@@ -120,7 +120,7 @@
             // 
             resources.ApplyResources(this.btnSummary2, "btnSummary2");
             this.btnSummary2.Name = "btnSummary2";
-            this.btnSummary2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BtnSummary2_Click);
+            this.btnSummary2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Summary2_Click);
             // 
             // separator1
             // 

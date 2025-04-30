@@ -194,4 +194,7 @@ Use only the provided content information and statements as the basis for the re
   <data name="OpenAiDefaultModel" xml:space="preserve">
     <value>gpt-4o-mini</value>
   </data>
+  <data name="ComposeNotTextSelected" xml:space="preserve">
+    <value>Please select some text and try again. \r\n </value>
+  </data>
 </root>

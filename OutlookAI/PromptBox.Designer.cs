@@ -77,11 +77,13 @@
             this.T4 = new System.Windows.Forms.TextBox();
             this.P4 = new System.Windows.Forms.TextBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -138,7 +140,6 @@
             // 
             // tabPage5
             // 
-            resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Controls.Add(this.listBox1);
             this.tabPage5.Controls.Add(this.button2);
             this.tabPage5.Controls.Add(this.checkBox1);
@@ -153,15 +154,16 @@
             this.tabPage5.Controls.Add(this.textBox1);
             this.tabPage5.Controls.Add(this.label3);
             this.tabPage5.Controls.Add(this.textBoxOpenAIApiKey);
+            resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // listBox1
             // 
-            resources.ApplyResources(this.listBox1, "listBox1");
             this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.userDataBindingSource, "Ollamamodel", true));
             this.listBox1.DataSource = this.ollamaModelsBindingSource;
             this.listBox1.FormattingEnabled = true;
+            resources.ApplyResources(this.listBox1, "listBox1");
             this.listBox1.Name = "listBox1";
             this.listBox1.Click += new System.EventHandler(this.ListBox1_Click);
             // 
@@ -195,8 +197,8 @@
             // 
             // textBox2
             // 
-            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Ollamamodel", true));
+            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
             // 
             // label14
@@ -206,8 +208,8 @@
             // 
             // textBoxOllamaUrl
             // 
-            resources.ApplyResources(this.textBoxOllamaUrl, "textBoxOllamaUrl");
             this.textBoxOllamaUrl.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OllamaUrl", true));
+            resources.ApplyResources(this.textBoxOllamaUrl, "textBoxOllamaUrl");
             this.textBoxOllamaUrl.Name = "textBoxOllamaUrl";
             // 
             // checkBoxOpenAI
@@ -224,8 +226,8 @@
             // 
             // textBoxOpenAIModel
             // 
-            resources.ApplyResources(this.textBoxOpenAIModel, "textBoxOpenAIModel");
             this.textBoxOpenAIModel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIModel", true));
+            resources.ApplyResources(this.textBoxOpenAIModel, "textBoxOpenAIModel");
             this.textBoxOpenAIModel.Name = "textBoxOpenAIModel";
             // 
             // label11
@@ -235,8 +237,8 @@
             // 
             // textBox1
             // 
-            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIUrl", true));
+            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             // 
             // label3
@@ -246,13 +248,12 @@
             // 
             // textBoxOpenAIApiKey
             // 
-            resources.ApplyResources(this.textBoxOpenAIApiKey, "textBoxOpenAIApiKey");
             this.textBoxOpenAIApiKey.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "OpenAIAPIKey", true));
+            resources.ApplyResources(this.textBoxOpenAIApiKey, "textBoxOpenAIApiKey");
             this.textBoxOpenAIApiKey.Name = "textBoxOpenAIApiKey";
             // 
             // tabPage6
             // 
-            resources.ApplyResources(this.tabPage6, "tabPage6");
             this.tabPage6.Controls.Add(this.label16);
             this.tabPage6.Controls.Add(this.textBox5);
             this.tabPage6.Controls.Add(this.checkBox2);
@@ -260,6 +261,7 @@
             this.tabPage6.Controls.Add(this.textBox3);
             this.tabPage6.Controls.Add(this.label15);
             this.tabPage6.Controls.Add(this.textBox4);
+            resources.ApplyResources(this.tabPage6, "tabPage6");
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
@@ -270,8 +272,8 @@
             // 
             // textBox5
             // 
-            resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyPassword", true));
+            resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.Name = "textBox5";
             // 
             // checkBox2
@@ -288,8 +290,8 @@
             // 
             // textBox3
             // 
-            resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyUsername", true));
+            resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.Name = "textBox3";
             // 
             // label15
@@ -299,17 +301,17 @@
             // 
             // textBox4
             // 
-            resources.ApplyResources(this.textBox4, "textBox4");
             this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ProxyUrl", true));
+            resources.ApplyResources(this.textBox4, "textBox4");
             this.textBox4.Name = "textBox4";
             // 
             // tabPage1
             // 
-            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.T1);
             this.tabPage1.Controls.Add(this.P1);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -325,23 +327,23 @@
             // 
             // T1
             // 
-            resources.ApplyResources(this.T1, "T1");
             this.T1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel1", true));
+            resources.ApplyResources(this.T1, "T1");
             this.T1.Name = "T1";
             // 
             // P1
             // 
-            resources.ApplyResources(this.P1, "P1");
             this.P1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt1", true));
+            resources.ApplyResources(this.P1, "P1");
             this.P1.Name = "P1";
             // 
             // tabPage2
             // 
-            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.T2);
             this.tabPage2.Controls.Add(this.P2);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
@@ -357,23 +359,23 @@
             // 
             // T2
             // 
-            resources.ApplyResources(this.T2, "T2");
             this.T2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel2", true));
+            resources.ApplyResources(this.T2, "T2");
             this.T2.Name = "T2";
             // 
             // P2
             // 
-            resources.ApplyResources(this.P2, "P2");
             this.P2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt2", true));
+            resources.ApplyResources(this.P2, "P2");
             this.P2.Name = "P2";
             // 
             // tabPage3
             // 
-            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.T3);
             this.tabPage3.Controls.Add(this.P3);
+            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -389,23 +391,23 @@
             // 
             // T3
             // 
-            resources.ApplyResources(this.T3, "T3");
             this.T3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel3", true));
+            resources.ApplyResources(this.T3, "T3");
             this.T3.Name = "T3";
             // 
             // P3
             // 
-            resources.ApplyResources(this.P3, "P3");
             this.P3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt3", true));
+            resources.ApplyResources(this.P3, "P3");
             this.P3.Name = "P3";
             // 
             // tabPage4
             // 
-            resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Controls.Add(this.label1);
             this.tabPage4.Controls.Add(this.label2);
             this.tabPage4.Controls.Add(this.T4);
             this.tabPage4.Controls.Add(this.P4);
+            resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
@@ -421,25 +423,33 @@
             // 
             // T4
             // 
-            resources.ApplyResources(this.T4, "T4");
             this.T4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Titel4", true));
+            resources.ApplyResources(this.T4, "T4");
             this.T4.Name = "T4";
             // 
             // P4
             // 
-            resources.ApplyResources(this.P4, "P4");
             this.P4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Prompt4", true));
+            resources.ApplyResources(this.P4, "P4");
             this.P4.Name = "P4";
             // 
             // tabPage7
             // 
-            resources.ApplyResources(this.tabPage7, "tabPage7");
+            this.tabPage7.Controls.Add(this.checkBox3);
             this.tabPage7.Controls.Add(this.label17);
             this.tabPage7.Controls.Add(this.label18);
             this.tabPage7.Controls.Add(this.textBox6);
             this.tabPage7.Controls.Add(this.textBox7);
+            resources.ApplyResources(this.tabPage7, "tabPage7");
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            resources.ApplyResources(this.checkBox3, "checkBox3");
+            this.checkBox3.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "SummaryMultiple1", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "true"));
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // label17
             // 
@@ -453,25 +463,33 @@
             // 
             // textBox6
             // 
-            resources.ApplyResources(this.textBox6, "textBox6");
             this.textBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "SummaryTitel1", true));
+            resources.ApplyResources(this.textBox6, "textBox6");
             this.textBox6.Name = "textBox6";
             // 
             // textBox7
             // 
-            resources.ApplyResources(this.textBox7, "textBox7");
             this.textBox7.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Summary1", true));
+            resources.ApplyResources(this.textBox7, "textBox7");
             this.textBox7.Name = "textBox7";
             // 
             // tabPage8
             // 
-            resources.ApplyResources(this.tabPage8, "tabPage8");
+            this.tabPage8.Controls.Add(this.checkBox4);
             this.tabPage8.Controls.Add(this.label19);
             this.tabPage8.Controls.Add(this.label20);
             this.tabPage8.Controls.Add(this.textBox8);
             this.tabPage8.Controls.Add(this.textBox9);
+            resources.ApplyResources(this.tabPage8, "tabPage8");
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            resources.ApplyResources(this.checkBox4, "checkBox4");
+            this.checkBox4.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "SummaryMultiple2", true));
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // label19
             // 
@@ -485,23 +503,23 @@
             // 
             // textBox8
             // 
-            resources.ApplyResources(this.textBox8, "textBox8");
             this.textBox8.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "SummaryTitel2", true));
+            resources.ApplyResources(this.textBox8, "textBox8");
             this.textBox8.Name = "textBox8";
             // 
             // textBox9
             // 
-            resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "Summary2", true));
+            resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.Name = "textBox9";
             // 
             // tabPage9
             // 
-            resources.ApplyResources(this.tabPage9, "tabPage9");
             this.tabPage9.Controls.Add(this.label21);
             this.tabPage9.Controls.Add(this.label22);
             this.tabPage9.Controls.Add(this.textBox10);
             this.tabPage9.Controls.Add(this.textBox11);
+            resources.ApplyResources(this.tabPage9, "tabPage9");
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
@@ -517,23 +535,23 @@
             // 
             // textBox10
             // 
-            resources.ApplyResources(this.textBox10, "textBox10");
             this.textBox10.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposeTitle1", true));
+            resources.ApplyResources(this.textBox10, "textBox10");
             this.textBox10.Name = "textBox10";
             // 
             // textBox11
             // 
-            resources.ApplyResources(this.textBox11, "textBox11");
             this.textBox11.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposePrompt1", true));
+            resources.ApplyResources(this.textBox11, "textBox11");
             this.textBox11.Name = "textBox11";
             // 
             // tabPage10
             // 
-            resources.ApplyResources(this.tabPage10, "tabPage10");
             this.tabPage10.Controls.Add(this.label23);
             this.tabPage10.Controls.Add(this.label24);
             this.tabPage10.Controls.Add(this.textBox12);
             this.tabPage10.Controls.Add(this.textBox13);
+            resources.ApplyResources(this.tabPage10, "tabPage10");
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
@@ -549,23 +567,23 @@
             // 
             // textBox12
             // 
-            resources.ApplyResources(this.textBox12, "textBox12");
             this.textBox12.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposeTitle2", true));
+            resources.ApplyResources(this.textBox12, "textBox12");
             this.textBox12.Name = "textBox12";
             // 
             // textBox13
             // 
-            resources.ApplyResources(this.textBox13, "textBox13");
             this.textBox13.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposePrompt2", true));
+            resources.ApplyResources(this.textBox13, "textBox13");
             this.textBox13.Name = "textBox13";
             // 
             // tabPage11
             // 
-            resources.ApplyResources(this.tabPage11, "tabPage11");
             this.tabPage11.Controls.Add(this.label25);
             this.tabPage11.Controls.Add(this.label26);
             this.tabPage11.Controls.Add(this.textBox14);
             this.tabPage11.Controls.Add(this.textBox15);
+            resources.ApplyResources(this.tabPage11, "tabPage11");
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
@@ -581,14 +599,14 @@
             // 
             // textBox14
             // 
-            resources.ApplyResources(this.textBox14, "textBox14");
             this.textBox14.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposeTitle3", true));
+            resources.ApplyResources(this.textBox14, "textBox14");
             this.textBox14.Name = "textBox14";
             // 
             // textBox15
             // 
-            resources.ApplyResources(this.textBox15, "textBox15");
             this.textBox15.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userDataBindingSource, "ComposePrompt3", true));
+            resources.ApplyResources(this.textBox15, "textBox15");
             this.textBox15.Name = "textBox15";
             // 
             // buttonOK
@@ -716,5 +734,7 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

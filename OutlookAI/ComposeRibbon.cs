@@ -60,7 +60,8 @@ namespace OutlookAI
             var mail = ctx.CurrentItem as MailItem;
             string selectedText = GetSelectedText(ctx);
             if (string.IsNullOrWhiteSpace(selectedText))
-            { 
+            {
+                mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
                 return;
             }
             await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
@@ -71,8 +72,12 @@ namespace OutlookAI
 
             var ctx = (Inspector)this.Context;
             var mail = ctx.CurrentItem as MailItem;
-
             string selectedText = GetSelectedText(ctx);
+            if (string.IsNullOrWhiteSpace(selectedText))
+            {
+                mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
+                return;
+            }
 
             await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
         }
@@ -84,6 +89,11 @@ namespace OutlookAI
             var mail = ctx.CurrentItem as MailItem;
 
             string selectedText = GetSelectedText(ctx);
+            if (string.IsNullOrWhiteSpace(selectedText))
+            {
+                mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
+                return;
+            }
 
             await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
         }

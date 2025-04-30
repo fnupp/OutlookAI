@@ -61,6 +61,15 @@ namespace OutlookAI {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please select some text and try again. \r\n  ähnelt.
+        /// </summary>
+        internal static string ComposeNotTextSelected {
+            get {
+                return ResourceManager.GetString("ComposeNotTextSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please formulate this email more professionally. \r\n - Do not include a subject line or signature.\r\n - Keep the salutation (you, they) as is. ähnelt.
         /// </summary>
         internal static string ComposePrompt1 {

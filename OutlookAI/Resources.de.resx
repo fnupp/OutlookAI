@@ -138,14 +138,14 @@
   <data name="Title1" xml:space="preserve">
     <value>3 Antworten</value>
   </data>
+  <data name="Title2" xml:space="preserve">
+    <value>ToDo</value>
+  </data>
   <data name="Title3" xml:space="preserve">
     <value>Clarifications</value>
   </data>
   <data name="Title4" xml:space="preserve">
     <value>Custom</value>
-  </data>
-  <data name="Title2" xml:space="preserve">
-    <value>ToDo</value>
   </data>
   <data name="ErrorcallingOllama" xml:space="preserve">
     <value>Fehler bei der Anfrage an oLLAMA</value>
@@ -185,5 +185,8 @@
   </data>
   <data name="OpenAiDefaultModel" xml:space="preserve">
     <value>gpt-4o-mini</value>
+  </data>
+  <data name="ComposeNotTextSelected" xml:space="preserve">
+    <value>Bitte den Text asuwählen der überarbeitet werden soll.</value>
   </data>
 </root>
