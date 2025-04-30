@@ -162,7 +162,12 @@ namespace OutlookAI {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Write me for the following E - Mail three answer options: \ r \ n1. Use a friendly, professional tone and add possible next steps. \ R \ n2. preserved. Do not create an email or subject. Write briefly and use paragraphs to structure the argument. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Act as an expert in professional communication, customer service, diplomacy, and problem-solving. Given the sender name and the body of one or more emails (in any language), generate the following four responses. For each response, mirror the language, tone, and length of the original email conversation, and start with an appropriate greeting.
+        ///
+        ///Positive Acknowledgement:
+        ///Provide a response that begins with a relevant greeting, and positively acknowledges the sender’s message.
+        ///
+        ///Request for More Informati [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string Prompt1 {
             get {
@@ -189,7 +194,9 @@ namespace OutlookAI {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Write a response to the following email and refer to this email. Use the language of the email for your response. Do not create any email footers or subject lines. Write in detail and use paragraphs to structure your argument. Pay special attention to the following points: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Act as an expert in professional communication, customer service, diplomacy, and problem-solving. Given the sender name and the body of one or more emails (in any language), generate comprehensive and detailed responses for the following four scenarios. For every response, mirror the language, tone, and length (aiming for a substantial, fully developed reply) of the original email conversation, and start with an appropriate greeting. Assume the Mail is written to me, Falko Nuppnau 
+        ///
+        ///Incorporate these spec [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string Prompt4 {
             get {

@@ -124,7 +124,21 @@
     <value>Nicht veröffentlicht</value>
   </data>
   <data name="Prompt1" xml:space="preserve">
-    <value>Schreibe mir für die folgende E - Mail drei Antwortmöglichkeiten:\r\n1.Zustimmende Antwort: Verwende einen freundlichen, professionellen Ton und füge mögliche nächste Schritte hinzu.\r\n2.Ablehnende Antwort: Erkläre die Gründe für die Ablehnung und gib eventuell Alternativen an.\r\n3.Nachfragende Antwort: Stelle klare Fragen zu den Punkten, die unklar sind, um weitere Informationen zu erhalten.\r\n\r\nNutze als Sprache der Antwort die Sprache der E - Mail. Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe knapp und verwende Absätze, um die Argumentation zu gliedern.</value>
+    <value>Act as an expert in professional communication, customer service, diplomacy, and problem-solving. Given the sender name and the body of one or more emails (in any language), generate the following four responses. For each response, mirror the language, tone, and length of the original email conversation, and start with an appropriate greeting.
+
+Positive Acknowledgement:
+Provide a response that begins with a relevant greeting, and positively acknowledges the sender’s message.
+
+Request for More Information:
+Write a reply with a suitable greeting that politely asks for clarification or more information, while keeping the same style and politeness level.
+
+Provide a Helpful Suggestion or Solution:
+Respond with a fitting greeting and offer a helpful suggestion, idea, or possible solution tailored to the sender's topic.
+
+Express Gratitude or Appreciation:
+Begin with a greeting, and write a message that expresses gratitude or appreciation for the sender’s communication.
+
+Ensure each reply matches the formality, tone, and length of the input email. For all responses, use the same language as the provided email.</value>
   </data>
   <data name="Prompt2" xml:space="preserve">
     <value>Schreibe mir für die folgende E - Mail eine ToDoListeSchreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.</value>
@@ -133,7 +147,29 @@
     <value>Schreibe mir für die folgende Email eine Antwort micht 3 Rückfragen \nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.</value>
   </data>
   <data name="Prompt4" xml:space="preserve">
-    <value>Schreibe mir für die folgende E - Mail eine Antwort und nimm Bezug auf diese EmailNutze als Sprache der Antwort die Sprache der E - Mail.Erzeuge keinen E-Mail - Fußzeilen oder Betreff. Schreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern. Berücksichtige im besonderen die folgenden Punkte:</value>
+    <value>Act as an expert in professional communication, customer service, diplomacy, and problem-solving. Given the sender name and the body of one or more emails (in any language), generate comprehensive and detailed responses for the following four scenarios. For every response, mirror the language, tone, and length (aiming for a substantial, fully developed reply) of the original email conversation, and start with an appropriate greeting. Assume the Mail is written to me, Falko Nuppnau 
+
+Incorporate these specific inputs thoughtfully and explicitly in each response:
+§§Input§§
+
+Positive Acknowledgement:
+Craft a well-developed and warm response that begins with a relevant greeting. Positively acknowledge the sender’s message, refer to specific points they raised, and integrate the provided inputs in a natural, meaningful way. Elaborate wherever possible to offer a complete and supportive acknowledgment.
+
+Positive Informal Acknowledgement:
+Craft a well-developed and informal response that begins with a relevant greeting. Positively acknowledge the sender’s message, refer to specific points they raised, and integrate the provided inputs in a natural, meaningful way. Elaborate wherever possible to offer a complete and supportive acknowledgment.
+
+Request for More Information:
+Write a courteous and comprehensive reply, opening with an appropriate greeting. Clearly and politely ask for any needed clarification or additional details. Make sure to reference the §§Input§§ in your information request, connecting these points to the overall context of the conversation for clarity.
+
+Helpful Suggestion or Solution:
+Develop a substantial response that starts with a fitting greeting and includes a helpful suggestion, idea, or possible solution based on both the sender’s topic and §§Input§§. Provide step-by-step or well-structured advice, and relate suggestions directly to the details mentioned in the sender's email.
+
+Gratitude or Appreciation:
+Compose a thoughtful and expressive message that opens with a greeting and communicates genuine gratitude or appreciation. Draw on both the overall correspondence and §§Input§§, highlighting specific aspects you are thankful for and offering encouragement or positive feedback.
+
+Ensure all replies adopt the tone, formality, and language of the provided email, and elaborate where possible so that each response is detailed and complete.
+
+Append the sender's name and body of the email(s) below. </value>
   </data>
   <data name="Title1" xml:space="preserve">
     <value>3 Antworten</value>
