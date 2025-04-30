@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Drawing.Printing;
 namespace OutlookAI
 {
     public partial class OutlookAIRibbon
@@ -43,19 +44,34 @@ namespace OutlookAI
         private async void Button1_Click(object sender, RibbonControlEventArgs e)
         {
             MailItem mail = GetMail();
-            await Reply(mail, ThisAddIn.userdata.Prompt1);
+            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
+            if (inputBox.ShowDialog() == DialogResult.OK)
+            {
+                string prompt = ThisAddIn.userdata.Prompt1.Replace("§§Input§§", inputBox.InputText);
+                await Reply(mail, prompt);
+            }
         }
         private async void Button2_Click(object sender, RibbonControlEventArgs e)
         {
-
             MailItem mail = GetMail();
-            await Reply(mail, ThisAddIn.userdata.Prompt2);
+            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
+            if (inputBox.ShowDialog() == DialogResult.OK)
+            {
+                string prompt = ThisAddIn.userdata.Prompt2.Replace("§§Input§§", inputBox.InputText);
+                await Reply(mail, prompt);
+            }
+
         }
         private async void Button3_Click(object sender, RibbonControlEventArgs e)
         {
-
             MailItem mail = GetMail();
-            await Reply(mail, ThisAddIn.userdata.Prompt3);
+            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
+            if (inputBox.ShowDialog() == DialogResult.OK)
+            {
+                string prompt = ThisAddIn.userdata.Prompt3.Replace("§§Input§§", inputBox.InputText);
+                await Reply(mail, prompt);
+            }
+
         }
         private async void Button4_Click(object sender, RibbonControlEventArgs e)
         {
@@ -63,7 +79,8 @@ namespace OutlookAI
             InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
             if (inputBox.ShowDialog() == DialogResult.OK)
             {
-                await Reply(mail, ThisAddIn.userdata.Prompt4 + "\n" + inputBox.InputText);
+                string prompt = ThisAddIn.userdata.Prompt4.Replace("§§Input§§", inputBox.InputText);
+                await Reply(mail, prompt);
             }
         }
         private void Button5_Click(object sender, RibbonControlEventArgs e)
@@ -145,10 +162,6 @@ namespace OutlookAI
             }
             return mails;
         }
-
-
-
-
         private async void Summary_Click(object sender, RibbonControlEventArgs e)
         {
             var mails = GetMails();
@@ -203,9 +216,6 @@ namespace OutlookAI
             p.ShowDialog();
             UpdateRibbonLabels();
         }
-
-
-
         public void ExportCalendarToJson()
         {
 
@@ -394,15 +404,15 @@ namespace OutlookAI
             }
         }
 
-        private  void ExportSync_Click(object sender, RibbonControlEventArgs e)
+        private void ExportSync_Click(object sender, RibbonControlEventArgs e)
         {
             ExportCalendarToJson();
-           // ImportCalendarFromJson(); // inputPath: @"C:\Users\Public\Documents\calendar_entries.json");
+            // ImportCalendarFromJson(); // inputPath: @"C:\Users\Public\Documents\calendar_entries.json");
         }
 
         private void Import_Click(object sender, RibbonControlEventArgs e)
         {
-            ImportCalendarFromJson();   
+            ImportCalendarFromJson();
         }
     }
 

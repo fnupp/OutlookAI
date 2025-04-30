@@ -276,15 +276,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon.cs">
-      <XmlRibbon>true</XmlRibbon>
-    </Compile>
     <Compile Include="UserData.cs" />
     <EmbeddedResource Include="ComposeRibbon.resx">
       <DependentUpon>ComposeRibbon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.de.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutlookAIRibbon.de.resx">
+      <DependentUpon>OutlookAIRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PromptBox.de.resx">
       <DependentUpon>PromptBox.cs</DependentUpon>
@@ -316,6 +319,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="OutlookAI_1_TemporaryKey.pfx" />
+    <None Include="OutlookAI_2_TemporaryKey.pfx" />
     <None Include="OutlookAI_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\UserData.datasource" />
@@ -348,9 +352,6 @@
   <ItemGroup>
     <None Include="Resources\211751_gear_icon%281%29.png" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Ribbon.xml" />
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -359,10 +360,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>OutlookAI_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>OutlookAI_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>EA18A1F5107FF0F850CB8A5C73AE8F7994D7A76E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>44BAC4B41319CB021AD91A98D0CB4511B6A2E365</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

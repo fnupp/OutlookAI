@@ -55,9 +55,6 @@ namespace OutlookAI
         {
             //var ollamaUrl = "http://localhost:11434/api/generate";
             //var model = "llama3"; 
-
-
-
             using (var client = CreateHttpClient())
             {
                 var requestBody = new
@@ -87,7 +84,6 @@ namespace OutlookAI
                 }
             }
         }
-
         private static async Task<string> GetChatGPTResponse(string userInput)
         {
             using (HttpClient client = CreateHttpClient())
