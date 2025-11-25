@@ -64,7 +64,18 @@ namespace OutlookAI
                 mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
                 return;
             }
-            await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
+
+            try
+            {
+                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText).ConfigureAwait(false);
+                response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
+                mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
+                mail.Display();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+            }
         }
 
         private async void BtnCompose2_Click(object sender, RibbonControlEventArgs e)
@@ -79,7 +90,17 @@ namespace OutlookAI
                 return;
             }
 
-            await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
+            try
+            {
+                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText).ConfigureAwait(false);
+                response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
+                mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
+                mail.Display();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+            }
         }
 
         private async void BtnCompose3_Click(object sender, RibbonControlEventArgs e)
@@ -95,27 +116,20 @@ namespace OutlookAI
                 return;
             }
 
-            await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText).ContinueWith(UpdateMail(mail));
-        }
-
-
-        private static Action<System.Threading.Tasks.Task<string>> UpdateMail(MailItem mail)
-        {
-            return task =>
+            try
             {
-                if (!task.IsFaulted)
-                {
-                    string response = task.Result;
-                    response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
-                    mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
-                    mail.Display();
-                }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show("Fehler bei der Verarbeitung: " + task.Exception?.Message);
-                }
-            };
+                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText).ConfigureAwait(false);
+                response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
+                mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
+                mail.Display();
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+            }
         }
+
+
 
         private static string GetSelectedText(Inspector ctx)
         {
@@ -123,7 +137,7 @@ namespace OutlookAI
             var selection = wordEditor.Application.Selection;
             if (selection == null)// || selection.Type != Microsoft.Office.Interop.Word.WdSelectionType.wdSelectionNormal)
             {
-                System.Windows.Forms.MessageBox.Show("Bitte wählen Sie den Text aus, den Sie umformulieren möchten.");
+                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ComposeNotTextSelected);
                 return "";
             }
 

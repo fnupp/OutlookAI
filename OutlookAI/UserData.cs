@@ -36,7 +36,34 @@ namespace OutlookAI
 
         public bool OpenAIAPIActive { get; set; }
         public string OpenAIAPIUrl { get; set; }
-        public string OpenAIAPIKey { get; set; }
+
+        // Encrypted API key will be serialized
+        public string EncryptedOpenAIAPIKey
+        {
+            get => encryptedOpenAIAPIKey;
+            set => encryptedOpenAIAPIKey = value;
+        }
+
+        [NonSerialized]
+        private string encryptedOpenAIAPIKey;
+
+        [IgnoreDataMember]
+        public string OpenAIAPIKey
+        {
+            get
+            {
+                return string.IsNullOrEmpty(encryptedOpenAIAPIKey)
+                    ? null
+                    : DecryptPassword(encryptedOpenAIAPIKey);
+            }
+            set
+            {
+                encryptedOpenAIAPIKey = string.IsNullOrEmpty(value)
+                    ? null
+                    : EncryptPassword(value);
+            }
+        }
+
         public string OpenAIAPIModel { get; set; }
 
 

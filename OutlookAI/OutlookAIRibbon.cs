@@ -97,7 +97,7 @@ namespace OutlookAI
             try
             {
                 string finalPrompt = $"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
-                string response = await ThisAddIn.GetLLMResponse(finalPrompt);
+                string response = await ThisAddIn.GetLLMResponse(finalPrompt).ConfigureAwait(false);
 
                 var reply = mail.ReplyAll();
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
@@ -106,7 +106,7 @@ namespace OutlookAI
             }
             catch (System.Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Fehler: " + ex.Message);
+                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorGeneric + ex.Message);
             }
         }
 
@@ -201,7 +201,7 @@ namespace OutlookAI
                     {
                         if (t.IsFaulted)
                         {
-                            MessageBox.Show("Fehler: " + t.Exception.InnerException.Message);
+                            MessageBox.Show(OutlookAI.Resources.ErrorGeneric + t.Exception.InnerException.Message);
                         }
                         else
                         {
@@ -209,13 +209,13 @@ namespace OutlookAI
                         }
                     }));
                 }
-                await Task.WhenAll(responses);
-                await Task.WhenAll(msgs);
+                await Task.WhenAll(responses).ConfigureAwait(false);
+                await Task.WhenAll(msgs).ConfigureAwait(false);
 
             }
             catch (System.Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Fehler: " + ex.Message);
+                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorGeneric + ex.Message);
             }
         }
         private async Task SummarizeMultiple(List<MailItem> mails, string prompt = "")
@@ -233,10 +233,10 @@ namespace OutlookAI
                 }
 
                 var response = ThisAddIn.GetLLMResponse(sb.ToString());
-                await response;
+                await response.ConfigureAwait(false);
                 if (response.IsFaulted)
                 {
-                    MessageBox.Show("Fehler: " + response.Exception.InnerException.Message);
+                    MessageBox.Show(OutlookAI.Resources.ErrorGeneric + response.Exception.InnerException.Message);
                 }
                 else
                 {
@@ -245,7 +245,7 @@ namespace OutlookAI
         }
             catch (System.Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Fehler: " + ex.Message);
+                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorGeneric + ex.Message);
             }
 }
 
@@ -310,12 +310,12 @@ public void ExportCalendarToJson()
         // JSON-Datei erstellen
         string json = JsonConvert.SerializeObject(entries, Formatting.Indented);
         File.WriteAllText(fileDialog.FileName, json);
-        System.Windows.Forms.MessageBox.Show("Kalendereinträge erfolgreich exportiert!");
+        System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.CalendarExportSuccess);
 
     }
     catch (System.Exception ex)
     {
-        System.Windows.Forms.MessageBox.Show("Fehler beim Exportieren: " + ex.Message);
+        System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.CalendarExportError + ex.Message);
     }
 
     finally
@@ -411,11 +411,11 @@ public void ImportCalendarFromJson()
             if (appointment != null) Marshal.ReleaseComObject(appointment);
         }
 
-        System.Windows.Forms.MessageBox.Show("Kalendereinträge erfolgreich importiert!");
+        System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.CalendarImportSuccess);
     }
     catch (System.Exception ex)
     {
-        System.Windows.Forms.MessageBox.Show("Fehler beim Importieren: " + ex.Message);
+        System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.CalendarImportError + ex.Message);
     }
     finally
     {
