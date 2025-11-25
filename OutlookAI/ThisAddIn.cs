@@ -40,11 +40,11 @@ namespace OutlookAI
             string response;
             if (ThisAddIn.userdata.OllamaActive)
             {
-                response = await ThisAddIn.GetChatOllamaResponse(prompt);
+                response = await ThisAddIn.GetChatOllamaResponse(prompt).ConfigureAwait(false);
             }
             else if (ThisAddIn.userdata.OpenAIAPIActive)
             {
-                response = await ThisAddIn.GetChatGPTResponse(prompt);
+                response = await ThisAddIn.GetChatGPTResponse(prompt).ConfigureAwait(false);
             }
             else
             {

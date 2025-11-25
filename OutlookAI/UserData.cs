@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
@@ -44,7 +45,7 @@ namespace OutlookAI
             set => encryptedOpenAIAPIKey = value;
         }
 
-        [NonSerialized]
+        [JsonIgnore]
         private string encryptedOpenAIAPIKey;
 
         [IgnoreDataMember]
