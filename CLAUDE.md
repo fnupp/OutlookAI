@@ -29,6 +29,55 @@ msbuild OutlookAI.sln /p:Configuration=Release
 - Debug path is set to Office 16.0 Outlook executable
 - Breakpoints can be set in any C# code file
 
+## Git Workflow
+
+### Branching Strategy
+**IMPORTANT**: When generating or modifying code, ALWAYS create a feature branch first. Never commit code changes directly to `master`.
+
+#### Workflow Steps:
+1. **Before making any code changes**, create a new branch from `master`:
+   ```bash
+   git checkout master
+   git pull origin master
+   git checkout -b <branch-name>
+   ```
+
+2. **Make all code changes** on the feature branch
+
+3. **Commit changes** with descriptive commit messages
+
+4. **Push to remote** (if ready for review):
+   ```bash
+   git push -u origin <branch-name>
+   ```
+
+5. **Create a Pull Request** for code review before merging to `master`
+
+#### Branch Naming Conventions:
+Use descriptive names that clearly indicate the purpose of the branch:
+
+- `feature/<description>` - For new features
+  - Example: `feature/add-usage-tracking`
+  - Example: `feature/multi-language-support`
+
+- `fix/<description>` - For bug fixes
+  - Example: `fix/email-body-encoding`
+  - Example: `fix/ribbon-button-visibility`
+
+- `enhancement/<description>` - For improvements to existing features
+  - Example: `enhancement/improve-error-handling`
+  - Example: `enhancement/optimize-llm-calls`
+
+- `refactor/<description>` - For code refactoring
+  - Example: `refactor/ribbon-ui-components`
+  - Example: `refactor/settings-management`
+
+#### Important Notes:
+- Keep `master` branch clean and production-ready
+- One feature/fix per branch (avoid mixing unrelated changes)
+- Delete branches after they are merged
+- Always pull latest `master` before creating a new branch
+
 ## Architecture
 
 ### Core Components
