@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookAI", "OutlookAI\Outl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{84D27F74-D2BA-6C25-2661-968F101900D9}"
 	ProjectSection(SolutionItems) = preProject
+		CLAUDE.md = CLAUDE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -25,7 +26,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {842035D0-F575-4CC4-96FE-61C185753445}
 		RESX_PrefixTranslations = False
+		SolutionGuid = {842035D0-F575-4CC4-96FE-61C185753445}
 	EndGlobalSection
 EndGlobal

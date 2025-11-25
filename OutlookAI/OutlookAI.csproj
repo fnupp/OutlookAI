@@ -35,7 +35,7 @@
     <PublishUrl>C:\Users\nup\OneDrive\1\</PublishUrl>
     <InstallUrl />
     <TargetCulture>de</TargetCulture>
-    <ApplicationVersion>1.0.0.29</ApplicationVersion>
+    <ApplicationVersion>1.0.0.31</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -60,7 +60,7 @@
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
       <Visible>False</Visible>
-      <ProductName>Microsoft Visual Studio 2010 Tools for Office Runtime %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft Visual Studio 2010-Tools für Office-Laufzeit %28x86 und x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
@@ -320,6 +320,7 @@
     <None Include="app.config" />
     <None Include="OutlookAI_1_TemporaryKey.pfx" />
     <None Include="OutlookAI_2_TemporaryKey.pfx" />
+    <None Include="OutlookAI_3_TemporaryKey.pfx" />
     <None Include="OutlookAI_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\UserData.datasource" />
@@ -360,10 +361,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>OutlookAI_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>OutlookAI_3_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>44BAC4B41319CB021AD91A98D0CB4511B6A2E365</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5DAC2D935FB45E072E3FF373BA97419E8D6CAD3A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
