@@ -244,22 +244,4 @@ Append the sender's name and body of the email(s) below. </value>
 	<data name="CalendarImportError" xml:space="preserve">
          <value>Fehler beim Importieren: </value>
        </data>
-	<data name="ErrorGeneric" xml:space="preserve">
-    <value>Fehler: </value>
-  </data>
-	<data name="ErrorProcessing" xml:space="preserve">
-    <value>Fehler bei der Verarbeitung: </value>
-  </data>
-	<data name="CalendarExportSuccess" xml:space="preserve">
-    <value>Kalendereinträge erfolgreich exportiert!</value>
-  </data>
-	<data name="CalendarExportError" xml:space="preserve">
-    <value>Fehler beim Exportieren: </value>
-  </data>
-	<data name="CalendarImportSuccess" xml:space="preserve">
-    <value>Kalendereinträge erfolgreich importiert!</value>
-  </data>
-	<data name="CalendarImportError" xml:space="preserve">
-    <value>Fehler beim Importieren: </value>
-  </data>
 </root>
