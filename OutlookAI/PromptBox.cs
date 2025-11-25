@@ -29,6 +29,10 @@ namespace OutlookAI
         {
             string json = JsonConvert.SerializeObject(userDataBindingSource.DataSource);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"), json);
+
+            // Invalidate HttpClient instances to apply new proxy/connection settings
+            ThisAddIn.InvalidateHttpClients();
+
             this.Close();
         }
 

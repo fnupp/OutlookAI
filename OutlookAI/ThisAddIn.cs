@@ -13,8 +13,9 @@ namespace OutlookAI
     {
 
         internal static UserData userdata;
-        private static readonly Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
-        private static readonly Lazy<HttpClient> _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
+        private static readonly object _httpClientLock = new object();
+        private static Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
+        private static Lazy<HttpClient> _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -128,11 +129,14 @@ namespace OutlookAI
         /// </summary>
         public static HttpClient GetHttpClient()
         {
-            if (ThisAddIn.userdata.ProxyActive)
+            lock (_httpClientLock)
             {
-                return _httpClientWithProxy.Value;
+                if (ThisAddIn.userdata.ProxyActive)
+                {
+                    return _httpClientWithProxy.Value;
+                }
+                return _httpClient.Value;
             }
-            return _httpClient.Value;
         }
 
         /// <summary>
@@ -162,6 +166,31 @@ namespace OutlookAI
             {
                 Timeout = TimeSpan.FromMinutes(5) // Reasonable timeout for LLM calls
             };
+        }
+
+        /// <summary>
+        /// Invalidates and disposes existing HttpClient instances.
+        /// Call this method when proxy settings or other HTTP configuration changes.
+        /// New instances will be created on the next GetHttpClient() call.
+        /// </summary>
+        public static void InvalidateHttpClients()
+        {
+            lock (_httpClientLock)
+            {
+                // Dispose existing clients if they were initialized
+                if (_httpClient.IsValueCreated)
+                {
+                    _httpClient.Value?.Dispose();
+                }
+                if (_httpClientWithProxy.IsValueCreated)
+                {
+                    _httpClientWithProxy.Value?.Dispose();
+                }
+
+                // Recreate lazy instances with fresh factory methods
+                _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
+                _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
+            }
         }
 
         [Obsolete("Use GetHttpClient() instead. This method is kept for backward compatibility.")]
