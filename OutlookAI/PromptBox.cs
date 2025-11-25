@@ -29,6 +29,10 @@ namespace OutlookAI
         {
             string json = JsonConvert.SerializeObject(userDataBindingSource.DataSource);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"), json);
+
+            // Invalidate HttpClient instances to apply new proxy/connection settings
+            ThisAddIn.InvalidateHttpClients();
+
             this.Close();
         }
 
@@ -47,16 +51,16 @@ namespace OutlookAI
             ollamaUrl += "api/tags";
             try
             {
-                HttpClient httpClient = ThisAddIn.CreateHttpClient();
+                HttpClient httpClient = ThisAddIn.GetHttpClient();
 
-                var response = await httpClient.GetAsync(ollamaUrl);
+                var response = await httpClient.GetAsync(ollamaUrl).ConfigureAwait(false);
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOllama}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
+                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOllama}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync().ConfigureAwait(false)}");
                 }
 
-                string jsonResponse = await response.Content.ReadAsStringAsync();
+                string jsonResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ModelListResponse modelListResponse = JsonConvert.DeserializeObject<ModelListResponse>(jsonResponse);
 
 

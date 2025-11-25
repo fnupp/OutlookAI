@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,71 +59,71 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="Settings" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
-  <data name="NichtVeröffentlicht" xml:space="preserve">
+	<data name="NichtVeröffentlicht" xml:space="preserve">
     <value>Nicht veröffentlicht</value>
   </data>
-  <data name="Prompt1" xml:space="preserve">
+	<data name="Prompt1" xml:space="preserve">
     <value>Act as an expert in professional communication, customer service, diplomacy, and problem-solving. Given the sender name and the body of one or more emails (in any language), generate the following four responses. For each response, mirror the language, tone, and length of the original email conversation, and start with an appropriate greeting.
 
 Positive Acknowledgement:
@@ -140,13 +140,13 @@ Begin with a greeting, and write a message that expresses gratitude or appreciat
 
 Ensure each reply matches the formality, tone, and length of the input email. For all responses, use the same language as the provided email.</value>
   </data>
-  <data name="Prompt2" xml:space="preserve">
+	<data name="Prompt2" xml:space="preserve">
     <value>Schreibe mir für die folgende E - Mail eine ToDoListeSchreibe ausführlich und verwende Absätze, um die Argumentation zu gliedern.</value>
   </data>
-  <data name="Prompt3" xml:space="preserve">
+	<data name="Prompt3" xml:space="preserve">
     <value>Schreibe mir für die folgende Email eine Antwort micht 3 Rückfragen \nNutze als Sprache der Antwort die Sprache der Email. Erzeuge keinen Emailfooter oder Betreff. \n Schreibe ausführlich und in einem informellen Stil.</value>
   </data>
-  <data name="Prompt4" xml:space="preserve">
+	<data name="Prompt4" xml:space="preserve">
     <value>Act as an expert in professional communication, customer service, diplomacy, and problem-solving. Given the sender name and the body of one or more emails (in any language), generate comprehensive and detailed responses for the following four scenarios. For every response, mirror the language, tone, and length (aiming for a substantial, fully developed reply) of the original email conversation, and start with an appropriate greeting. Assume the Mail is written to me, Falko Nuppnau 
 
 Incorporate these specific inputs thoughtfully and explicitly in each response:
@@ -171,58 +171,77 @@ Ensure all replies adopt the tone, formality, and language of the provided email
 
 Append the sender's name and body of the email(s) below. </value>
   </data>
-  <data name="Title1" xml:space="preserve">
+	<data name="Title1" xml:space="preserve">
     <value>3 Antworten</value>
   </data>
-  <data name="Title2" xml:space="preserve">
+	<data name="Title2" xml:space="preserve">
     <value>ToDo</value>
   </data>
-  <data name="Title3" xml:space="preserve">
+	<data name="Title3" xml:space="preserve">
     <value>Clarifications</value>
   </data>
-  <data name="Title4" xml:space="preserve">
+	<data name="Title4" xml:space="preserve">
     <value>Custom</value>
   </data>
-  <data name="ErrorcallingOllama" xml:space="preserve">
+	<data name="ErrorcallingOllama" xml:space="preserve">
     <value>Fehler bei der Anfrage an oLLAMA</value>
   </data>
-  <data name="ErrorcallingOpenai" xml:space="preserve">
+	<data name="ErrorcallingOpenai" xml:space="preserve">
     <value>Fehler bei der Anfrage an ChatGPT</value>
   </data>
-  <data name="ComposePrompt1" xml:space="preserve">
+	<data name="ComposePrompt1" xml:space="preserve">
     <value>Formuliere diese Email professioneller. \r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei.</value>
   </data>
-  <data name="ComposePrompt2" xml:space="preserve">
+	<data name="ComposePrompt2" xml:space="preserve">
     <value>Überarbeite diese E-Mail so, dass sie klarer strukturiert und leichter verständlich ist, ohne den Inhalt zu verändern. Erzeuge keinen Betreff oder Signatur. Behalte die Anrede (Du, sie) bei:</value>
   </data>
-  <data name="ComposePrompt3" xml:space="preserve">
+	<data name="ComposePrompt3" xml:space="preserve">
     <value>Mach diese E-Mail kürzer und persönlicher, als würdest du einem guten Kollegen oder einer Bekannten schreiben:\r\n - Erzeuge keinen Betreff oder Signatur.\r\n - Behalte die Anrede (Du, sie) bei.</value>
   </data>
-  <data name="ComposePromptTitle1" xml:space="preserve">
+	<data name="ComposePromptTitle1" xml:space="preserve">
     <value>Professioneller</value>
   </data>
-  <data name="ComposePromptTitle2" xml:space="preserve">
+	<data name="ComposePromptTitle2" xml:space="preserve">
     <value>Klarer</value>
   </data>
-  <data name="ComposePromptTitle3" xml:space="preserve">
+	<data name="ComposePromptTitle3" xml:space="preserve">
     <value>Informeller</value>
   </data>
-  <data name="SummarizeTitle1" xml:space="preserve">
+	<data name="SummarizeTitle1" xml:space="preserve">
     <value>Zusammenfassung 1</value>
   </data>
-  <data name="SummarizeTitle2" xml:space="preserve">
+	<data name="SummarizeTitle2" xml:space="preserve">
     <value>Zusammenfassung 2</value>
   </data>
-  <data name="SummarizePrompt1" xml:space="preserve">
+	<data name="SummarizePrompt1" xml:space="preserve">
     <value>Fasse die folgende Email zusammen, zähle die zentralen Aussagen und Informationen auf und beschreibe den Ton der Email.\r\n\r\n\r\n   E-Mail analysieren:\r\n        Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.\r\n\r\n    Inhaltlichen Input einbauen:\r\n        Verwende ausschließlich die bereitgestellten inhaltlichen Informationen und Aussagen als Basis für die Antwort.</value>
   </data>
-  <data name="SummarizePrompt2" xml:space="preserve">
+	<data name="SummarizePrompt2" xml:space="preserve">
     <value>Fasse die folgende Eamil zusammen.Lies die Ursprungs-E-Mail, um den Kontext, das Anliegen und den Ton des Absenders zu verstehen.</value>
   </data>
-  <data name="OpenAiDefaultModel" xml:space="preserve">
+	<data name="OpenAiDefaultModel" xml:space="preserve">
     <value>gpt-4o-mini</value>
   </data>
-  <data name="ComposeNotTextSelected" xml:space="preserve">
-    <value>Bitte den Text asuwählen der überarbeitet werden soll.</value>
+	<data name="ComposeNotTextSelected" xml:space="preserve">
+    <value>Bitte den Text auswählen der überarbeitet werden soll.</value>
   </data>
+
+	<data name="ErrorGeneric" xml:space="preserve">
+         <value>Fehler: </value>
+       </data>
+	<data name="ErrorProcessing" xml:space="preserve">
+         <value>Fehler bei der Verarbeitung: </value>
+       </data>
+	<data name="CalendarExportSuccess" xml:space="preserve">
+         <value>Kalendereinträge erfolgreich exportiert!</value>
+       </data>
+	<data name="CalendarExportError" xml:space="preserve">
+         <value>Fehler beim Exportieren: </value>
+       </data>
+	<data name="CalendarImportSuccess" xml:space="preserve">
+         <value>Kalendereinträge erfolgreich importiert!</value>
+       </data>
+	<data name="CalendarImportError" xml:space="preserve">
+         <value>Fehler beim Importieren: </value>
+       </data>
 </root>

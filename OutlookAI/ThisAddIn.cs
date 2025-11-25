@@ -13,6 +13,9 @@ namespace OutlookAI
     {
 
         internal static UserData userdata;
+        private static readonly object _httpClientLock = new object();
+        private static Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
+        private static Lazy<HttpClient> _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -37,11 +40,11 @@ namespace OutlookAI
             string response;
             if (ThisAddIn.userdata.OllamaActive)
             {
-                response = await ThisAddIn.GetChatOllamaResponse(prompt);
+                response = await ThisAddIn.GetChatOllamaResponse(prompt).ConfigureAwait(false);
             }
             else if (ThisAddIn.userdata.OpenAIAPIActive)
             {
-                response = await ThisAddIn.GetChatGPTResponse(prompt);
+                response = await ThisAddIn.GetChatGPTResponse(prompt).ConfigureAwait(false);
             }
             else
             {
@@ -54,73 +57,95 @@ namespace OutlookAI
         private static async Task<string> GetChatOllamaResponse(string prompt)
         {
             //var ollamaUrl = "http://localhost:11434/api/generate";
-            //var model = "llama3"; 
-            using (var client = CreateHttpClient())
+            //var model = "llama3";
+            var client = GetHttpClient();
+            var requestBody = new
             {
-                var requestBody = new
-                {
-                    model = ThisAddIn.userdata.Ollamamodel,
-                    prompt,
-                    stream = false
-                };
+                model = ThisAddIn.userdata.Ollamamodel,
+                prompt,
+                stream = false
+            };
 
-                var json = JsonConvert.SerializeObject(requestBody);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var ollamaUrl = ThisAddIn.userdata.OllamaUrl;
-                if (!ThisAddIn.userdata.OllamaUrl.EndsWith("/"))
-                    ollamaUrl += "/";
-                ollamaUrl += "api/generate";
-                var response = await client.PostAsync(ollamaUrl, content);
+            var json = JsonConvert.SerializeObject(requestBody);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var ollamaUrl = ThisAddIn.userdata.OllamaUrl;
+            if (!ThisAddIn.userdata.OllamaUrl.EndsWith("/"))
+                ollamaUrl += "/";
+            ollamaUrl += "api/generate";
+            var response = await client.PostAsync(ollamaUrl, content).ConfigureAwait(false);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string jsonResponse = await response.Content.ReadAsStringAsync();
-                    dynamic jsonResponseParsed = JsonConvert.DeserializeObject(jsonResponse);
-                    return jsonResponseParsed.response.ToString();
-                }
-                else
-                {
-                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOllama}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
-                }
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                dynamic jsonResponseParsed = JsonConvert.DeserializeObject(jsonResponse);
+                return jsonResponseParsed.response.ToString();
+            }
+            else
+            {
+                throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOllama}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync().ConfigureAwait(false)}");
             }
         }
         private static async Task<string> GetChatGPTResponse(string userInput)
         {
-            using (HttpClient client = CreateHttpClient())
+            var client = GetHttpClient();
+
+            var requestBody = new
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ThisAddIn.userdata.OpenAIAPIKey);
-
-                var requestBody = new
+                model = ThisAddIn.userdata.OpenAIAPIModel,  //"gpt-4o-mini",
+                messages = new[]
                 {
-                    model = ThisAddIn.userdata.OpenAIAPIModel,  //"gpt-4o-mini", 
-                    messages = new[]
-                    {
-                        new { role = "user", content = userInput }
-                    }
-                };
+                    new { role = "user", content = userInput }
+                }
+            };
 
-                string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
-                var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
+            string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
+            var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await client.PostAsync(ThisAddIn.userdata.OpenAIAPIUrl, content);
+            // Create request message with authorization header
+            using (var request = new HttpRequestMessage(HttpMethod.Post, ThisAddIn.userdata.OpenAIAPIUrl))
+            {
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ThisAddIn.userdata.OpenAIAPIKey);
+                request.Content = content;
+
+                HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    string jsonResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     dynamic jsonResponseParsed = JsonConvert.DeserializeObject(jsonResponse);
                     return jsonResponseParsed.choices[0].message.content.ToString();
                 }
                 else
                 {
-                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOpenai}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}");
+                    throw new System.Exception($"{OutlookAI.Resources.ErrorcallingOpenai}: {response.StatusCode}\n{await response.Content.ReadAsStringAsync().ConfigureAwait(false)}");
                 }
             }
         }
 
 
-        public static HttpClient CreateHttpClient()
+        /// <summary>
+        /// Gets the appropriate HttpClient instance based on proxy settings.
+        /// Uses static instances to avoid socket exhaustion.
+        /// </summary>
+        public static HttpClient GetHttpClient()
         {
-            if (ThisAddIn.userdata.ProxyActive)
+            lock (_httpClientLock)
+            {
+                if (ThisAddIn.userdata.ProxyActive)
+                {
+                    return _httpClientWithProxy.Value;
+                }
+                return _httpClient.Value;
+            }
+        }
+
+        /// <summary>
+        /// Creates a new HttpClient instance with optional proxy configuration.
+        /// This method is called lazily only once per configuration.
+        /// </summary>
+        private static HttpClient CreateHttpClientInternal(bool useProxy = false)
+        {
+            if (useProxy)
             {
                 var proxy = new WebProxy(ThisAddIn.userdata.ProxyUrl)
                 {
@@ -132,9 +157,46 @@ namespace OutlookAI
                     Proxy = proxy,
                     UseProxy = true
                 };
-                return new HttpClient(handler);
+                return new HttpClient(handler)
+                {
+                    Timeout = TimeSpan.FromMinutes(5) // Reasonable timeout for LLM calls
+                };
             }
-            return new HttpClient();
+            return new HttpClient()
+            {
+                Timeout = TimeSpan.FromMinutes(5) // Reasonable timeout for LLM calls
+            };
+        }
+
+        /// <summary>
+        /// Invalidates and disposes existing HttpClient instances.
+        /// Call this method when proxy settings or other HTTP configuration changes.
+        /// New instances will be created on the next GetHttpClient() call.
+        /// </summary>
+        public static void InvalidateHttpClients()
+        {
+            lock (_httpClientLock)
+            {
+                // Dispose existing clients if they were initialized
+                if (_httpClient.IsValueCreated)
+                {
+                    _httpClient.Value?.Dispose();
+                }
+                if (_httpClientWithProxy.IsValueCreated)
+                {
+                    _httpClientWithProxy.Value?.Dispose();
+                }
+
+                // Recreate lazy instances with fresh factory methods
+                _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
+                _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
+            }
+        }
+
+        [Obsolete("Use GetHttpClient() instead. This method is kept for backward compatibility.")]
+        public static HttpClient CreateHttpClient()
+        {
+            return GetHttpClient();
         }
 
         private static void InitSettingsFile()

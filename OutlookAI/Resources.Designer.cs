@@ -61,6 +61,42 @@ namespace OutlookAI {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error during export:  ähnelt.
+        /// </summary>
+        internal static string CalendarExportError {
+            get {
+                return ResourceManager.GetString("CalendarExportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Calendar entries successfully exported! ähnelt.
+        /// </summary>
+        internal static string CalendarExportSuccess {
+            get {
+                return ResourceManager.GetString("CalendarExportSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error during import:  ähnelt.
+        /// </summary>
+        internal static string CalendarImportError {
+            get {
+                return ResourceManager.GetString("CalendarImportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Calendar entries successfully imported! ähnelt.
+        /// </summary>
+        internal static string CalendarImportSuccess {
+            get {
+                return ResourceManager.GetString("CalendarImportSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please select some text and try again. \r\n  ähnelt.
         /// </summary>
         internal static string ComposeNotTextSelected {
@@ -140,6 +176,24 @@ namespace OutlookAI {
         internal static string ErrorcallingOpenai {
             get {
                 return ResourceManager.GetString("ErrorcallingOpenai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error:  ähnelt.
+        /// </summary>
+        internal static string ErrorGeneric {
+            get {
+                return ResourceManager.GetString("ErrorGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error during processing:  ähnelt.
+        /// </summary>
+        internal static string ErrorProcessing {
+            get {
+                return ResourceManager.GetString("ErrorProcessing", resourceCulture);
             }
         }
         
