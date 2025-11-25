@@ -13,7 +13,7 @@ namespace OutlookAI
     {
 
         internal static UserData userdata;
-        private static readonly Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(CreateHttpClientInternal);
+        private static readonly Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
         private static readonly Lazy<HttpClient> _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
