@@ -282,6 +282,8 @@
     <Compile Include="CategoryEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ErrorLogger.cs" />
+    <Compile Include="RetryHelper.cs" />
     <EmbeddedResource Include="ComposeRibbon.resx">
       <DependentUpon>ComposeRibbon.cs</DependentUpon>
     </EmbeddedResource>

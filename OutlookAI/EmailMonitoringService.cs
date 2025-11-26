@@ -171,27 +171,57 @@ namespace OutlookAI
             if (mailItem == null)
                 return;
 
-            // Get enabled categories
-            var enabledCategories = ThisAddIn.userdata.EmailCategories?
-                .Where(c => c.IsEnabled)
-                .ToList();
+            string emailSubject = mailItem?.Subject ?? "<no subject>";
+            string emailSender = mailItem?.SenderName ?? "<unknown>";
 
-            if (enabledCategories == null || !enabledCategories.Any())
-                return;
-
-            // Classify the email
-            EmailCategory assignedCategory = await ClassifyEmail(mailItem, enabledCategories).ConfigureAwait(false);
-
-            if (assignedCategory != null)
+            try
             {
-                // Assign Outlook category
-                AssignOutlookCategory(mailItem, assignedCategory.CategoryName);
+                ErrorLogger.LogInfo($"Processing new email: '{emailSubject}' from {emailSender}");
 
-                // Generate reply draft if configured
-                if (assignedCategory.GenerateReplyDraft && !string.IsNullOrWhiteSpace(assignedCategory.ReplyPrompt))
+                // Get enabled categories
+                var enabledCategories = ThisAddIn.userdata.EmailCategories?
+                    .Where(c => c.IsEnabled)
+                    .ToList();
+
+                if (enabledCategories == null || !enabledCategories.Any())
                 {
-                    await GenerateReplyDraft(mailItem, assignedCategory).ConfigureAwait(false);
+                    ErrorLogger.LogWarning("No enabled categories configured for email monitoring");
+                    return;
                 }
+
+                // Classify the email
+                EmailCategory assignedCategory = await ClassifyEmail(mailItem, enabledCategories).ConfigureAwait(false);
+
+                if (assignedCategory != null)
+                {
+                    ErrorLogger.LogInfo($"Email classified as: {assignedCategory.CategoryName}");
+
+                    // Assign Outlook category
+                    AssignOutlookCategory(mailItem, assignedCategory.CategoryName);
+
+                    // Generate reply draft if configured
+                    if (assignedCategory.GenerateReplyDraft && !string.IsNullOrWhiteSpace(assignedCategory.ReplyPrompt))
+                    {
+                        await GenerateReplyDraft(mailItem, assignedCategory).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    ErrorLogger.LogInfo($"Email '{emailSubject}' did not match any category");
+                }
+            }
+            catch (LLMCommunicationException ex)
+            {
+                ErrorLogger.LogError(
+                    $"LLM communication failed for email '{emailSubject}' from {emailSender}. " +
+                    "Email will not be categorized.", ex);
+                // Email remains uncategorized but processing continues
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError(
+                    $"Unexpected error processing email '{emailSubject}' from {emailSender}", ex);
+                // Continue processing other emails
             }
         }
 
@@ -200,29 +230,21 @@ namespace OutlookAI
         /// </summary>
         private async Task<EmailCategory> ClassifyEmail(Outlook.MailItem mailItem, List<EmailCategory> categories)
         {
-            try
-            {
-                // Extract email information
-                string subject = mailItem.Subject ?? "";
-                string sender = mailItem.SenderName ?? "";
-                string body = GetEmailBodyText(mailItem);
+            // Extract email information
+            string subject = mailItem.Subject ?? "";
+            string sender = mailItem.SenderName ?? "";
+            string body = GetEmailBodyText(mailItem);
 
-                // Build classification prompt
-                string classificationPrompt = BuildClassificationPrompt(subject, sender, body, categories);
+            // Build classification prompt
+            string classificationPrompt = BuildClassificationPrompt(subject, sender, body, categories);
 
-                // Call LLM
-                string llmResponse = await ThisAddIn.GetLLMResponse(classificationPrompt).ConfigureAwait(false);
+            // Call LLM (exceptions will propagate to caller)
+            string llmResponse = await ThisAddIn.GetLLMResponse(classificationPrompt).ConfigureAwait(false);
 
-                // Parse response to find matching category
-                EmailCategory matchedCategory = ParseCategoryFromResponse(llmResponse, categories);
+            // Parse response to find matching category
+            EmailCategory matchedCategory = ParseCategoryFromResponse(llmResponse, categories);
 
-                return matchedCategory;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error classifying email: {ex.Message}");
-                return null;
-            }
+            return matchedCategory;
         }
 
         /// <summary>
@@ -363,11 +385,16 @@ namespace OutlookAI
             Outlook.MailItem replyDraft = null;
             try
             {
+                ErrorLogger.LogInfo($"Generating reply draft for category: {category.CategoryName}");
+
                 // Create reply
                 replyDraft = originalMail.Reply() as Outlook.MailItem;
 
                 if (replyDraft == null)
+                {
+                    ErrorLogger.LogWarning("Failed to create reply draft - Reply() returned null");
                     return;
+                }
 
                 // Build reply generation prompt
                 string replyPrompt = BuildReplyPrompt(originalMail, category.ReplyPrompt);
@@ -380,11 +407,21 @@ namespace OutlookAI
                 {
                     replyDraft.Body = replyContent;
                     replyDraft.Save();
+                    ErrorLogger.LogInfo("Reply draft saved successfully");
                 }
+                else
+                {
+                    ErrorLogger.LogWarning("LLM returned empty reply content");
+                }
+            }
+            catch (LLMCommunicationException ex)
+            {
+                ErrorLogger.LogError($"Failed to generate reply draft due to LLM communication error", ex);
+                // Don't rethrow - reply draft generation failure shouldn't prevent categorization
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error generating reply draft: {ex.Message}");
+                ErrorLogger.LogError($"Error generating reply draft: {ex.Message}", ex);
             }
             finally
             {

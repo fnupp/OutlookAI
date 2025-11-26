@@ -103,6 +103,19 @@
             this.label26 = new System.Windows.Forms.Label();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
+            this.tabPageEmailMonitoring = new System.Windows.Forms.TabPage();
+            this.buttonTestClassification = new System.Windows.Forms.Button();
+            this.buttonDeleteCategory = new System.Windows.Forms.Button();
+            this.buttonEditCategory = new System.Windows.Forms.Button();
+            this.buttonAddCategory = new System.Windows.Forms.Button();
+            this.listBoxCategories = new System.Windows.Forms.ListBox();
+            this.emailCategoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.buttonRefreshMailboxes = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.checkedListBoxMailboxes = new System.Windows.Forms.CheckedListBox();
+            this.checkBoxEmailMonitoringEnabled = new System.Windows.Forms.CheckBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelVersion = new System.Windows.Forms.Label();
             this.Tab1.SuspendLayout();
@@ -119,11 +132,12 @@
             this.tabPage9.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.tabPage11.SuspendLayout();
+            this.tabPageEmailMonitoring.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.emailCategoriesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Tab1
             // 
-            resources.ApplyResources(this.Tab1, "Tab1");
             this.Tab1.Controls.Add(this.tabPage5);
             this.Tab1.Controls.Add(this.tabPage6);
             this.Tab1.Controls.Add(this.tabPage1);
@@ -135,6 +149,8 @@
             this.Tab1.Controls.Add(this.tabPage9);
             this.Tab1.Controls.Add(this.tabPage10);
             this.Tab1.Controls.Add(this.tabPage11);
+            this.Tab1.Controls.Add(this.tabPageEmailMonitoring);
+            resources.ApplyResources(this.Tab1, "Tab1");
             this.Tab1.Name = "Tab1";
             this.Tab1.SelectedIndex = 0;
             // 
@@ -609,6 +625,100 @@
             resources.ApplyResources(this.textBox15, "textBox15");
             this.textBox15.Name = "textBox15";
             // 
+            // tabPageEmailMonitoring
+            // 
+            this.tabPageEmailMonitoring.Controls.Add(this.buttonTestClassification);
+            this.tabPageEmailMonitoring.Controls.Add(this.buttonDeleteCategory);
+            this.tabPageEmailMonitoring.Controls.Add(this.buttonEditCategory);
+            this.tabPageEmailMonitoring.Controls.Add(this.buttonAddCategory);
+            this.tabPageEmailMonitoring.Controls.Add(this.listBoxCategories);
+            this.tabPageEmailMonitoring.Controls.Add(this.label29);
+            this.tabPageEmailMonitoring.Controls.Add(this.label28);
+            this.tabPageEmailMonitoring.Controls.Add(this.buttonRefreshMailboxes);
+            this.tabPageEmailMonitoring.Controls.Add(this.label27);
+            this.tabPageEmailMonitoring.Controls.Add(this.checkedListBoxMailboxes);
+            this.tabPageEmailMonitoring.Controls.Add(this.checkBoxEmailMonitoringEnabled);
+            resources.ApplyResources(this.tabPageEmailMonitoring, "tabPageEmailMonitoring");
+            this.tabPageEmailMonitoring.Name = "tabPageEmailMonitoring";
+            this.tabPageEmailMonitoring.UseVisualStyleBackColor = true;
+            // 
+            // buttonTestClassification
+            // 
+            resources.ApplyResources(this.buttonTestClassification, "buttonTestClassification");
+            this.buttonTestClassification.Name = "buttonTestClassification";
+            this.buttonTestClassification.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteCategory
+            // 
+            resources.ApplyResources(this.buttonDeleteCategory, "buttonDeleteCategory");
+            this.buttonDeleteCategory.Name = "buttonDeleteCategory";
+            this.buttonDeleteCategory.UseVisualStyleBackColor = true;
+            this.buttonDeleteCategory.Click += new System.EventHandler(this.buttonDeleteCategory_Click);
+            // 
+            // buttonEditCategory
+            // 
+            resources.ApplyResources(this.buttonEditCategory, "buttonEditCategory");
+            this.buttonEditCategory.Name = "buttonEditCategory";
+            this.buttonEditCategory.UseVisualStyleBackColor = true;
+            this.buttonEditCategory.Click += new System.EventHandler(this.buttonEditCategory_Click);
+            // 
+            // buttonAddCategory
+            // 
+            resources.ApplyResources(this.buttonAddCategory, "buttonAddCategory");
+            this.buttonAddCategory.Name = "buttonAddCategory";
+            this.buttonAddCategory.UseVisualStyleBackColor = true;
+            this.buttonAddCategory.Click += new System.EventHandler(this.buttonAddCategory_Click);
+            // 
+            // listBoxCategories
+            // 
+            this.listBoxCategories.DataSource = this.emailCategoriesBindingSource;
+            this.listBoxCategories.DisplayMember = "CategoryName";
+            this.listBoxCategories.FormattingEnabled = true;
+            resources.ApplyResources(this.listBoxCategories, "listBoxCategories");
+            this.listBoxCategories.Name = "listBoxCategories";
+            // 
+            // emailCategoriesBindingSource
+            // 
+            this.emailCategoriesBindingSource.DataMember = "EmailCategories";
+            this.emailCategoriesBindingSource.DataSource = this.userDataBindingSource;
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
+            // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
+            // 
+            // buttonRefreshMailboxes
+            // 
+            resources.ApplyResources(this.buttonRefreshMailboxes, "buttonRefreshMailboxes");
+            this.buttonRefreshMailboxes.Name = "buttonRefreshMailboxes";
+            this.buttonRefreshMailboxes.UseVisualStyleBackColor = true;
+            this.buttonRefreshMailboxes.Click += new System.EventHandler(this.buttonRefreshMailboxes_Click);
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            this.label27.Click += new System.EventHandler(this.label27_Click);
+            // 
+            // checkedListBoxMailboxes
+            // 
+            this.checkedListBoxMailboxes.FormattingEnabled = true;
+            resources.ApplyResources(this.checkedListBoxMailboxes, "checkedListBoxMailboxes");
+            this.checkedListBoxMailboxes.Name = "checkedListBoxMailboxes";
+            this.checkedListBoxMailboxes.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxMailboxes_ItemCheck);
+            // 
+            // checkBoxEmailMonitoringEnabled
+            // 
+            resources.ApplyResources(this.checkBoxEmailMonitoringEnabled, "checkBoxEmailMonitoringEnabled");
+            this.checkBoxEmailMonitoringEnabled.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.userDataBindingSource, "EmailMonitoringEnabled", true));
+            this.checkBoxEmailMonitoringEnabled.Name = "checkBoxEmailMonitoringEnabled";
+            this.checkBoxEmailMonitoringEnabled.UseVisualStyleBackColor = true;
+            // 
             // buttonOK
             // 
             resources.ApplyResources(this.buttonOK, "buttonOK");
@@ -629,6 +739,7 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.Tab1);
             this.Name = "PromptBox";
+            this.Load += new System.EventHandler(this.PromptBox_Load);
             this.Tab1.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
@@ -654,6 +765,9 @@
             this.tabPage10.PerformLayout();
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
+            this.tabPageEmailMonitoring.ResumeLayout(false);
+            this.tabPageEmailMonitoring.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.emailCategoriesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -736,5 +850,18 @@
         private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.TabPage tabPageEmailMonitoring;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.CheckedListBox checkedListBoxMailboxes;
+        private System.Windows.Forms.CheckBox checkBoxEmailMonitoringEnabled;
+        private System.Windows.Forms.Button buttonRefreshMailboxes;
+        private System.Windows.Forms.ListBox listBoxCategories;
+        private System.Windows.Forms.BindingSource emailCategoriesBindingSource;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Button buttonTestClassification;
+        private System.Windows.Forms.Button buttonDeleteCategory;
+        private System.Windows.Forms.Button buttonEditCategory;
+        private System.Windows.Forms.Button buttonAddCategory;
     }
 }
