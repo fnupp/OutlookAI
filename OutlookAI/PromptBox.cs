@@ -33,6 +33,9 @@ namespace OutlookAI
             // Invalidate HttpClient instances to apply new proxy/connection settings
             ThisAddIn.InvalidateHttpClients();
 
+            // Restart email monitoring to apply new settings
+            Globals.ThisAddIn.RestartEmailMonitoring();
+
             this.Close();
         }
 

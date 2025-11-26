@@ -16,6 +16,7 @@ namespace OutlookAI
         private static readonly object _httpClientLock = new object();
         private static Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
         private static Lazy<HttpClient> _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
+        private EmailMonitoringService _emailMonitoringService;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -26,12 +27,22 @@ namespace OutlookAI
             string jsonData = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"));
             UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
             ThisAddIn.userdata = loadedData;
+
+            // Initialize and start email monitoring service
+            InitializeEmailMonitoring();
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
-            // Hinweis: Outlook löst dieses Ereignis nicht mehr aus. Wenn Code vorhanden ist, der 
+            // Hinweis: Outlook löst dieses Ereignis nicht mehr aus. Wenn Code vorhanden ist, der
             //    muss ausgeführt werden, wenn Outlook heruntergefahren wird. Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkId=506785.
+
+            // Clean up email monitoring service
+            if (_emailMonitoringService != null)
+            {
+                _emailMonitoringService.Dispose();
+                _emailMonitoringService = null;
+            }
         }
 
 
@@ -199,6 +210,37 @@ namespace OutlookAI
             return GetHttpClient();
         }
 
+        /// <summary>
+        /// Initializes the email monitoring service
+        /// </summary>
+        private void InitializeEmailMonitoring()
+        {
+            try
+            {
+                if (_emailMonitoringService != null)
+                {
+                    _emailMonitoringService.Dispose();
+                    _emailMonitoringService = null;
+                }
+
+                _emailMonitoringService = new EmailMonitoringService(Application);
+                _emailMonitoringService.StartMonitoring();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error initializing email monitoring: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Restarts email monitoring with current settings
+        /// Call this after settings have been updated
+        /// </summary>
+        public void RestartEmailMonitoring()
+        {
+            InitializeEmailMonitoring();
+        }
+
         private static void InitSettingsFile()
         {
             FileInfo fi = new FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"));
@@ -234,6 +276,9 @@ namespace OutlookAI
                     SummaryTitel2 = OutlookAI.Resources.SummarizeTitle2,
                     Summary1 = OutlookAI.Resources.SummarizePrompt1,
                     Summary2 = OutlookAI.Resources.SummarizePrompt2,
+                    EmailMonitoringEnabled = false,
+                    MonitoredMailboxes = new System.Collections.Generic.List<string>(),
+                    EmailCategories = new System.Collections.Generic.List<EmailCategory>()
                 };
                 string json = JsonConvert.SerializeObject(data);
                 File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"OutlookAI", "OutlookAI.json"), json);
