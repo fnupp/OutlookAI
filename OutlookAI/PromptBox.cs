@@ -225,6 +225,26 @@ namespace OutlookAI
             InitializeEmailMonitoringTab();
 
         }
+
+        private void label30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class ModelListResponse

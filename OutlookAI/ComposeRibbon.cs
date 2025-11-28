@@ -67,7 +67,7 @@ namespace OutlookAI
 
             try
             {
-                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText).ConfigureAwait(false);
+                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText);
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
                 mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
                 mail.Display();
@@ -92,7 +92,7 @@ namespace OutlookAI
 
             try
             {
-                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText).ConfigureAwait(false);
+                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText);
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
                 mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
                 mail.Display();
@@ -118,7 +118,7 @@ namespace OutlookAI
 
             try
             {
-                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText).ConfigureAwait(false);
+                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText);
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
                 mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
                 mail.Display();

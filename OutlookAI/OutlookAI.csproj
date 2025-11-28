@@ -278,6 +278,7 @@
     </Compile>
     <Compile Include="UserData.cs" />
     <Compile Include="EmailCategory.cs" />
+    <Compile Include="EmailData.cs" />
     <Compile Include="EmailMonitoringService.cs" />
     <Compile Include="CategoryEditorForm.cs">
       <SubType>Form</SubType>

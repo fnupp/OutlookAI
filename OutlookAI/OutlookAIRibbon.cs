@@ -97,7 +97,7 @@ namespace OutlookAI
             try
             {
                 string finalPrompt = $"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
-                string response = await ThisAddIn.GetLLMResponse(finalPrompt).ConfigureAwait(false);
+                string response = await ThisAddIn.GetLLMResponse(finalPrompt);
 
                 var reply = mail.ReplyAll();
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
@@ -209,8 +209,8 @@ namespace OutlookAI
                         }
                     }));
                 }
-                await Task.WhenAll(responses).ConfigureAwait(false);
-                await Task.WhenAll(msgs).ConfigureAwait(false);
+                await Task.WhenAll(responses);
+                await Task.WhenAll(msgs);
 
             }
             catch (System.Exception ex)
@@ -233,7 +233,7 @@ namespace OutlookAI
                 }
 
                 var response = ThisAddIn.GetLLMResponse(sb.ToString());
-                await response.ConfigureAwait(false);
+                await response;
                 if (response.IsFaulted)
                 {
                     MessageBox.Show(OutlookAI.Resources.ErrorGeneric + response.Exception.InnerException.Message);

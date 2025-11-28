@@ -143,40 +143,43 @@ namespace OutlookAI
             if (mailItem == null)
                 return;
 
-            // Process email asynchronously to avoid blocking Outlook
-            Task.Run(async () =>
+            try
             {
-                try
+                // Extract all COM data immediately on STA thread
+                EmailData emailData = EmailData.FromMailItem(mailItem);
+
+                // Now safe to process async - no COM object passed
+                _ = Task.Run(async () =>
                 {
-                    await ProcessNewEmail(mailItem).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Error processing new email: {ex.Message}");
-                }
-                finally
-                {
-                    // Release COM object
-                    if (mailItem != null)
-                        Marshal.ReleaseComObject(mailItem);
-                }
-            });
+                    try
+                    {
+                        await ProcessNewEmailAsync(emailData);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error processing new email: {ex.Message}");
+                    }
+                });
+            }
+            finally
+            {
+                // Release COM object immediately - we've extracted what we need
+                if (mailItem != null)
+                    Marshal.ReleaseComObject(mailItem);
+            }
         }
 
         /// <summary>
         /// Processes a new email: classifies it and optionally generates a reply draft
         /// </summary>
-        private async Task ProcessNewEmail(Outlook.MailItem mailItem)
+        private async Task ProcessNewEmailAsync(EmailData emailData)
         {
-            if (mailItem == null)
+            if (emailData == null)
                 return;
-
-            string emailSubject = mailItem?.Subject ?? "<no subject>";
-            string emailSender = mailItem?.SenderName ?? "<unknown>";
 
             try
             {
-                ErrorLogger.LogInfo($"Processing new email: '{emailSubject}' from {emailSender}");
+                ErrorLogger.LogInfo($"Processing new email: '{emailData.Subject}' from {emailData.SenderName}");
 
                 // Get enabled categories
                 var enabledCategories = ThisAddIn.userdata.EmailCategories?
@@ -190,37 +193,37 @@ namespace OutlookAI
                 }
 
                 // Classify the email
-                EmailCategory assignedCategory = await ClassifyEmail(mailItem, enabledCategories).ConfigureAwait(false);
+                EmailCategory assignedCategory = await ClassifyEmailAsync(emailData, enabledCategories);
 
                 if (assignedCategory != null)
                 {
                     ErrorLogger.LogInfo($"Email classified as: {assignedCategory.CategoryName}");
 
                     // Assign Outlook category
-                    AssignOutlookCategory(mailItem, assignedCategory.CategoryName);
+                    AssignOutlookCategory(emailData.EntryID, assignedCategory.CategoryName);
 
                     // Generate reply draft if configured
                     if (assignedCategory.GenerateReplyDraft && !string.IsNullOrWhiteSpace(assignedCategory.ReplyPrompt))
                     {
-                        await GenerateReplyDraft(mailItem, assignedCategory).ConfigureAwait(false);
+                        await GenerateReplyDraftAsync(emailData, assignedCategory);
                     }
                 }
                 else
                 {
-                    ErrorLogger.LogInfo($"Email '{emailSubject}' did not match any category");
+                    ErrorLogger.LogInfo($"Email '{emailData.Subject}' did not match any category");
                 }
             }
             catch (LLMCommunicationException ex)
             {
                 ErrorLogger.LogError(
-                    $"LLM communication failed for email '{emailSubject}' from {emailSender}. " +
+                    $"LLM communication failed for email '{emailData.Subject}' from {emailData.SenderName}. " +
                     "Email will not be categorized.", ex);
                 // Email remains uncategorized but processing continues
             }
             catch (Exception ex)
             {
                 ErrorLogger.LogError(
-                    $"Unexpected error processing email '{emailSubject}' from {emailSender}", ex);
+                    $"Unexpected error processing email '{emailData.Subject}' from {emailData.SenderName}", ex);
                 // Continue processing other emails
             }
         }
@@ -228,18 +231,18 @@ namespace OutlookAI
         /// <summary>
         /// Uses LLM to classify the email into one of the configured categories
         /// </summary>
-        private async Task<EmailCategory> ClassifyEmail(Outlook.MailItem mailItem, List<EmailCategory> categories)
+        private async Task<EmailCategory> ClassifyEmailAsync(EmailData emailData, List<EmailCategory> categories)
         {
-            // Extract email information
-            string subject = mailItem.Subject ?? "";
-            string sender = mailItem.SenderName ?? "";
-            string body = GetEmailBodyText(mailItem);
+            // Use extracted email information
+            string subject = emailData.Subject;
+            string sender = emailData.SenderName;
+            string body = emailData.Body;
 
             // Build classification prompt
             string classificationPrompt = BuildClassificationPrompt(subject, sender, body, categories);
 
             // Call LLM (exceptions will propagate to caller)
-            string llmResponse = await ThisAddIn.GetLLMResponse(classificationPrompt).ConfigureAwait(false);
+            string llmResponse = await ThisAddIn.GetLLMResponse(classificationPrompt);
 
             // Parse response to find matching category
             EmailCategory matchedCategory = ParseCategoryFromResponse(llmResponse, categories);
@@ -318,10 +321,21 @@ namespace OutlookAI
         /// <summary>
         /// Assigns an Outlook category to the email
         /// </summary>
-        private void AssignOutlookCategory(Outlook.MailItem mailItem, string categoryName)
+        private void AssignOutlookCategory(string entryID, string categoryName)
         {
+            Outlook.MailItem mailItem = null;
             try
             {
+                // Re-acquire MailItem from EntryID
+                var ns = _outlookApp.GetNamespace("MAPI");
+                mailItem = ns.GetItemFromID(entryID) as Outlook.MailItem;
+
+                if (mailItem == null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Could not retrieve mail item: {entryID}");
+                    return;
+                }
+
                 // Ensure category exists in Outlook
                 EnsureCategoryExists(categoryName);
 
@@ -340,6 +354,11 @@ namespace OutlookAI
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error assigning category: {ex.Message}");
+            }
+            finally
+            {
+                if (mailItem != null)
+                    Marshal.ReleaseComObject(mailItem);
             }
         }
 
@@ -380,32 +399,44 @@ namespace OutlookAI
         /// <summary>
         /// Generates a reply draft for the email
         /// </summary>
-        private async Task GenerateReplyDraft(Outlook.MailItem originalMail, EmailCategory category)
+        private async Task GenerateReplyDraftAsync(EmailData emailData, EmailCategory category)
         {
+            Outlook.MailItem originalMail = null;
             Outlook.MailItem replyDraft = null;
             try
             {
                 ErrorLogger.LogInfo($"Generating reply draft for category: {category.CategoryName}");
 
-                // Create reply
-                replyDraft = originalMail.Reply() as Outlook.MailItem;
+                // Re-acquire original MailItem from EntryID
+                var ns = _outlookApp.GetNamespace("MAPI");
+                originalMail = ns.GetItemFromID(emailData.EntryID) as Outlook.MailItem;
 
-                if (replyDraft == null)
+                if (originalMail == null)
                 {
-                    ErrorLogger.LogWarning("Failed to create reply draft - Reply() returned null");
+                    ErrorLogger.LogWarning($"Could not retrieve mail item for reply: {emailData.EntryID}");
                     return;
                 }
 
-                // Build reply generation prompt
-                string replyPrompt = BuildReplyPrompt(originalMail, category.ReplyPrompt);
+                // Build reply generation prompt using EmailData
+                string replyPrompt = BuildReplyPrompt(emailData, category.ReplyPrompt);
 
                 // Generate reply content using LLM
-                string replyContent = await ThisAddIn.GetLLMResponse(replyPrompt).ConfigureAwait(false);
+                string replyContent = await ThisAddIn.GetLLMResponse(replyPrompt);
 
                 // Set reply body
                 if (!string.IsNullOrWhiteSpace(replyContent))
                 {
+                    // Create reply
+                    replyDraft = originalMail.Reply() as Outlook.MailItem;
+
+                    if (replyDraft == null)
+                    {
+                        ErrorLogger.LogWarning("Failed to create reply draft - Reply() returned null");
+                        return;
+                    }
+
                     replyDraft.Body = replyContent;
+                    replyDraft.Categories = category.CategoryName + " Reply Draft";
                     replyDraft.Save();
                     ErrorLogger.LogInfo("Reply draft saved successfully");
                 }
@@ -427,22 +458,24 @@ namespace OutlookAI
             {
                 if (replyDraft != null)
                     Marshal.ReleaseComObject(replyDraft);
+                if (originalMail != null)
+                    Marshal.ReleaseComObject(originalMail);
             }
         }
 
         /// <summary>
         /// Builds the prompt for reply generation
         /// </summary>
-        private string BuildReplyPrompt(Outlook.MailItem originalMail, string replyPromptTemplate)
+        private string BuildReplyPrompt(EmailData emailData, string replyPromptTemplate)
         {
             var sb = new StringBuilder();
 
             sb.AppendLine("Generate a professional email reply based on the following:");
             sb.AppendLine();
             sb.AppendLine("ORIGINAL EMAIL:");
-            sb.AppendLine($"From: {originalMail.SenderName}");
-            sb.AppendLine($"Subject: {originalMail.Subject}");
-            sb.AppendLine($"Body: {TruncateText(GetEmailBodyText(originalMail), 2000)}");
+            sb.AppendLine($"From: {emailData.SenderName}");
+            sb.AppendLine($"Subject: {emailData.Subject}");
+            sb.AppendLine($"Body: {TruncateText(emailData.Body, 2000)}");
             sb.AppendLine();
             sb.AppendLine("REPLY INSTRUCTIONS:");
             sb.AppendLine(replyPromptTemplate);
