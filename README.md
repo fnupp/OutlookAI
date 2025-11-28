@@ -11,6 +11,7 @@ If you appreciate my work, please consider giving it a star! 🤩
 - **Text Composition Assistant**: Improve and rewrite email text while composing
 - **Email Monitoring & Auto-Categorization**: Automatically categorize incoming emails using LLM analysis
 - **Auto-Reply Draft Generation**: Generate draft replies automatically for specific categories
+- **Correlation ID Logging**: Trace multi-step operations with unique IDs for easier debugging
 - **Flexible LLM Support**: Works with OpenAI API or local Ollama models
 - **Proxy Support**: Built-in proxy configuration with encrypted password storage
 

@@ -148,16 +148,27 @@ namespace OutlookAI
                 // Extract all COM data immediately on STA thread
                 EmailData emailData = EmailData.FromMailItem(mailItem);
 
-                // Now safe to process async - no COM object passed
+                // Start correlation + capture context
+                var correlationScope = ErrorLogger.BeginCorrelation($"EmailMonitoring");
+                var capturedContext = ErrorLogger.CaptureContext();
+
+                // Fire-and-forget with correlation
                 _ = Task.Run(async () =>
                 {
+                    // Restore context in background thread
+                    ErrorLogger.RestoreContext(capturedContext);
+
                     try
                     {
                         await ProcessNewEmailAsync(emailData);
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Error processing new email: {ex.Message}");
+                        ErrorLogger.LogError("Error processing new email", ex);
+                    }
+                    finally
+                    {
+                        correlationScope?.Dispose();
                     }
                 });
             }

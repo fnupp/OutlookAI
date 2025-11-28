@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Threading;
 
 namespace OutlookAI
 {
@@ -10,6 +12,7 @@ namespace OutlookAI
     {
         private static readonly object _logLock = new object();
         private static string _logFilePath;
+        private static readonly AsyncLocal<CorrelationContext> _correlationContext = new AsyncLocal<CorrelationContext>();
 
         static ErrorLogger()
         {
@@ -40,7 +43,8 @@ namespace OutlookAI
                 {
                     using (StreamWriter writer = new StreamWriter(_logFilePath, append: true))
                     {
-                        writer.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ERROR: {message}");
+                        string correlationId = _correlationContext.Value?.CorrelationId ?? "";
+                        writer.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [{correlationId}] ERROR: {message}");
 
                         if (ex != null)
                         {
@@ -80,7 +84,8 @@ namespace OutlookAI
                 {
                     using (StreamWriter writer = new StreamWriter(_logFilePath, append: true))
                     {
-                        writer.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] INFO: {message}");
+                        string correlationId = _correlationContext.Value?.CorrelationId ?? "";
+                        writer.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [{correlationId}] INFO: {message}");
                     }
                 }
             }
@@ -105,7 +110,8 @@ namespace OutlookAI
                 {
                     using (StreamWriter writer = new StreamWriter(_logFilePath, append: true))
                     {
-                        writer.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] WARNING: {message}");
+                        string correlationId = _correlationContext.Value?.CorrelationId ?? "";
+                        writer.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [{correlationId}] WARNING: {message}");
                     }
                 }
             }
@@ -146,6 +152,70 @@ namespace OutlookAI
             catch
             {
                 // Fail silently
+            }
+        }
+
+        /// <summary>
+        /// Starts a new correlation scope for grouping related log entries
+        /// </summary>
+        public static IDisposable BeginCorrelation(string operationName = null)
+        {
+            var correlationId = GenerateCorrelationId();
+            var context = new CorrelationContext(correlationId, operationName);
+            _correlationContext.Value = context;
+
+            LogInfo($"=== BEGIN: {operationName ?? "Operation"} ===");
+            return new CorrelationScope(context);
+        }
+
+        /// <summary>
+        /// Captures the current correlation context for propagation across Task.Run() boundaries
+        /// </summary>
+        public static CorrelationContext CaptureContext()
+        {
+            return _correlationContext.Value;
+        }
+
+        /// <summary>
+        /// Restores a captured correlation context inside Task.Run()
+        /// </summary>
+        public static void RestoreContext(CorrelationContext context)
+        {
+            _correlationContext.Value = context;
+        }
+
+        /// <summary>
+        /// Generates a random 8-character correlation ID
+        /// </summary>
+        private static string GenerateCorrelationId()
+        {
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            var random = new Random(Guid.NewGuid().GetHashCode());
+            return new string(Enumerable.Range(0, 8)
+                .Select(_ => chars[random.Next(chars.Length)])
+                .ToArray());
+        }
+
+        /// <summary>
+        /// IDisposable scope for automatic BEGIN/END correlation logging
+        /// </summary>
+        private class CorrelationScope : IDisposable
+        {
+            private readonly CorrelationContext _context;
+
+            public CorrelationScope(CorrelationContext context)
+            {
+                _context = context;
+            }
+
+            public void Dispose()
+            {
+                if (_context != null)
+                {
+                    var elapsed = DateTime.Now - _context.StartTime;
+                    ErrorLogger.LogInfo($"=== END: {_context.OperationName ?? "Operation"} (Duration: {elapsed.TotalMilliseconds:F0}ms) ===");
+                    _correlationContext.Value = null;
+                }
             }
         }
     }

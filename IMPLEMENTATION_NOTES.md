@@ -108,3 +108,52 @@
 - `OutlookAI\PromptBox.resx` - Updated resource file for new UI controls
 - `REQUIREMENTS.md` - Added comprehensive requirements
 - `IMPLEMENTATION_NOTES.md` - This documentation file
+
+## Correlation ID Logging System
+
+### Overview
+The correlation ID system enables tracing multi-step operations across async boundaries by assigning a unique 8-character ID to each operation. This groups related log entries together, making debugging and troubleshooting significantly easier.
+
+### Technical Implementation
+- **Storage**: `AsyncLocal<CorrelationContext>` for automatic context flow through async/await
+- **ID Format**: 8-character alphanumeric (e.g., `A7X9K2M1`)
+- **Log Format**: `[timestamp] [CorrelationID] LEVEL: message`
+- **BEGIN/END Markers**: Automatic operation duration tracking
+
+### Instrumented Components
+1. **EmailMonitoringService** - Entire email processing flow (new email → classification → categorization → reply)
+2. **OutlookAIRibbon** - All 6 button handlers (Button1-4, Summary1-2)
+3. **ComposeRibbon** - All 3 compose transformation handlers (BtnCompose1-3)
+
+### Usage in Logs
+Each operation gets a unique correlation ID that flows through all nested operations:
+```
+[2025-11-28 14:23:45] [A7X9K2M1] INFO: === BEGIN: EmailMonitoring ===
+[2025-11-28 14:23:45] [A7X9K2M1] INFO: Processing new email: 'Budget Q3'
+[2025-11-28 14:23:48] [A7X9K2M1] INFO: Email classified as: Financial
+[2025-11-28 14:23:52] [A7X9K2M1] INFO: === END: EmailMonitoring (Duration: 7234ms) ===
+```
+
+### Log Analysis Commands
+```bash
+# Find all logs for specific operation
+grep "A7X9K2M1" OutlookAI_20251128.log
+
+# Find all failed operations
+grep "ERROR" OutlookAI_20251128.log | grep -o "\[[A-Z0-9]*\]" | sort | uniq
+
+# Find operations that needed retries
+grep "Attempt [2-9]" OutlookAI_20251128.log
+```
+
+### Files Modified/Created for Correlation IDs
+
+**New Files:**
+- `OutlookAI\CorrelationContext.cs` - POCO for correlation data (CorrelationId, OperationName, StartTime)
+
+**Modified Files:**
+- `OutlookAI\ErrorLogger.cs` - Added AsyncLocal context, BeginCorrelation(), correlation ID generation
+- `OutlookAI\EmailMonitoringService.cs` - Added correlation tracking to OnNewMailItem
+- `OutlookAI\OutlookAIRibbon.cs` - Added correlation tracking to all 6 button handlers
+- `OutlookAI\ComposeRibbon.cs` - Added correlation tracking to all 3 compose handlers
+- `OutlookAI\OutlookAI.csproj` - Added CorrelationContext.cs to project

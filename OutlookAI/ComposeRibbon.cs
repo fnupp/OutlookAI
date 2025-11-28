@@ -56,76 +56,109 @@ namespace OutlookAI
 
         private async void BtnCompose_Click(object sender, RibbonControlEventArgs e)
         {
-            var ctx = (Inspector)this.Context;
-            var mail = ctx.CurrentItem as MailItem;
-            string selectedText = GetSelectedText(ctx);
-            if (string.IsNullOrWhiteSpace(selectedText))
+            using (ErrorLogger.BeginCorrelation("ComposeTransform-Button1"))
             {
-                mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
-                return;
-            }
+                ErrorLogger.LogInfo("Compose transformation button 1 clicked");
 
-            try
-            {
-                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText);
-                response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
-                mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
-                mail.Display();
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+                var ctx = (Inspector)this.Context;
+                var mail = ctx.CurrentItem as MailItem;
+                string selectedText = GetSelectedText(ctx);
+
+                if (string.IsNullOrWhiteSpace(selectedText))
+                {
+                    ErrorLogger.LogWarning("No text selected for transformation");
+                    mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
+                    return;
+                }
+
+                try
+                {
+                    ErrorLogger.LogInfo($"Transforming {selectedText.Length} characters of text");
+
+                    string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt1 + " \r\n" + selectedText);
+                    response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
+                    mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
+                    mail.Display();
+
+                    ErrorLogger.LogInfo("Text transformation completed successfully");
+                }
+                catch (System.Exception ex)
+                {
+                    ErrorLogger.LogError("Text transformation failed", ex);
+                    System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+                }
             }
         }
 
         private async void BtnCompose2_Click(object sender, RibbonControlEventArgs e)
         {
+            using (ErrorLogger.BeginCorrelation("ComposeTransform-Button2"))
+            {
+                ErrorLogger.LogInfo("Compose transformation button 2 clicked");
 
-            var ctx = (Inspector)this.Context;
-            var mail = ctx.CurrentItem as MailItem;
-            string selectedText = GetSelectedText(ctx);
-            if (string.IsNullOrWhiteSpace(selectedText))
-            {
-                mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
-                return;
-            }
+                var ctx = (Inspector)this.Context;
+                var mail = ctx.CurrentItem as MailItem;
+                string selectedText = GetSelectedText(ctx);
 
-            try
-            {
-                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText);
-                response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
-                mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
-                mail.Display();
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+                if (string.IsNullOrWhiteSpace(selectedText))
+                {
+                    ErrorLogger.LogWarning("No text selected for transformation");
+                    mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
+                    return;
+                }
+
+                try
+                {
+                    ErrorLogger.LogInfo($"Transforming {selectedText.Length} characters of text");
+
+                    string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt2 + " \r\n" + selectedText);
+                    response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
+                    mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
+                    mail.Display();
+
+                    ErrorLogger.LogInfo("Text transformation completed successfully");
+                }
+                catch (System.Exception ex)
+                {
+                    ErrorLogger.LogError("Text transformation failed", ex);
+                    System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+                }
             }
         }
 
         private async void BtnCompose3_Click(object sender, RibbonControlEventArgs e)
         {
-
-            var ctx = (Inspector)this.Context;
-            var mail = ctx.CurrentItem as MailItem;
-
-            string selectedText = GetSelectedText(ctx);
-            if (string.IsNullOrWhiteSpace(selectedText))
+            using (ErrorLogger.BeginCorrelation("ComposeTransform-Button3"))
             {
-                mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
-                return;
-            }
+                ErrorLogger.LogInfo("Compose transformation button 3 clicked");
 
-            try
-            {
-                string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText);
-                response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
-                mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
-                mail.Display();
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+                var ctx = (Inspector)this.Context;
+                var mail = ctx.CurrentItem as MailItem;
+
+                string selectedText = GetSelectedText(ctx);
+                if (string.IsNullOrWhiteSpace(selectedText))
+                {
+                    ErrorLogger.LogWarning("No text selected for transformation");
+                    mail.HTMLBody = Resources.ComposeNotTextSelected + mail.HTMLBody;
+                    return;
+                }
+
+                try
+                {
+                    ErrorLogger.LogInfo($"Transforming {selectedText.Length} characters of text");
+
+                    string response = await ThisAddIn.GetLLMResponse(ThisAddIn.userdata.ComposePrompt3 + " \r\n" + selectedText);
+                    response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
+                    mail.HTMLBody = response + "\n\n" + mail.HTMLBody;
+                    mail.Display();
+
+                    ErrorLogger.LogInfo("Text transformation completed successfully");
+                }
+                catch (System.Exception ex)
+                {
+                    ErrorLogger.LogError("Text transformation failed", ex);
+                    System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorProcessing + ex.Message);
+                }
             }
         }
 
