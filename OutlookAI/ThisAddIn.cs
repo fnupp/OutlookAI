@@ -16,42 +16,92 @@ namespace OutlookAI
         private static readonly object _httpClientLock = new object();
         private static Lazy<HttpClient> _httpClient = new Lazy<HttpClient>(() => CreateHttpClientInternal());
         private static Lazy<HttpClient> _httpClientWithProxy = new Lazy<HttpClient>(() => CreateHttpClientInternal(useProxy: true));
+        private EmailMonitoringService _emailMonitoringService;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-            InitSettingsFile();
+            try
+            {
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+                InitSettingsFile();
 
-            //lade Settings
-            string jsonData = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"));
-            UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
-            ThisAddIn.userdata = loadedData;
+                //lade Settings
+                string jsonData = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OutlookAI", "OutlookAI.json"));
+                UserData loadedData = JsonConvert.DeserializeObject<UserData>(jsonData);
+                ThisAddIn.userdata = loadedData;
+
+                ErrorLogger.LogInfo("OutlookAI Add-In started successfully");
+                ErrorLogger.LogInfo($"Settings: LLM Timeout={userdata.LLMTimeoutSeconds}s, Retry Attempts={userdata.LLMRetryAttempts}, Email Monitoring={userdata.EmailMonitoringEnabled}");
+
+                // Clean up old log files
+                ErrorLogger.CleanupOldLogs(30);
+
+                // Initialize and start email monitoring service
+                InitializeEmailMonitoring();
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Failed to start OutlookAI Add-In", ex);
+                throw;
+            }
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
-            // Hinweis: Outlook löst dieses Ereignis nicht mehr aus. Wenn Code vorhanden ist, der 
+            // Hinweis: Outlook löst dieses Ereignis nicht mehr aus. Wenn Code vorhanden ist, der
             //    muss ausgeführt werden, wenn Outlook heruntergefahren wird. Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkId=506785.
+
+            // Clean up email monitoring service
+            if (_emailMonitoringService != null)
+            {
+                _emailMonitoringService.Dispose();
+                _emailMonitoringService = null;
+            }
         }
 
 
         public  static async Task<string> GetLLMResponse(string prompt)
         {
-            string response;
-            if (ThisAddIn.userdata.OllamaActive)
+            try
             {
-                response = await ThisAddIn.GetChatOllamaResponse(prompt).ConfigureAwait(false);
-            }
-            else if (ThisAddIn.userdata.OpenAIAPIActive)
-            {
-                response = await ThisAddIn.GetChatGPTResponse(prompt).ConfigureAwait(false);
-            }
-            else
-            {
-                response = "No active LLM. Active in Settings.";
-            }
+                string response;
 
-            return response;
+                if (ThisAddIn.userdata.OllamaActive)
+                {
+                    response = await RetryHelper.ExecuteWithRetryAsync(
+                        async () => await ThisAddIn.GetChatOllamaResponse(prompt).ConfigureAwait(false),
+                        maxAttempts: ThisAddIn.userdata.LLMRetryAttempts,
+                        initialDelayMs: ThisAddIn.userdata.LLMRetryDelayMs,
+                        operationName: "Ollama LLM Call"
+                    ).ConfigureAwait(false);
+                }
+                else if (ThisAddIn.userdata.OpenAIAPIActive)
+                {
+                    response = await RetryHelper.ExecuteWithRetryAsync(
+                        async () => await ThisAddIn.GetChatGPTResponse(prompt).ConfigureAwait(false),
+                        maxAttempts: ThisAddIn.userdata.LLMRetryAttempts,
+                        initialDelayMs: ThisAddIn.userdata.LLMRetryDelayMs,
+                        operationName: "OpenAI API Call"
+                    ).ConfigureAwait(false);
+                }
+                else
+                {
+                    ErrorLogger.LogWarning("No active LLM configured");
+                    response = "No active LLM. Activate in Settings.";
+                }
+
+                return response;
+            }
+            catch (LLMCommunicationException ex)
+            {
+                // This exception already has detailed logging from RetryHelper
+                throw;
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Unexpected error in GetLLMResponse", ex);
+                throw new LLMCommunicationException("Failed to get LLM response", ex);
+            }
         }
 
         private static async Task<string> GetChatOllamaResponse(string prompt)
@@ -145,6 +195,10 @@ namespace OutlookAI
         /// </summary>
         private static HttpClient CreateHttpClientInternal(bool useProxy = false)
         {
+            // Get timeout from settings, default to 60 seconds
+            int timeoutSeconds = ThisAddIn.userdata?.LLMTimeoutSeconds ?? 60;
+            TimeSpan timeout = TimeSpan.FromSeconds(timeoutSeconds);
+
             if (useProxy)
             {
                 var proxy = new WebProxy(ThisAddIn.userdata.ProxyUrl)
@@ -159,12 +213,12 @@ namespace OutlookAI
                 };
                 return new HttpClient(handler)
                 {
-                    Timeout = TimeSpan.FromMinutes(5) // Reasonable timeout for LLM calls
+                    Timeout = timeout
                 };
             }
             return new HttpClient()
             {
-                Timeout = TimeSpan.FromMinutes(5) // Reasonable timeout for LLM calls
+                Timeout = timeout
             };
         }
 
@@ -197,6 +251,37 @@ namespace OutlookAI
         public static HttpClient CreateHttpClient()
         {
             return GetHttpClient();
+        }
+
+        /// <summary>
+        /// Initializes the email monitoring service
+        /// </summary>
+        private void InitializeEmailMonitoring()
+        {
+            try
+            {
+                if (_emailMonitoringService != null)
+                {
+                    _emailMonitoringService.Dispose();
+                    _emailMonitoringService = null;
+                }
+
+                _emailMonitoringService = new EmailMonitoringService(Application);
+                _emailMonitoringService.StartMonitoring();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error initializing email monitoring: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Restarts email monitoring with current settings
+        /// Call this after settings have been updated
+        /// </summary>
+        public void RestartEmailMonitoring()
+        {
+            InitializeEmailMonitoring();
         }
 
         private static void InitSettingsFile()
@@ -234,6 +319,13 @@ namespace OutlookAI
                     SummaryTitel2 = OutlookAI.Resources.SummarizeTitle2,
                     Summary1 = OutlookAI.Resources.SummarizePrompt1,
                     Summary2 = OutlookAI.Resources.SummarizePrompt2,
+                    EmailMonitoringEnabled = false,
+                    MonitoredMailboxes = new System.Collections.Generic.List<string>(),
+                    EmailCategories = new System.Collections.Generic.List<EmailCategory>(),
+                    LLMRetryAttempts = 3,
+                    LLMRetryDelayMs = 1000,
+                    LLMTimeoutSeconds = 60,
+                    LogErrors = true
                 };
                 string json = JsonConvert.SerializeObject(data);
                 File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"OutlookAI", "OutlookAI.json"), json);

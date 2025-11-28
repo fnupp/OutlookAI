@@ -75,6 +75,18 @@ namespace OutlookAI
         public List<string> OllamaModels { get; set; }
 
 
+        // Email Monitoring and Categorization Settings
+        public bool EmailMonitoringEnabled { get; set; }
+        public List<string> MonitoredMailboxes { get; set; }
+        public List<EmailCategory> EmailCategories { get; set; }
+
+        // Error Handling and Retry Settings
+        public int LLMRetryAttempts { get; set; }
+        public int LLMRetryDelayMs { get; set; }
+        public int LLMTimeoutSeconds { get; set; }
+        public bool LogErrors { get; set; }
+
+
         public bool ProxyActive { get; set; }
         public string ProxyUrl { get; set; }
         public string ProxyUsername { get; set; }

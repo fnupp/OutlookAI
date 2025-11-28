@@ -204,9 +204,6 @@
   <data name="&gt;&gt;separator1.Name" xml:space="preserve">
     <value>separator1</value>
   </data>
-  <data name="button1.Label" xml:space="preserve">
-    <value>3 Antworten kurz</value>
-  </data>
   <data name="Button_Export.Label" xml:space="preserve">
     <value>Export Transfer File</value>
   </data>
@@ -215,6 +212,9 @@
   </data>
   <data name="&gt;&gt;button4.Name" xml:space="preserve">
     <value>button4</value>
+  </data>
+  <data name="&gt;&gt;OutlookAIRibbon.OfficeMenu.Type" xml:space="preserve">
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.OfficeMenuView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="button2.Label" xml:space="preserve">
     <value>3 Antworten lang</value>
@@ -242,9 +242,6 @@
   </data>
   <data name="&gt;&gt;tab1.Type" xml:space="preserve">
     <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.TabView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="&gt;&gt;OutlookAIRibbon.OfficeMenu.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;group1.Type" xml:space="preserve">
     <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -294,6 +291,9 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>OutlookAIRibbon</value>
   </data>
+  <data name="&gt;&gt;btnSummary1.Type" xml:space="preserve">
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="&gt;&gt;group2.Type" xml:space="preserve">
     <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -318,8 +318,8 @@
   <data name="button6.Label" xml:space="preserve">
     <value>Zusammenfassung 1</value>
   </data>
-  <data name="&gt;&gt;btnSummary1.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="button1.Label" xml:space="preserve">
+    <value>3 Antworten kurz</value>
   </data>
   <data name="&gt;&gt;btnSummary2.Name" xml:space="preserve">
     <value>btnSummary2</value>
@@ -336,8 +336,8 @@
   <data name="&gt;&gt;Button_Export.Type" xml:space="preserve">
     <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="&gt;&gt;OutlookAIRibbon.OfficeMenu.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.OfficeMenuView, Microsoft.VisualStudio.Tools.Office.Designer, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;OutlookAIRibbon.OfficeMenu.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;button2.Name" xml:space="preserve">
     <value>button2</value>
