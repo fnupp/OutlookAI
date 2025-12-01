@@ -44,44 +44,70 @@ namespace OutlookAI
 
         private async void Button1_Click(object sender, RibbonControlEventArgs e)
         {
-            MailItem mail = GetMail();
-            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
-            if (inputBox.ShowDialog() == DialogResult.OK)
+            using (ErrorLogger.BeginCorrelation("RibbonReply-Button1"))
             {
-                string prompt = ThisAddIn.userdata.Prompt1.Replace("§§Input§§", inputBox.InputText);
-                await Reply(mail, prompt);
+                ErrorLogger.LogInfo("Reply button 1 clicked");
+
+                MailItem mail = GetMail();
+                InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
+                if (inputBox.ShowDialog() == DialogResult.OK)
+                {
+                    string prompt = ThisAddIn.userdata.Prompt1.Replace("§§Input§§", inputBox.InputText);
+                    await Reply(mail, prompt);
+                }
+
+                ErrorLogger.LogInfo("Reply operation completed");
             }
         }
         private async void Button2_Click(object sender, RibbonControlEventArgs e)
         {
-            MailItem mail = GetMail();
-            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
-            if (inputBox.ShowDialog() == DialogResult.OK)
+            using (ErrorLogger.BeginCorrelation("RibbonReply-Button2"))
             {
-                string prompt = ThisAddIn.userdata.Prompt2.Replace("§§Input§§", inputBox.InputText);
-                await Reply(mail, prompt);
-            }
+                ErrorLogger.LogInfo("Reply button 2 clicked");
 
+                MailItem mail = GetMail();
+                InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
+                if (inputBox.ShowDialog() == DialogResult.OK)
+                {
+                    string prompt = ThisAddIn.userdata.Prompt2.Replace("§§Input§§", inputBox.InputText);
+                    await Reply(mail, prompt);
+                }
+
+                ErrorLogger.LogInfo("Reply operation completed");
+            }
         }
         private async void Button3_Click(object sender, RibbonControlEventArgs e)
         {
-            MailItem mail = GetMail();
-            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
-            if (inputBox.ShowDialog() == DialogResult.OK)
+            using (ErrorLogger.BeginCorrelation("RibbonReply-Button3"))
             {
-                string prompt = ThisAddIn.userdata.Prompt3.Replace("§§Input§§", inputBox.InputText);
-                await Reply(mail, prompt);
-            }
+                ErrorLogger.LogInfo("Reply button 3 clicked");
 
+                MailItem mail = GetMail();
+                InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
+                if (inputBox.ShowDialog() == DialogResult.OK)
+                {
+                    string prompt = ThisAddIn.userdata.Prompt3.Replace("§§Input§§", inputBox.InputText);
+                    await Reply(mail, prompt);
+                }
+
+                ErrorLogger.LogInfo("Reply operation completed");
+            }
         }
         private async void Button4_Click(object sender, RibbonControlEventArgs e)
         {
-            MailItem mail = GetMail();
-            InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
-            if (inputBox.ShowDialog() == DialogResult.OK)
+            using (ErrorLogger.BeginCorrelation("RibbonReply-Button4"))
             {
-                string prompt = ThisAddIn.userdata.Prompt4.Replace("§§Input§§", inputBox.InputText);
-                await Reply(mail, prompt);
+                ErrorLogger.LogInfo("Reply button 4 clicked");
+
+                MailItem mail = GetMail();
+                InputBox inputBox = new InputBox(ThisAddIn.userdata.Prompt4, "Textinput");
+                if (inputBox.ShowDialog() == DialogResult.OK)
+                {
+                    string prompt = ThisAddIn.userdata.Prompt4.Replace("§§Input§§", inputBox.InputText);
+                    await Reply(mail, prompt);
+                }
+
+                ErrorLogger.LogInfo("Reply operation completed");
             }
         }
         private void Button5_Click(object sender, RibbonControlEventArgs e)
@@ -93,19 +119,29 @@ namespace OutlookAI
 
         private async Task Reply(MailItem mail, string prompt)
         {
-            if (mail == null) return;
+            if (mail == null)
+            {
+                ErrorLogger.LogWarning("Reply called with null mail item");
+                return;
+            }
+
             try
             {
+                ErrorLogger.LogInfo($"Generating reply for email: {mail.Subject}");
+
                 string finalPrompt = $"{prompt} \n Hier die zu beantwortende Email:\n Absender: {mail.Sender.Name}\nBetreff: {mail.Subject}\nInhalt: {mail.Body}";
-                string response = await ThisAddIn.GetLLMResponse(finalPrompt).ConfigureAwait(false);
+                string response = await ThisAddIn.GetLLMResponse(finalPrompt);
 
                 var reply = mail.ReplyAll();
                 response = response.Replace("\r\n", "<br>").Replace("\n", "<br>");
                 reply.HTMLBody = "<br>" + response + "<br><br>" + reply.HTMLBody;
                 reply.Display();
+
+                ErrorLogger.LogInfo("Reply generated successfully");
             }
             catch (System.Exception ex)
             {
+                ErrorLogger.LogError("Failed to generate reply", ex);
                 System.Windows.Forms.MessageBox.Show(OutlookAI.Resources.ErrorGeneric + ex.Message);
             }
         }
@@ -165,22 +201,47 @@ namespace OutlookAI
         }
         private async void Summary_Click(object sender, RibbonControlEventArgs e)
         {
-            var mails = GetMails();
-            if (ThisAddIn.userdata.SummaryMultiple1 ?? true)
-                await SummarizeMultiple(mails, ThisAddIn.userdata.Summary1);
-            else
-                await Summarize(mails, ThisAddIn.userdata.Summary1);
+            using (ErrorLogger.BeginCorrelation("RibbonSummary-Single"))
+            {
+                ErrorLogger.LogInfo("Summary button clicked");
 
-    
+                var mails = GetMails();
+                if (mails != null && mails.Count > 0)
+                {
+                    if (ThisAddIn.userdata.SummaryMultiple1 ?? true)
+                        await SummarizeMultiple(mails, ThisAddIn.userdata.Summary1);
+                    else
+                        await Summarize(mails, ThisAddIn.userdata.Summary1);
+                }
+                else
+                {
+                    ErrorLogger.LogWarning("No emails selected for summary");
+                }
+
+                ErrorLogger.LogInfo("Summary operation completed");
+            }
         }
         private async void Summary2_Click(object sender, RibbonControlEventArgs e)
         {
-            var mails = GetMails();
-            if(ThisAddIn.userdata.SummaryMultiple2??true)
-                await SummarizeMultiple(mails, ThisAddIn.userdata.Summary2);
-            else
-                await Summarize(mails, ThisAddIn.userdata.Summary2);
+            using (ErrorLogger.BeginCorrelation("RibbonSummary-Multiple"))
+            {
+                ErrorLogger.LogInfo("Summary 2 button clicked");
 
+                var mails = GetMails();
+                if (mails != null && mails.Count > 0)
+                {
+                    if (ThisAddIn.userdata.SummaryMultiple2 ?? true)
+                        await SummarizeMultiple(mails, ThisAddIn.userdata.Summary2);
+                    else
+                        await Summarize(mails, ThisAddIn.userdata.Summary2);
+                }
+                else
+                {
+                    ErrorLogger.LogWarning("No emails selected for summary");
+                }
+
+                ErrorLogger.LogInfo("Summary operation completed");
+            }
         }
 
         private async Task Summarize(List<MailItem> mails, string prompt = "")
@@ -209,8 +270,8 @@ namespace OutlookAI
                         }
                     }));
                 }
-                await Task.WhenAll(responses).ConfigureAwait(false);
-                await Task.WhenAll(msgs).ConfigureAwait(false);
+                await Task.WhenAll(responses);
+                await Task.WhenAll(msgs);
 
             }
             catch (System.Exception ex)
@@ -233,7 +294,7 @@ namespace OutlookAI
                 }
 
                 var response = ThisAddIn.GetLLMResponse(sb.ToString());
-                await response.ConfigureAwait(false);
+                await response;
                 if (response.IsFaulted)
                 {
                     MessageBox.Show(OutlookAI.Resources.ErrorGeneric + response.Exception.InnerException.Message);

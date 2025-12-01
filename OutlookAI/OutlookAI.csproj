@@ -277,6 +277,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="UserData.cs" />
+    <Compile Include="EmailCategory.cs" />
+    <Compile Include="CorrelationContext.cs" />
+    <Compile Include="EmailData.cs" />
+    <Compile Include="EmailMonitoringService.cs" />
+    <Compile Include="CategoryEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorLogger.cs" />
+    <Compile Include="RetryHelper.cs" />
     <EmbeddedResource Include="ComposeRibbon.resx">
       <DependentUpon>ComposeRibbon.cs</DependentUpon>
     </EmbeddedResource>
